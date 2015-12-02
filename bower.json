@@ -1,0 +1,12 @@
+{
+  "name": "bb-todo",
+  "private": true,
+  "main": "server.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

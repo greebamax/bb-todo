@@ -1,0 +1,11 @@
+{
+  "name": "bb-todo",
+  "private": true,
+  "version": "0.0.1",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  }
+}
