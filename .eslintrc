@@ -1,0 +1,9 @@
+{
+  "extends": "airbnb-base/legacy",
+  "globals": {
+    "Backbone": true
+  },
+  "rules": {
+    "func-names": ["error", "never"]
+  }
+}
