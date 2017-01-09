@@ -16,6 +16,11 @@ var Todo = Backbone.Model.extend({
   }
 });
 
+var Todos = Backbone.Collection.extend({
+  url: '/todos',
+  model: Todo
+});
+
 var TodoView = Backbone.View.extend({
   tagName: 'li',
   template: _.template('An example template'),
