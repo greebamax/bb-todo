@@ -1,9 +1,4 @@
 {
-  "name": "osm-bb",
-  "authors": [
-    "Maxim Grib <max.grib@gmail.com>"
-  ],
-  "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
