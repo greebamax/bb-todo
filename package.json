@@ -16,6 +16,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "json": "./node_modules/.bin/json-server -p 8080 db.json",
     "http": "./node_modules/.bin/http-server -p 3000",
-    "dev": "npm run json | npm run http"
+    "dev": "./node_modules/.bin/json-server -p 3000 db.json --static ./"
   }
 }
