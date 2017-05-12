@@ -1,7 +1,10 @@
 {
-  "name": "bb-todo",
+  "name": "osm-bb",
+  "authors": [
+    "Maxim Grib <max.grib@gmail.com>"
+  ],
+  "license": "MIT",
   "private": true,
-  "main": "server.js",
   "ignore": [
     "**/.*",
     "node_modules",
