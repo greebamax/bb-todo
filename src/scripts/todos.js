@@ -1,3 +1,4 @@
+import { Collection } from 'backbone';
 import TodoModel from './todo';
 
 export default Backbone.Collection.extend({
