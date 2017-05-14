@@ -1,9 +1,9 @@
 {
-  "extends": "airbnb-base/legacy",
-  "globals": {
-    "Backbone": true
-  },
+  "extends": "airbnb-base",
   "rules": {
-    "func-names": ["error", "never"]
-  }
+    "arrow-parens": ["error", "as-needed"]
+  },
+  "plugins": [
+    "import"
+  ]
 }
