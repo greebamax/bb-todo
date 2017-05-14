@@ -1,9 +1,12 @@
-var ListView = Backbone.View.extend({
-  render: function () {
-    var items = this.model.get('items');
+import Backbone from 'backbone';
+import ItemView from './item-view';
 
-    _.each(items, function (item) {
-      var itemView = new ItemView({
+export default Backbone.View.extend({
+  render() {
+    const items = this.model.get('items');
+
+    _.each(items, item => {
+      const itemView = new ItemView({
         model: item
       });
 

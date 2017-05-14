@@ -1,6 +1,9 @@
-var ItemView = Backbone.View.extend({
+import Backbone from 'backbone';
+
+export default Backbone.View.extend({
   events: {},
-  render: function () {
+
+  render() {
     this.$el.html(this.model.toJSON());
     return this;
   }

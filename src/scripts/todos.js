@@ -1,4 +1,4 @@
-import { Collection } from 'backbone';
+import Backbone from 'backbone';
 import TodoModel from './todo';
 
 export default Backbone.Collection.extend({

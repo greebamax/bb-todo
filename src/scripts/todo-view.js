@@ -8,22 +8,19 @@ var TodoView = Backbone.View.extend({
     'blur .edit': 'close'
   },
 
-  initialize: function () {
+  initialize() {
     this.on('change', _.bind(this.render, this));
   },
 
-  render: function () {
+  render() {
     this.$el.html(this.template(this.model.toJSON()));
     this.input = this.$('.edit');
     return this;
   },
 
-  edit: function () {
-  },
+  edit() { },
 
-  close: function () {
-  },
+  close() { },
 
-  updateOnEnter: function (e) {
-  }
+  updateOnEnter(e) { }
 });

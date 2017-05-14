@@ -1,16 +1,16 @@
-import { Model } from 'backbone';
+import Backbone from 'backbone';
 
-export default Model.extend({
+export default Backbone.Model.extend({
   defaults: {
     title: '',
-    completed: false
+    complete: false
   },
-  validate (attrs) {
+  validate(attrs) {
     if (attrs.title === undefined) {
       return 'Remember to set a title for your todo.';
     }
   },
-  initialize () {
+  initialize() {
     console.log('This model has been initialized.');
     this.on('invalid', function (model, error) {
       console.log(error);
