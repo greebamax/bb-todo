@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import _ from 'underscore';
 import ItemView from './item-view';
 
 export default Backbone.View.extend({
@@ -7,10 +8,10 @@ export default Backbone.View.extend({
 
     _.each(items, item => {
       const itemView = new ItemView({
-        model: item
+        model: item,
       });
 
       this.$el.append(itemView.render().el);
     }, this);
-  }
+  },
 });

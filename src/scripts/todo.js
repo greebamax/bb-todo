@@ -3,17 +3,21 @@ import Backbone from 'backbone';
 export default Backbone.Model.extend({
   defaults: {
     title: '',
-    complete: false
+    complete: false,
   },
+
   validate(attrs) {
     if (attrs.title === undefined) {
       return 'Remember to set a title for your todo.';
     }
+
+    return undefined;
   },
+
   initialize() {
     console.log('This model has been initialized.');
-    this.on('invalid', function (model, error) {
+    this.on('invalid', (model, error) => {
       console.log(error);
     });
-  }
+  },
 });

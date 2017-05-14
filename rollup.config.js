@@ -7,24 +7,24 @@ export default {
   dest: 'build/js/bundle.js',
   sourceMap: true,
   format: 'iife',
-  external: [ 'jquery' ],
+  external: ['jquery'],
   globals: {
     backbone: 'Backbone',
     underscore: '_',
-    jquery: '$'
+    jquery: '$',
   },
   plugins: [
     nodeResolve({
       jsnext: true,
       main: true,
-      browser: true
+      browser: true,
     }),
     commonjs({
       include: 'node_modules/**',
-      sourceMap: true
+      sourceMap: true,
     }),
     babel({
-      exclude: 'node_modules/**'
-    })
-  ]
+      exclude: 'node_modules/**',
+    }),
+  ],
 };

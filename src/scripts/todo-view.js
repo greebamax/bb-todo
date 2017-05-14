@@ -1,11 +1,15 @@
-var TodoView = Backbone.View.extend({
+import Backbone from 'backbone';
+import _ from 'underscore';
+
+export default Backbone.View.extend({
   tagName: 'li',
   template: _.template('An example template'),
+
   events: {
     'click .toggle': 'toggleCompleted',
     'dblclick label': 'edit',
     'click .destroy': 'clear',
-    'blur .edit': 'close'
+    'blur .edit': 'close',
   },
 
   initialize() {
@@ -22,5 +26,5 @@ var TodoView = Backbone.View.extend({
 
   close() { },
 
-  updateOnEnter(e) { }
+  updateOnEnter() { },
 });
