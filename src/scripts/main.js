@@ -1,11 +1,13 @@
 import $ from 'jquery';
 import TodosCollection from './todos';
+import ListView from './list-view';
 
 $(() => {
   const todos = new TodosCollection();
-  todos.fetch();
-  todos.on('sync', (collection) => {
-    console.log(collection.toJSON());
+  const todosList = new ListView({
+    el: '#todo-app',
+    model: todos,
   });
+  todos.fetch();
 });
 
