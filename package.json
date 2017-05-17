@@ -18,6 +18,7 @@
     "livereload": "^0.6.2",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^1.0.2",
     "rollup-watch": "^3.2.2"
   },
@@ -26,7 +27,7 @@
     "json": "json-server -p 8080 db.json",
     "http": "http-server -p 3000",
     "serve": "json-server -p 3000 db.json --static ./build --middlewares delay.js",
-    "build": "rollup --config rollup.config.js",
+    "build": "NODE_ENV=production rollup --config rollup.config.js",
     "watch": "rollup --config rollup.config.js --watch",
     "reload": "livereload 'build/'",
     "dev": "npm-run-all --parallel serve watch reload"
