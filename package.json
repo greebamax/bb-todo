@@ -22,9 +22,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "json": "./node_modules/.bin/json-server -p 8080 db.json",
-    "http": "./node_modules/.bin/http-server -p 3000",
-    "dev": "./node_modules/.bin/json-server -p 3000 db.json --static ./build --middlewares delay.js",
-    "build": "./node_modules/.bin/rollup --config rollup.config.js"
+    "json": "json-server -p 8080 db.json",
+    "http": "http-server -p 3000",
+    "serve": "json-server -p 3000 db.json --static ./build --middlewares delay.js",
+    "build": "rollup --config rollup.config.js",
+    "watch": "rollup --config rollup.config.js --watch",
+    "reload": "livereload 'build/'",
+    "dev": "npm-run-all --parallel serve watch reload"
   }
 }
