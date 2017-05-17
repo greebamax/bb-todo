@@ -7,12 +7,6 @@ export default {
   dest: 'build/js/bundle.js',
   sourceMap: true,
   format: 'iife',
-  external: ['jquery'],
-  globals: {
-    backbone: 'Backbone',
-    underscore: '_',
-    jquery: '$',
-  },
   plugins: [
     nodeResolve({
       jsnext: true,
