@@ -3,6 +3,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import replace from 'rollup-plugin-replace';
+import handlebars from 'rollup-plugin-handlebars-plus';
 
 export default {
   entry: 'src/scripts/main.js',
@@ -18,6 +19,14 @@ export default {
     commonjs({
       include: 'node_modules/**',
       sourceMap: true,
+    }),
+    handlebars({
+      handlebars: {
+        options: {
+          sourceMap: process.env.NODE_ENV !== 'production',
+        },
+      },
+      jquery: 'jquery',
     }),
     babel({
       exclude: 'node_modules/**',
