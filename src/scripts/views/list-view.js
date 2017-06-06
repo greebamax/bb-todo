@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 import ItemView from './list-item-view';
-import Todos from './todos';
+import Todos from '../collections/todos';
 
 export default Backbone.View.extend({
   tagName: 'ul',

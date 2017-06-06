@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import TodoModel from './todo';
+import TodoModel from '../models/todo';
 
 export default Backbone.Collection.extend({
   url: '/todos',

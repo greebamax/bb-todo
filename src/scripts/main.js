@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import TodosCollection from './todos';
-import ListView from './list-view';
+import TodosCollection from './collections/todos';
+import ListView from './views/list-view';
 
 $(() => {
   const todos = new TodosCollection();
