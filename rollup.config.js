@@ -5,6 +5,11 @@ import uglify from 'rollup-plugin-uglify';
 import replace from 'rollup-plugin-replace';
 import handlebars from 'rollup-plugin-handlebars-plus';
 
+const ENV = {
+  DEV: 'development',
+  PROD: 'production',
+};
+
 export default {
   entry: 'src/scripts/main.js',
   dest: 'build/js/bundle.js',
@@ -23,7 +28,7 @@ export default {
     handlebars({
       handlebars: {
         options: {
-          sourceMap: process.env.NODE_ENV !== 'production',
+          sourceMap: process.env.NODE_ENV !== ENV.DEV,
         },
       },
       jquery: 'jquery',
@@ -33,8 +38,8 @@ export default {
     }),
     replace({
       exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      ENV: JSON.stringify(process.env.NODE_ENV || ENV.DEV),
     }),
-    (process.env.NODE_ENV === 'production' && uglify()),
+    (process.env.NODE_ENV === ENV.DEV && uglify()),
   ],
 };
