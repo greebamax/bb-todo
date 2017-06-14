@@ -20,4 +20,10 @@ export default Backbone.Model.extend({
       console.log(error);
     });
   },
+
+  toggle() {
+    this.save({
+      completed: !this.get('completed'),
+    });
+  },
 });
