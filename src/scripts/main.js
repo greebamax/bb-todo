@@ -5,7 +5,7 @@ import ListView from './views/list-view';
 $(() => {
   const todos = new TodosCollection();
   const todosList = new ListView({
-    el: '#todo-app',
+    el: '#todo-list',
     model: todos,
   });
   todos.fetch();

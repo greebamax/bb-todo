@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Todo App</title>
 </head>
 
 <body>
-  <div id="todo-app"></div>
+  <section id="todo-app">
+    <header>
+      <h1>todos</h1>
+      <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+    <section>
+      <input id="complete-all" type="checkbox">
+      <label for="complete-all">Complete all</label>
+      <ul id="todo-list"></ul>
+    </section>
+    <footer id="footer">
+      <div id="info"></div>
+    </footer>
+  </section>
   <script src="js/bundle.js"></script>
   <script src="http://localhost:35729/livereload.js?snipver=1"></script>
 </body>
