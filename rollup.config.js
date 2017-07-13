@@ -13,7 +13,7 @@ const ENV = {
 export default {
   entry: 'src/scripts/main.js',
   dest: 'build/js/bundle.js',
-  sourceMap: true,
+  sourceMap: process.env.NODE_ENV !== ENV.PROD,
   format: 'iife',
   plugins: [
     nodeResolve({
@@ -28,7 +28,7 @@ export default {
     handlebars({
       handlebars: {
         options: {
-          sourceMap: process.env.NODE_ENV !== ENV.DEV,
+          sourceMap: process.env.NODE_ENV !== ENV.PROD,
         },
       },
       jquery: 'jquery',
@@ -40,6 +40,6 @@ export default {
       exclude: 'node_modules/**',
       ENV: JSON.stringify(process.env.NODE_ENV || ENV.DEV),
     }),
-    (process.env.NODE_ENV === ENV.DEV && uglify()),
+    (process.env.NODE_ENV === ENV.PROD && uglify()),
   ],
 };
