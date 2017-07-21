@@ -35,6 +35,7 @@
     "reload": "livereload 'build/'",
     "dev": "npm-run-all --parallel serve watch reload",
     "typings:install": "./node_modules/.bin/typings install",
-    "postinstall": "npm run typings:install"
+    "postinstall": "npm run typings:install",
+    "start": "npm run dev"
   }
 }
