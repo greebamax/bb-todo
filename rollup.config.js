@@ -11,10 +11,12 @@ const ENV = {
 };
 
 export default {
-  entry: 'src/scripts/main.js',
-  dest: 'build/js/bundle.js',
-  sourceMap: process.env.NODE_ENV !== ENV.PROD,
-  format: 'iife',
+  input: 'src/scripts/main.js',
+  output: {
+    format: 'iife',
+    sourcemap: process.env.NODE_ENV !== ENV.PROD,
+    file: 'build/js/bundle.js',
+  },
   plugins: [
     nodeResolve({
       jsnext: true,
@@ -38,7 +40,7 @@ export default {
     }),
     replace({
       exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || ENV.DEV),
+      __ENV__: JSON.stringify(process.env.NODE_ENV || ENV.DEV), // `development` by default
     }),
     (process.env.NODE_ENV === ENV.PROD && uglify()),
   ],
