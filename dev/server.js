@@ -1,19 +1,23 @@
-var finalhandler = require('finalhandler'),
-    http = require('http'),
-    serveStatic = require('serve-static');
+const { resolve } = require('path');
+const jsonServer = require('json-server');
+const serveStatic = require('serve-static');
 
-var serveApp = serveStatic('public');
-
-var server = http.createServer(function(req, res) {
-  var done = finalhandler(req, res, {
-    onerror: logerror
-  });
-
-  serveApp(req, res, done);
+const server = jsonServer.create();
+const router = jsonServer.router(resolve(__dirname, 'db.json'));
+const middlewares = jsonServer.defaults({
+  static: resolve(__dirname, '../build'),
 });
+const delayMiddleware = require('./delay');
 
-function logerror(err) {
-  console.error(err.stack || err.toString());
-}
+server.use(middlewares);
+server.use(delayMiddleware);
 
-server.listen(3000);
+// serve static file for tests
+server.use('/tests', serveStatic(resolve(__dirname, '../tests/browser')));
+server.use('/tests/chai', serveStatic(resolve(__dirname, '../node_modules/chai')));
+
+server.use(router);
+
+server.listen(3000, () => {
+  console.log('JSON Server is running');
+});
