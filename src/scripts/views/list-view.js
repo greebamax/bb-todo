@@ -12,6 +12,7 @@ export default Backbone.View.extend({
   },
 
   render() {
+    this.$el.html(''); // clear list
     this.model.forEach(model => {
       const itemView = new ItemView({ model });
       this.$el.append(itemView.render().el);
