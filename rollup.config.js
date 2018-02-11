@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import replace from 'rollup-plugin-replace';
 import handlebars from 'rollup-plugin-handlebars-plus';
+import sass from 'rollup-plugin-sass';
 
 const ENV = {
   DEV: 'development',
@@ -26,6 +27,9 @@ export default {
     commonjs({
       include: 'node_modules/**',
       sourceMap: true,
+    }),
+    sass({
+      output: 'build/css/bundle.css',
     }),
     handlebars({
       handlebars: {
