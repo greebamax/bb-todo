@@ -1,4 +1,5 @@
 .vscode/
 bower_components/
-build/js/
 node_modules/
+
+build/

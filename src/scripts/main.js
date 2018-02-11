@@ -1,4 +1,6 @@
+/* eslint-disable import/first */
 import '../styles/main.scss';
+
 import $ from 'jquery';
 import TodosCollection from './collections/todos';
 import ListView from './views/list-view';
