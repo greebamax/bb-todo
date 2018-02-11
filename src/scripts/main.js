@@ -1,4 +1,4 @@
-/* eslint-disable import/first */
+/* eslint-disable import/first,no-undef */
 import '../styles/main.scss';
 
 import $ from 'jquery';
@@ -13,4 +13,9 @@ $(() => {
   });
   todos.fetch();
 });
+
+if (__ENV__ !== 'production') {
+  // Enable LiveReload
+  document.write('<script src="http://localhost:35729/livereload.js?snipver=1"></script>');
+}
 
