@@ -6,11 +6,11 @@ export default Backbone.Collection.extend({
   model: TodoModel,
 
   completed() {
-    return this.filter(todo => todo.get('completed'));
+    return this.filter('complete');
   },
 
   remaining() {
-    return this.without.apply(this, this.completed());
+    return this.without(...this.filter('complete'));
   },
 
 });
