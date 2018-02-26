@@ -11,12 +11,13 @@ const ENV = {
   DEV: 'development',
   PROD: 'production',
 };
+const isProd = process.env.NODE_ENV === ENV.PROD;
 
 export default {
   input: 'src/scripts/main.js',
   output: {
     format: 'iife',
-    sourcemap: process.env.NODE_ENV !== ENV.PROD,
+    sourcemap: !isProd,
     file: 'build/js/bundle.js',
   },
   plugins: [
@@ -38,7 +39,7 @@ export default {
     handlebars({
       handlebars: {
         options: {
-          sourceMap: process.env.NODE_ENV !== ENV.PROD,
+          sourceMap: !isProd,
         },
       },
       jquery: 'jquery',
@@ -50,6 +51,6 @@ export default {
       exclude: 'node_modules/**',
       __ENV__: JSON.stringify(process.env.NODE_ENV || ENV.DEV), // `development` by default
     }),
-    (process.env.NODE_ENV === ENV.PROD && uglify()),
+    (isProd && uglify()),
   ],
 };
