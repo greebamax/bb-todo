@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import TodoModel from '../models/todo';
-import Template from '../templates/todo-item.hbs';
+import TodoModel from './task-model';
+import Template from './task-template.hbs';
 
 export default Backbone.View.extend({
   tagName: 'li',
@@ -15,4 +15,5 @@ export default Backbone.View.extend({
     }, this.model.toJSON())));
     return this;
   },
+
 });

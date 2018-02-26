@@ -2,20 +2,18 @@
 import '../styles/main.scss';
 
 import $ from 'jquery';
-import TodosCollection from './collections/todos';
-import ListView from './views/list-view';
+import ListView from './tasks-list/tasks-list-view';
+import ListModel from './tasks-list/tasks-list-model';
 
 $(() => {
-  const todos = new TodosCollection();
   const todosList = new ListView({
     el: '#todo-list',
-    model: todos,
+    model: new ListModel(),
   });
-  todos.fetch();
+  todosList.render();
 });
 
 if (__ENV__ !== 'production') {
   // Enable LiveReload
   document.write('<script src="http://localhost:35729/livereload.js?snipver=1"></script>');
 }
-
