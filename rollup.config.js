@@ -6,6 +6,8 @@ import replace from 'rollup-plugin-replace';
 import handlebars from 'rollup-plugin-handlebars-plus';
 import sass from 'rollup-plugin-sass';
 import copy from 'rollup-plugin-copy';
+import alias from 'rollup-plugin-alias';
+import path from 'path';
 
 const ENV = {
   DEV: 'development',
@@ -21,6 +23,9 @@ export default {
     file: 'build/js/bundle.js',
   },
   plugins: [
+    alias({
+      underscore: path.resolve(__dirname, 'node_modules/lodash/index.js'),
+    }),
     nodeResolve({
       jsnext: true,
       main: true,
