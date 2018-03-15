@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import _ from 'underscore';
+import _ from 'lodash';
 import TodoModel from './task-model';
 import Template from './task-template.hbs';
 
