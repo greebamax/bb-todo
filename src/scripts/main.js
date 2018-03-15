@@ -1,6 +1,4 @@
 /* eslint-disable import/first,no-undef */
-import '../styles/main.scss';
-
 import $ from 'jquery';
 import ListView from './tasks-list/tasks-list-view';
 import ListModel from './tasks-list/tasks-list-model';

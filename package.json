@@ -44,7 +44,7 @@
     "test": "mocha ./tests",
     "json": "json-server -p 8080 db.json",
     "serve": "node dev/server.js",
-    "build": "npm run clean; NODE_ENV=production rollup --config rollup.config.js",
+    "build": "NODE_ENV=production gulp",
     "build-dev": "npm run clean; NODE_ENV=development rollup --config rollup.config.js",
     "watch": "npm run clean; rollup --config rollup.config.js --watch",
     "reload": "livereload 'build/'",
