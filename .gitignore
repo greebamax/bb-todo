@@ -1,7 +1,6 @@
-.vscode/
 .idea/
-bower_components/
-node_modules/
+.vscode/
 *.log
-
+bower_components/
 build/
+node_modules/
