@@ -9,13 +9,21 @@ const uglify = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
 const handlebars = require('rollup-plugin-handlebars-plus');
 const alias = require('rollup-plugin-alias');
-const path = require('path');
+const { resolve, join } = require('path');
+const livereload = require('livereload');
 
 const ENV = {
   DEV: 'development',
   PROD: 'production',
 };
 const isProd = process.env.NODE_ENV === ENV.PROD;
+
+const loadTask = name => {
+  const path = join(__dirname, 'gulptasks', name);
+
+  // eslint-disable-next-line import/no-dynamic-require,global-require
+  return require(resolve(path));
+};
 
 gulp.task('clean', () => {
   del('build/**/*.*');
@@ -42,7 +50,7 @@ gulp.task('build:scripts', async () => {
     input: 'src/scripts/main.js',
     plugins: [
       alias({
-        underscore: path.resolve(__dirname, 'node_modules/lodash/index.js'),
+        underscore: resolve(__dirname, 'node_modules/lodash/index.js'),
       }),
       nodeResolve({
         jsnext: true,
@@ -92,4 +100,13 @@ gulp.task('default', [
   'build:scripts',
 ]);
 
-gulp.task('dev', ['default', 'watch:all']);
+gulp.task('reload', () => {
+  const liveReloadServer = livereload.createServer({
+    delay: 1000,
+  });
+
+  liveReloadServer.watch(resolve('build'));
+});
+
+gulp.task('server', loadTask('server'));
+gulp.task('dev', ['default', 'watch:all', 'reload', 'server']);

@@ -45,14 +45,11 @@
   },
   "scripts": {
     "test": "mocha ./tests",
-    "json": "json-server -p 8080 db.json",
     "serve": "node dev/server.js",
-    "build": "NODE_ENV=production gulp",
-    "build-dev": "npm run clean; NODE_ENV=development rollup --config rollup.config.js",
-    "watch": "npm run clean; rollup --config rollup.config.js --watch",
+    "build:prod": "NODE_ENV=production gulp",
+    "build": "gulp",
+    "watch": "gulp watch:all",
     "reload": "livereload 'build/'",
-    "dev": "npm-run-all --parallel serve watch reload",
-    "start": "npm run dev",
-    "clean": "rm -rf build/"
+    "start": "npm run dev"
   }
 }
