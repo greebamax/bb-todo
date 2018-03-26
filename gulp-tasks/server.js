@@ -17,6 +17,6 @@ module.exports = () => {
   server.use(router);
 
   server.listen(port, () => {
-    console.log('DEV Server is running on port:', port);
+    console.log(`DEV Server is running on port: http://localhost:${port}`);
   });
 };

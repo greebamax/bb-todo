@@ -44,12 +44,10 @@
     "serve-static": "^1.13.2"
   },
   "scripts": {
-    "test": "mocha ./tests",
-    "serve": "node dev/server.js",
-    "build:prod": "NODE_ENV=production gulp",
-    "build": "gulp",
     "watch": "gulp watch:all",
-    "reload": "livereload 'build/'",
-    "start": "npm run dev"
+    "test": "mocha ./tests",
+    "build:prod": "NODE_ENV=production gulp build",
+    "build": "gulp build",
+    "start": "gulp dev"
   }
 }
