@@ -12,7 +12,16 @@
           "defaults"
         ]
       }
-    ]
+    ],
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": [
+          "base"
+        ]
+      }
+    ],
+    "import/extensions": "off"
   },
   "plugins": [
     "import"
