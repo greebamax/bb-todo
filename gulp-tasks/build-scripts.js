@@ -19,6 +19,7 @@ module.exports = async ({ isProd }) => {
     plugins: [
       alias({
         underscore: resolve('node_modules/lodash/index.js'),
+        base: resolve('src/scripts/base'),
       }),
       nodeResolve({
         jsnext: true,
