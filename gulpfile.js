@@ -44,7 +44,7 @@ gulp.task('build:scripts', () => {
 });
 
 gulp.task('watch:scripts', () => {
-  gulp.watch('src/scripts/**/*.js', ['build:scripts']);
+  gulp.watch('src/scripts/**/*.{js,hbs}', ['build:scripts']);
 });
 
 gulp.task('watch:all', ['watch:styles', 'watch:scripts', 'watch:html']);
