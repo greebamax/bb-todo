@@ -1,0 +1,38 @@
+<header id="region:header">
+  <h2>App Main Layout</h2>
+  <input
+    data-action="task:create"
+    placeholder="What needs to be done?"
+    autofocus>
+</header>
+<section id="region:tasks-list-container">
+  <!-- filters -->
+  <div>
+    <label for="complete-all">
+      <input
+        type="checkbox"
+        data-action="tasks:complete-all">
+      <span>Complete all</span>
+    </label><br>
+
+    <label for="completed">
+      <input
+        type="checkbox"
+        data-action="tasks:show-completed">
+      <span>Completed</span>
+    </label><br>
+
+    <label for="remaining">
+      <input
+        type="checkbox"
+        data-action="tasks:show-remaining">
+      <span>Remaining</span>
+    </label>
+  </div>
+  <!-- /filters -->
+
+  <ul id="region:tasks-list"></ul>
+</section>
+<footer id="region:footer">
+  {{!-- Stats --}}
+</footer>
