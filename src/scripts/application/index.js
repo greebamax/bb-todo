@@ -1,8 +1,8 @@
 import Bb from 'backbone';
-import Mn from 'backbone.marionette';
+import BaseApplication from 'base/application';
 import MainLayout from './layout';
 
-export default class extends Mn.Application {
+export default class extends BaseApplication {
   constructor() {
     super({
       region: '#app',
