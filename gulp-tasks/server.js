@@ -3,12 +3,22 @@ const { resolve } = require('path');
 const jsonServer = require('json-server');
 const delayMiddleware = require('./delay');
 
-module.exports = () => {
+const defaults = {
+  port: 3000,
+  dbFile: './db.json',
+  staticFolder: 'build',
+  hostName: 'localhost',
+};
+
+module.exports = options => {
+  const {
+    port, dbFile, staticFolder, hostName,
+  } = Object.assign(defaults, options);
+
   const server = jsonServer.create();
-  const router = jsonServer.router(resolve(__dirname, 'db.json'));
-  const port = 3000;
+  const router = jsonServer.router(dbFile);
   const middleware = jsonServer.defaults({
-    static: resolve('build'),
+    static: resolve(staticFolder),
   });
 
   server.use(middleware);
@@ -17,6 +27,6 @@ module.exports = () => {
   server.use(router);
 
   server.listen(port, () => {
-    console.log(`DEV Server is running on port: http://localhost:${port}`);
+    console.log(`DEV Server is running on port: http://${hostName}:${port}`);
   });
 };

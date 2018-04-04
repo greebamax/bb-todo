@@ -27,7 +27,8 @@ gulp.task('watch:html', () =>
   gulp.watch('src/index.html', ['build:html']));
 
 gulp.task('build:styles', () =>
-  gulp.src('src/styles/main.scss')
+  gulp
+    .src('src/styles/main.scss')
     .pipe(sass())
     .pipe(gulp.dest('build/css')));
 
@@ -57,13 +58,17 @@ gulp.task('reload', () => {
   });
 });
 
-gulp.task('build', [
-  'clean',
-  'build:html',
-  'build:styles',
-  'build:scripts',
-]);
+gulp.task('build', ['clean', 'build:html', 'build:styles', 'build:scripts']);
 
-gulp.task('server', loadTask('server'));
+gulp.task('server', () => {
+  const taskServer = loadTask('server');
+
+  taskServer({
+    port: 4379,
+    dbFile: resolve('./gulp-tasks/db.json'),
+    staticFolder: resolve('./build'),
+  });
+});
+
 gulp.task('dev', ['build', 'watch:all', 'reload', 'server']);
 gulp.task('default', ['dev']);
