@@ -1,27 +1,34 @@
 import Mn from 'backbone.marionette';
 
 const IS_LOADED = Symbol('isLoaded');
+const DEFAULTS = { isLoaded: false };
 
 class BaseModule extends Mn.Object {
-  constructor(options) {
+  constructor(options = DEFAULTS) {
     super(options);
+  }
 
-    this.isLoaded = false;
+  initialize() {
+    this.isLoaded = this.options.isLoaded;
   }
 
   get isLoaded() {
-    return this.getOption(IS_LOADED);
+    return this[IS_LOADED];
   }
 
   set isLoaded(state) {
-    this.options[IS_LOADED] = state;
+    this[IS_LOADED] = state;
   }
 
   load() {
     return new Promise(resolve => {
-      this.isLoaded = true;
+      this[IS_LOADED] = true;
       resolve();
     });
+  }
+
+  unload() {
+    this[IS_LOADED] = false;
   }
 }
 
