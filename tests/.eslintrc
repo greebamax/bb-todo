@@ -5,10 +5,15 @@
       "error",
       "as-needed"
     ],
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "prefer-destructuring": "off"
   },
   "globals": {
     "describe": true,
-    "it": true
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true
   }
 }
