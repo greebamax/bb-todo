@@ -5,6 +5,7 @@ export default class extends BaseView {
   constructor() {
     super({
       template: AppTemplate,
+      tagName: 'section',
     });
   }
 }
