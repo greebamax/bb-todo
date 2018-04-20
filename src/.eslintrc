@@ -21,7 +21,12 @@
         ]
       }
     ],
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "no-underscore-dangle": "off",
+    "quote-props": [
+      "error",
+      "consistent-as-needed"
+    ]
   },
   "plugins": [
     "import"
