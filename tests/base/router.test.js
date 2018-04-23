@@ -55,8 +55,8 @@ describe('Base Router', () => {
       },
     });
 
-    router.navigate('someRoute', { trigger: true });
-    router.navigate('anotherRoute', { trigger: true });
+    router.redirectTo('someRoute');
+    router.redirectTo('anotherRoute');
 
     expect(router.controller.beforeEach).to.have.been.calledTwice;
   });
@@ -70,9 +70,55 @@ describe('Base Router', () => {
       },
     });
 
-    router.navigate('someRoute', { trigger: true });
-    router.navigate('anotherRoute', { trigger: true });
+    router.redirectTo('someRoute');
+    router.redirectTo('anotherRoute');
 
     expect(router.controller.afterEach).to.have.been.calledTwice;
+  });
+
+  it('should return root route with ending slash if defined. Returns null otherwise', () => {
+    const router = new BaseRouter({
+      routesRoot: 'testRoute',
+    });
+    expect(/\/$/.test(router.routesRoot)).to.be.true;
+
+    const router2 = new BaseRouter({});
+    expect(router2.routesRoot).to.be.null;
+  });
+
+  describe('#redirectTo()', () => {
+    let router;
+    let navigateSpy;
+    let methodSpy;
+
+    beforeEach(() => {
+      methodSpy = sinon.spy();
+      router = new BaseRouter({
+        appRoutes: {
+          someRoute: 'methodSpy',
+        },
+        controller: {
+          methodSpy,
+        },
+      });
+      navigateSpy = sinon.spy(router, 'navigate');
+    });
+
+    afterEach(() => {
+      router = undefined;
+      navigateSpy = undefined;
+      methodSpy = undefined;
+    });
+
+    it('should redirect to route with prefix', () => {
+      router.redirectTo('someRoute');
+      expect(navigateSpy).to.be.calledWith('#/someRoute');
+      expect(methodSpy).to.be.called;
+    });
+
+    it('should call the route function by setting the trigger option to true by default', () => {
+      router.redirectTo('anotherRoute');
+      expect(navigateSpy).to.be.calledWith('#/anotherRoute', { trigger: true });
+    });
   });
 });
