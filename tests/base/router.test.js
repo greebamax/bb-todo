@@ -76,14 +76,14 @@ describe('Base Router', () => {
     expect(router.controller.afterEach).to.have.been.calledTwice;
   });
 
-  it('should return root route with ending slash if defined. Returns null otherwise', () => {
+  it('should allways return home route based on routesRoot or constructor name with ending slash', () => {
     const router = new BaseRouter({
       routesRoot: 'testRoute',
     });
-    expect(/\/$/.test(router.routesRoot)).to.be.true;
+    expect(/\/$/.test(router.homeRoute)).to.be.true;
 
-    const router2 = new BaseRouter({});
-    expect(router2.routesRoot).to.be.null;
+    const router2 = new BaseRouter();
+    expect(router2.homeRoute).to.be.eql(`${BaseRouter.routesRoot}/`);
   });
 
   describe('#redirectTo()', () => {

@@ -25,11 +25,16 @@ export default class BaseRouter extends Mn.AppRouter {
   /**
    * @readonly
    * @memberof BaseRouter
-   * @returns {string|null}
+   * @returns {string}
    */
-  get routesRoot() {
-    const { routesRoot } = this.options;
-    return routesRoot ? `${routesRoot}/` : null;
+  static get routesRoot() {
+    return _.first(this.name.split('Router')).toLowerCase();
+  }
+
+  get homeRoute() {
+    const routesRoot = _.get(this.options, 'routesRoot', this.constructor.routesRoot);
+
+    return `${routesRoot}/`;
   }
 
   /**
@@ -49,14 +54,13 @@ export default class BaseRouter extends Mn.AppRouter {
     });
   }
 
-
   /**
    * @param {!string} fragment
    * @param {object} options
    * @param {boolean} [options.trigger=true]
    * @memberof BaseRouter
    */
-  redirectTo(fragment = '', options) { // eslint-disable-line
+  redirectTo(fragment = '', options) {
     if (!_.isString(fragment)) return;
     this.navigate(`${DEFAULT_PREFIX}${fragment}`, Object.assign({ trigger: true }, options));
   }
