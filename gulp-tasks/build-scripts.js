@@ -28,7 +28,7 @@ module.exports = async ({ isProd }) => {
       }),
       commonjs({
         include: 'node_modules/**',
-        sourceMap: true,
+        sourceMap: !isProd,
       }),
       handlebars({
         handlebars: {
