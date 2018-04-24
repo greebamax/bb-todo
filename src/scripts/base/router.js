@@ -62,6 +62,6 @@ export default class BaseRouter extends Mn.AppRouter {
    */
   redirectTo(fragment = '', options) {
     if (!_.isString(fragment)) return;
-    this.navigate(`${DEFAULT_PREFIX}${fragment}`, Object.assign({ trigger: true }, options));
+    this.navigate(`${DEFAULT_PREFIX}${fragment}`, _.assign({ trigger: true }, options));
   }
 }

@@ -124,13 +124,13 @@ describe('Base Router', () => {
 
     it('should redirect to route with prefix', () => {
       router.redirectTo('someRoute');
-      expect(navigateSpy).to.be.calledWith('#/someRoute');
-      expect(methodSpy).to.be.called;
+      expect(navigateSpy).to.have.been.calledWith('#/someRoute');
+      expect(methodSpy).to.have.been.called;
     });
 
     it('should call the route function by setting the trigger option to true by default', () => {
       router.redirectTo('anotherRoute');
-      expect(navigateSpy).to.be.calledWith('#/anotherRoute', { trigger: true });
+      expect(navigateSpy).to.have.been.calledWith('#/anotherRoute', { trigger: true });
     });
   });
 });
