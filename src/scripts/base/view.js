@@ -1,3 +1,8 @@
 import Mn from 'backbone.marionette';
 
-export default class extends Mn.View {}
+
+/**
+ * @class BaseView
+ * @extends {Marionette.View}
+ */
+export default class BaseView extends Mn.View {}

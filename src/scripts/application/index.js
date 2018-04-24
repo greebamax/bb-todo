@@ -5,7 +5,6 @@ import MainLayout from './layout';
 import MainRouter from './router';
 
 /**
- * @export
  * @class
  * @extends {Marionette.Application}
  */

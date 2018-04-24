@@ -3,7 +3,12 @@ import Mn from 'backbone.marionette';
 const IS_LOADED = Symbol('isLoaded');
 const DEFAULTS = { isLoaded: false };
 
-class BaseModule extends Mn.Object {
+
+/**
+ * @class BaseModule
+ * @extends {Marionette.Object}
+ */
+export default class BaseModule extends Mn.Object {
   constructor(options = DEFAULTS) {
     super(options);
   }
@@ -31,5 +36,3 @@ class BaseModule extends Mn.Object {
     this[IS_LOADED] = false;
   }
 }
-
-export default BaseModule;

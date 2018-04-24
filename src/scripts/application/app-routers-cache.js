@@ -4,6 +4,10 @@ const routers = Symbol('routers');
 const isExtendsBaseRouter = router =>
   Object.prototype.isPrototypeOf.call(Object.getPrototypeOf(BaseRouter), router);
 
+/**
+ * @class AppRoutersCache
+ * @extends Marionette.AppRouter
+ */
 export default class AppRoutersCache {
   constructor() {
     this[routers] = new Map();
@@ -11,7 +15,7 @@ export default class AppRoutersCache {
 
   /**
    * @param {BaseRouter} RouterClass
-   * @memberof AppRoutes
+   * @memberof AppRoutersCache
    * @returns {BaseRouter}
    */
   registerRouter(RouterClass) {
@@ -34,7 +38,7 @@ export default class AppRoutersCache {
 
   /**
    * @param {BaseRouter} RouterClass
-   * @memberof AppRoutes
+   * @memberof AppRoutersCache
    * @returns {boolean}
    */
   unregisterRouter(RouterClass) {
@@ -50,7 +54,7 @@ export default class AppRoutersCache {
    *
    * @param {string} name
    * @returns {Marionette.AppRouter|undefined}
-   * @memberof AppRoutes
+   * @memberof AppRoutersCache
    */
   getRouter(name) {
     return this[routers].get(name);

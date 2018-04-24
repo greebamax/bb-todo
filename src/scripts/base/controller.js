@@ -1,3 +1,7 @@
 import Mn from 'backbone.marionette';
 
-export default class extends Mn.Object {}
+/**
+ * @class BaseController
+ * @extends {Marionette.Object}
+ */
+export default class BaseController extends Mn.Object {}

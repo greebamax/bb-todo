@@ -4,7 +4,7 @@ import _ from 'lodash';
 const DEFAULT_PREFIX = '#/';
 
 /**
- * @class
+ * @class BaseRouter
  * @extends Marionette.AppRouter
  */
 export default class BaseRouter extends Mn.AppRouter {
