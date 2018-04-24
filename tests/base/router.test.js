@@ -86,6 +86,18 @@ describe('Base Router', () => {
     expect(router2.homeRoute).to.be.eql(`${BaseRouter.routesRoot}/`);
   });
 
+  it('should have name based on provided option or constructor name', () => {
+    let router;
+
+    router = new BaseRouter();
+    expect(router).to.have.property('name');
+    expect(router.name).to.be.eql('BaseRouter');
+
+    const testRouterName = 'testRouterName';
+    router = new BaseRouter({ name: testRouterName });
+    expect(router.name).to.be.eql(testRouterName);
+  });
+
   describe('#redirectTo()', () => {
     let router;
     let navigateSpy;
