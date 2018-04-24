@@ -1,7 +1,10 @@
 .idea/
-.vscode/
 *.log
 bower_components/
 build/
 node_modules/
 .temp/
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/snippets/

@@ -1,0 +1,38 @@
+{
+  "Import Base Entity": {
+    "prefix": "ib",
+    "body": [
+      "import Base$1 from 'base/$1';\n"
+    ]
+  },
+  "Import BaseController": {
+    "prefix": "ibc",
+    "body": [
+      "import Base$1 from 'base/$1';\n"
+    ]
+  },
+  "Import BaseView": {
+    "prefix": "imv",
+    "body": [
+      "import BaseView from 'base/view';\n"
+    ]
+  },
+  "Import BaseModule": {
+    "prefix": "ibm",
+    "body": [
+      "import BaseModule from 'base/module';\n"
+    ]
+  },
+  "Import BaseRouter": {
+    "prefix": "ibr",
+    "body": [
+      "import BaseRouter from 'base/router';\n"
+    ]
+  },
+  "Import BaseApplication": {
+    "prefix": "iba",
+    "body": [
+      "import BaseApplication from 'base/application';\n"
+    ]
+  }
+}
