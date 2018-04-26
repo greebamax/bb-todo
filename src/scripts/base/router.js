@@ -23,6 +23,9 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
+   * Returns root route with ending slash to omit triggering navigation to `*otherwise` route of
+   * parent router.
+   *
    * @readonly
    * @memberof BaseRouter
    * @returns {string}
@@ -63,5 +66,14 @@ export default class BaseRouter extends Mn.AppRouter {
   redirectTo(fragment = '', options) {
     if (!_.isString(fragment)) return;
     this.navigate(`${DEFAULT_PREFIX}${fragment}`, _.assign({ trigger: true }, options));
+  }
+
+  /**
+   * @param {!string} fragment
+   * @memberof BaseRouter
+   */
+  navigateTo(fragment = '') {
+    if (!_.isString(fragment)) return;
+    this.navigate(`${DEFAULT_PREFIX}${fragment}`);
   }
 }

@@ -3,7 +3,6 @@ import Mn from 'backbone.marionette';
 const IS_LOADED = Symbol('isLoaded');
 const DEFAULTS = { isLoaded: false };
 
-
 /**
  * @class BaseModule
  * @extends {Marionette.Object}

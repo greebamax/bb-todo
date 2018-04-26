@@ -1,6 +1,5 @@
 import Mn from 'backbone.marionette';
 
-
 /**
  * @class BaseView
  * @extends {Marionette.View}
