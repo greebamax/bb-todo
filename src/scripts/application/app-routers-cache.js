@@ -59,4 +59,8 @@ export default class AppRoutersCache {
   getRouter(name) {
     return this[routers].get(name);
   }
+
+  forEach(cb) {
+    return this[routers].forEach(cb);
+  }
 }

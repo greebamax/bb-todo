@@ -98,7 +98,7 @@ describe('Base Router', () => {
     expect(router.name).to.be.eql(testRouterName);
   });
 
-  describe('#redirectTo()', () => {
+  describe('.redirectTo()', () => {
     let router;
     let navigateSpy;
     let methodSpy;

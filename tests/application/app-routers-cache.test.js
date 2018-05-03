@@ -16,12 +16,12 @@ describe('AppRouters Cache', () => {
     appRoutersCache = undefined;
   });
 
-  describe('#registerRouter()', () => {
+  describe('.registerRouter()', () => {
     it('should register router', () => {
       appRoutersCache.registerRouter(BaseRouter);
       const registeredRouter = appRoutersCache.getRouter(BaseRouter.name);
 
-      expect(registeredRouter).to.be.instanceOf(BaseRouter);
+      expect(registeredRouter).to.be.an.instanceOf(BaseRouter);
     });
 
     it('should create and return new instance of registered router', () => {
@@ -47,7 +47,7 @@ describe('AppRouters Cache', () => {
     });
   });
 
-  describe('#unregisterRouter()', () => {
+  describe('.unregisterRouter()', () => {
     it('should unregister router', () => {
       appRoutersCache.registerRouter(BaseRouter);
       expect(appRoutersCache.getRouter(BaseRouter.name) === BaseRouter).to.be.false;
@@ -67,6 +67,24 @@ describe('AppRouters Cache', () => {
       } catch (error) { } // eslint-disable-line
 
       expect(spy).to.throws('Attempt to unregister a malformed RouterClass');
+    });
+  });
+
+  describe('.forEach(callback)', () => {
+    it('should iterate through the routers', () => {
+      const spyCb = sinon.spy();
+
+      appRoutersCache.forEach(spyCb);
+      expect(spyCb).to.have.not.been.called;
+
+      appRoutersCache.registerRouter(BaseRouter);
+      appRoutersCache.forEach(spyCb);
+      expect(spyCb).to.have.been.calledOnce;
+
+      const passedArgs = spyCb.args[0];
+      expect(passedArgs[0]).to.be.an.instanceOf(BaseRouter);
+      expect(passedArgs[1]).to.be.equals(BaseRouter.name);
+      expect(passedArgs[2]).to.be.an.instanceOf(Map);
     });
   });
 });
