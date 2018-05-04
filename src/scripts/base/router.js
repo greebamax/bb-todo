@@ -52,7 +52,7 @@ export default class BaseRouter extends Mn.AppRouter {
 
     super.route.call(this, fragment, fn, (...args) => {
       if (beforeEachHook && Boolean(beforeEachHook.apply(this.controller, args))) return;
-      callback.apply(this, args);
+      callback.apply(this.controller, args);
       if (afterEachHook) afterEachHook.apply(this.controller, args);
     });
   }
