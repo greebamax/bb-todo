@@ -83,7 +83,7 @@ describe('Base Router', () => {
     expect(/\/$/.test(router.homeRoute)).to.be.true;
 
     const router2 = new BaseRouter();
-    expect(router2.homeRoute).to.be.eql(`${BaseRouter.routesRoot}/`);
+    expect(router2.homeRoute).to.be.equals(`${BaseRouter.routesRoot}/`);
   });
 
   it('should have name based on provided option or constructor name', () => {
@@ -91,11 +91,11 @@ describe('Base Router', () => {
 
     router = new BaseRouter();
     expect(router).to.have.property('name');
-    expect(router.name).to.be.eql('BaseRouter');
+    expect(router.name).to.be.equals('BaseRouter');
 
     const testRouterName = 'testRouterName';
     router = new BaseRouter({ name: testRouterName });
-    expect(router.name).to.be.eql(testRouterName);
+    expect(router.name).to.be.equals(testRouterName);
   });
 
   describe('.redirectTo()', () => {

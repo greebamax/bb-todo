@@ -6,14 +6,14 @@ import MainRouter from './router';
 
 /**
  * @class
- * @extends {Marionette.Application}
+ * @extends Marionette.Application
  */
 export default class extends BaseApplication {
   constructor(options) {
     super(_.assign({
       region: '#app',
+      channelName: 'main',
     }, options));
-
     this.mainRouter = new MainRouter();
   }
 
@@ -28,5 +28,9 @@ export default class extends BaseApplication {
   onStart() {
     this.showView(new MainLayout());
     Bb.history.start();
+  }
+
+  onBeforeDestroy() {
+    this.mainRouter.routers.forEach(router => router.destroy());
   }
 }

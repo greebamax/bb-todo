@@ -4,20 +4,17 @@ import AppRoutersCache from './app-routers-cache';
 import AppController from './controller';
 
 export default class AppRouter extends BaseRouter {
-  constructor() {
-    super();
-    this.ctrl = new AppController({ router: this });
+  constructor(options) {
+    super(options);
+    this.controller = new AppController({ router: this });
     this.routers = new AppRoutersCache();
-    this.processAppRoutes(this.ctrl, {
-      '': 'home',
-      '*otherwise': 'otherwise',
-    });
+    this.processAppRoutes(this.controller, AppController.appRoutes);
   }
 
   registerSubRouter(RouterClass) {
     const redirectionMethodName = `redirectTo${RouterClass.name}`;
 
-    _.extend(this.ctrl, {
+    _.extend(this.controller, {
       [redirectionMethodName]: () => {
         const registeredRouter = this.routers.registerRouter(RouterClass);
 
@@ -25,7 +22,7 @@ export default class AppRouter extends BaseRouter {
       },
     });
 
-    this.processAppRoutes(this.ctrl, {
+    this.processAppRoutes(this.controller, {
       // Set 2 routes in such way to handle both cases:
       //    navigate throw `routesRoot/` and `routesRoot/*other` to ensure that target RouterClass
       //    will be always initialized. Static method `routesRoot` returns root route with ending

@@ -1,21 +1,10 @@
 import BaseRouter from 'base/router';
+import ProfileCtrl from './controller';
 
 export default class ProfileRouter extends BaseRouter {
-  constructor() {
-    super({
-      appRoutes: {
-        'profile/': 'home',
-        'profile/*other': 'otherwise',
-      },
-      controller: {
-        home() {
-          console.log('profile home page');
-        },
-        otherwise() {
-          console.log('profile otherwise');
-          this.redirectTo(this.homeRoute);
-        },
-      },
-    });
+  constructor(options) {
+    super(options);
+    this.controller = new ProfileCtrl({ router: this });
+    this.processAppRoutes(this.controller, ProfileCtrl.appRoutes);
   }
 }
