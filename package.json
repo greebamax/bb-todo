@@ -29,6 +29,7 @@
     "json-server": "^0.12.1",
     "livereload": "^0.7.0",
     "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
     "rollup": "^0.57.1",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^4.0.0-beta.3",
@@ -43,6 +44,7 @@
   "scripts": {
     "watch": "gulp watch:all",
     "test": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --require @babel/core --require @babel/register tests/**",
+    "test:coverage": "nyc --reporter=text --reporter=html npm test",
     "test:watch": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --watch --require @babel/core --require @babel/register tests/**",
     "build:prod": "NODE_ENV=production gulp build",
     "build": "gulp build",

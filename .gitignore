@@ -1,10 +1,15 @@
 .idea/
+.temp/
 *.log
 bower_components/
 build/
 node_modules/
-.temp/
 
+# nyc related files
+.nyc_output/
+coverage/
+
+# project settings
 .vscode/*
 !.vscode/extensions.json
 !.vscode/snippets/
