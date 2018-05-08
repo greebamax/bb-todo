@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import TodosCollection from './tasks-collection';
+import TasksCollection from './tasks-collection';
 
 export default Backbone.Model.extend({
 
@@ -13,7 +13,7 @@ export default Backbone.Model.extend({
   },
 
   getTasks() {
-    const tasks = new TodosCollection();
+    const tasks = new TasksCollection();
     tasks.fetch();
 
     this.listenTo(tasks, 'sync', this.onTasksLoad);

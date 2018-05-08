@@ -9,11 +9,10 @@ export default class AppController extends BaseController {
   }
 
   home() {
-    console.log('main router home');
+    this.router.redirectTo('tasks-list');
   }
 
   otherwise() {
-    console.log('main router otherwise');
     this.redirectTo(this.home);
   }
 }

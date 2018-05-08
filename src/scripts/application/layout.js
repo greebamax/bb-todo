@@ -6,6 +6,11 @@ export default class extends BaseView {
     super({
       template: AppTemplate,
       tagName: 'section',
+      regions: {
+        footer: '#footer',
+        header: '#header',
+        main: '#main',
+      },
     });
   }
 }

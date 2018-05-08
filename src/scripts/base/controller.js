@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Mn from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
 const getRoute = (target, routes) =>
   _.get(routes, _.isFunction(target) ? target.name : target, null);
@@ -32,5 +33,9 @@ export default class BaseController extends Mn.Object {
         this.router.redirectTo(route);
       }
     }
+  }
+
+  show(view) { // eslint-disable-line
+    Radio.channel('app').request('show:content', view);
   }
 }

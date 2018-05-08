@@ -1,20 +1,20 @@
 import BaseController from 'base/controller';
-import ProfileView from './view';
+import TaskListView from './view';
 
 /**
- * @class ProfileController
+ * @class TaskListController
  * @extends Marionette.Object
  */
-export default class ProfileController extends BaseController {
+export default class TaskListController extends BaseController {
   static get appRoutes() {
     return {
-      'profile/': 'home',
-      'profile/*other': 'otherwise',
+      'tasks-list/': 'home',
+      'tasks-list/*other': 'otherwise',
     };
   }
 
   getView() {
-    const view = new ProfileView();
+    const view = new TaskListView();
     this.listenTo(view, {
       show: this.onShow,
     }, this);

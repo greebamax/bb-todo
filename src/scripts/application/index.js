@@ -12,7 +12,10 @@ export default class extends BaseApplication {
   constructor(options) {
     super(_.assign({
       region: '#app',
-      channelName: 'main',
+      channelName: 'app',
+      radioRequests: {
+        'show:content': 'showContent',
+      },
     }, options));
     this.mainRouter = new MainRouter();
   }
@@ -32,5 +35,9 @@ export default class extends BaseApplication {
 
   onBeforeDestroy() {
     this.mainRouter.routers.forEach(router => router.destroy());
+  }
+
+  showContent(view) {
+    this.getView().getRegion('main').show(view);
   }
 }
