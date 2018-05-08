@@ -84,6 +84,12 @@ describe('Base Router', () => {
 
     const router2 = new BaseRouter();
     expect(router2.homeRoute).to.be.equals(`${BaseRouter.routesRoot}/`);
+
+    const testDashRoute = 'test-dash-route';
+    const router3 = new BaseRouter({
+      routesRoot: testDashRoute,
+    });
+    expect((new RegExp(testDashRoute)).test(router3.homeRoute)).to.be.true;
   });
 
   it('should have name based on provided option or constructor name', () => {
