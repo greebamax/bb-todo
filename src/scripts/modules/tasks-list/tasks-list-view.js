@@ -1,14 +1,18 @@
-import Backbone from 'backbone';
+import Marionette from 'backbone.marionette';
 import TaskView from '../task/task-view';
 import TasksListModel from './tasks-list-model';
 
-export default Backbone.View.extend({
-  tagName: 'ul',
-  model: TasksListModel,
+export default class extends Marionette.CollectionView {
+  constructor() {
+    super({
+      tagName: 'ul',
+      model: TasksListModel,
+    });
+  }
 
   initialize() {
     this.listenTo(this.model, 'tasks:sync', this.render);
-  },
+  }
 
   render() {
     this.$el.empty();
@@ -21,6 +25,5 @@ export default Backbone.View.extend({
       const itemView = new TaskView({ model });
       this.$el.append(itemView.render().el);
     });
-  },
-
-});
+  }
+}

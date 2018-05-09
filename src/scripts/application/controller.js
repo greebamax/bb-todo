@@ -9,7 +9,7 @@ export default class AppController extends BaseController {
   }
 
   home() {
-    this.router.redirectTo('tasks-list');
+    this.router.redirectTo('task-lists');
   }
 
   otherwise() {

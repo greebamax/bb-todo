@@ -8,8 +8,8 @@ import TaskListView from './view';
 export default class TaskListController extends BaseController {
   static get appRoutes() {
     return {
-      'tasks-list/': 'home',
-      'tasks-list/*other': 'otherwise',
+      'task-lists/': 'home',
+      'task-lists/*other': 'otherwise',
     };
   }
 

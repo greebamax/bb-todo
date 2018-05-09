@@ -4,7 +4,7 @@ import TaskListRouterCtrl from './controller';
 
 export default class TaskListRouter extends BaseRouter {
   static get routesRoot() {
-    return 'tasks-list';
+    return 'task-lists';
   }
 
   constructor(options) {
