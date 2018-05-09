@@ -1,6 +1,6 @@
 import Marionette from 'backbone.marionette';
 import TaskView from '../task/task-view';
-import TasksListModel from './tasks-list-model';
+import TasksListModel from './task-list-model';
 
 export default class extends Marionette.CollectionView {
   constructor() {
