@@ -65,7 +65,6 @@ gulp.task('server', () => {
 
   taskServer({
     port: 4379,
-    dbFile: resolve('./gulp-tasks/db.json'),
     staticFolder: resolve('./build'),
   });
 });

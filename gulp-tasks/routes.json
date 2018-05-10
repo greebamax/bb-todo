@@ -1,0 +1,5 @@
+{
+  "/api/*": "/$1",
+  "/task-lists/:listId/tasks": "/tasks",
+  "/task-lists/:listId/tasks/:taskId": "/tasks/:taskId"
+}

@@ -1,28 +1,38 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { resolve } = require('path');
+const { resolve, isAbsolute } = require('path');
 const jsonServer = require('json-server');
 const delayMiddleware = require('./delay');
 
+const getAbsPathToFile = path => (isAbsolute(path) ? path : resolve(__dirname, path));
+
 const defaults = {
-  port: 3000,
   dbFile: './db.json',
-  staticFolder: 'build',
   hostName: 'localhost',
+  port: 3000,
+  routesFile: './routes.json',
+  staticFolder: 'build',
 };
 
 module.exports = options => {
   const {
-    port, dbFile, staticFolder, hostName,
+    dbFile,
+    hostName,
+    port,
+    routesFile,
+    staticFolder,
   } = Object.assign(defaults, options);
 
   const server = jsonServer.create();
-  const router = jsonServer.router(dbFile);
+  const router = jsonServer.router(getAbsPathToFile(dbFile));
   const middleware = jsonServer.defaults({
     static: resolve(staticFolder),
   });
 
   server.use(middleware);
   server.use(delayMiddleware);
+
+  const rewriteRules = require(getAbsPathToFile(routesFile)); // eslint-disable-line
+  server.use(jsonServer.rewriter(rewriteRules));
 
   server.use(router);
 
