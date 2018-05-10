@@ -5,14 +5,7 @@
       "error",
       "as-needed"
     ],
-    "class-methods-use-this": [
-      "error",
-      {
-        "exceptMethods": [
-          "defaults"
-        ]
-      }
-    ],
+    "class-methods-use-this": "off",
     "import/no-unresolved": [
       "error",
       {
@@ -30,5 +23,9 @@
   },
   "plugins": [
     "import"
-  ]
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  }
 }

@@ -1,7 +1,7 @@
 import ProfileModule from './profile';
-import TaskListModule from './task-list';
+import ListsModule from './lists';
 
 export default {
   ProfileModule,
-  TaskListModule,
+  ListsModule,
 };
