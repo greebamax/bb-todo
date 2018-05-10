@@ -12,4 +12,5 @@ coverage/
 # project settings
 .vscode/*
 !.vscode/extensions.json
+!.vscode/launch.json
 !.vscode/snippets/
