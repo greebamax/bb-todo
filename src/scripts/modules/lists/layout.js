@@ -1,17 +1,16 @@
 import _ from 'lodash';
 import BaseView from 'base/view';
-import TaskListsViewTemplate from './template.hbs';
+import TaskListsLayoutTemplate from './template.hbs';
 import TaskList from './container-view';
 
 /**
- * @export
- * @class TaskListsView
+ * @class TaskListsLayout
  * @extends {Marionette.View}
  */
-export default class TaskListsView extends BaseView {
+export default class TaskListsLayout extends BaseView {
   constructor(options) {
     super(_.extend({
-      template: TaskListsViewTemplate,
+      template: TaskListsLayoutTemplate,
       regions: {
         listsContainer: {
           el: '#lists',

@@ -4,10 +4,10 @@ import TaskListView from './list/view';
 
 /**
  * @export
- * @class TaskListsView
+ * @class TasksListContainerView
  * @extends {Marionette.CollectionView}
  */
-export default class extends BaseCollectionView {
+export default class TasksListContainerView extends BaseCollectionView {
   constructor(options) {
     super(_.extend({
       tagName: 'ul',

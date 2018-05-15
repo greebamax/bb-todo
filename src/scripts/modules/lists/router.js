@@ -2,6 +2,10 @@ import _ from 'lodash';
 import BaseRouter from 'base/router';
 import ListsController from './controller';
 
+/**
+ * @class ListsRouter
+ * @extends {Marionette.AppRouter}
+ */
 export default class ListsRouter extends BaseRouter {
   static get routesRoot() {
     return 'lists';

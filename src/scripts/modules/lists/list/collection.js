@@ -2,11 +2,10 @@ import BaseCollection from 'base/collection';
 import ListModel from './model';
 
 /**
- * @export
- * @class ListsCollection
- * @extends {BaseCollection}
+ * @class TaskListsCollection
+ * @extends {Backbone.Collection}
  */
-export default class ListsCollection extends BaseCollection {
+export default class TaskListsCollection extends BaseCollection {
   get url() {
     return 'api/lists';
   }

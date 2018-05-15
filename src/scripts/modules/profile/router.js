@@ -1,6 +1,10 @@
 import BaseRouter from 'base/router';
 import ProfileCtrl from './controller';
 
+/**
+ * @class ProfileRouter
+ * @extends {Marionette.AppRouter}
+ */
 export default class ProfileRouter extends BaseRouter {
   constructor(options) {
     super(options);

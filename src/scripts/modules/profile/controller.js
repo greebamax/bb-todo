@@ -3,7 +3,7 @@ import ProfileView from './view';
 
 /**
  * @class ProfileController
- * @extends Marionette.Object
+ * @extends {Marionette.Object}
  */
 export default class ProfileController extends BaseController {
   static get appRoutes() {
