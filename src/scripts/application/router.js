@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Backbone from 'backbone';
 import BaseRouter from 'base/router';
 import AppRoutersCache from './app-routers-cache';
 import AppController from './controller';
@@ -17,8 +18,11 @@ export default class AppRouter extends BaseRouter {
     _.extend(this.controller, {
       [redirectionMethodName]: () => {
         const registeredRouter = this.routers.registerRouter(RouterClass);
+        const route = /:/.test(registeredRouter.homeRoute) // assume that parametrical route might be only of child route
+          ? Backbone.history.getFragment()
+          : registeredRouter.homeRoute;
 
-        registeredRouter.redirectTo(registeredRouter.homeRoute);
+        registeredRouter.redirectTo(route);
       },
     });
 
