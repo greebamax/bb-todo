@@ -10,7 +10,6 @@ export default class ListsController extends BaseController {
   static get appRoutes() {
     return {
       'lists/': 'home',
-      'lists/*other': 'otherwise',
     };
   }
 
@@ -27,9 +26,5 @@ export default class ListsController extends BaseController {
 
   home() {
     this.show(this.getLayout());
-  }
-
-  otherwise() {
-    this.redirectTo(this.home);
   }
 }
