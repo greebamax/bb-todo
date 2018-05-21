@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import Backbone from 'backbone';
 import BaseController from 'base/controller';
 import TaskListLayout from './layout';
