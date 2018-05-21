@@ -22,19 +22,16 @@ export default class TaskListController extends BaseController {
   }
 
   home(id) {
-    const taskListId = parseInt(id, 10);
-
-    if (!_.isNumber(taskListId)) {
+    if (!/\d{1,}/.test(id)) {
       this.otherwise();
-      return;
     }
 
     this.show(this.getView({
-      taskListId,
+      id,
     }));
   }
 
   otherwise() {
-    this.redirectTo('lists/');
+    this.router.navigateTo('lists');
   }
 }
