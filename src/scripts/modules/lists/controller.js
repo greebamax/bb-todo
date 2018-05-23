@@ -9,7 +9,7 @@ import ListsCollection from './list/collection';
 export default class ListsController extends BaseController {
   static get appRoutes() {
     return {
-      'lists/': 'home',
+      lists: 'home',
     };
   }
 

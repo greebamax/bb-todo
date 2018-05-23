@@ -8,7 +8,7 @@ import ProfileView from './view';
 export default class ProfileController extends BaseController {
   static get appRoutes() {
     return {
-      'profile/': 'home',
+      'profile': 'home',
       'profile/*other': 'otherwise',
     };
   }

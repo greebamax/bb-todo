@@ -24,7 +24,7 @@ export default class extends BaseApplication {
     const modules = this.getOption('modules');
 
     _.forEach(modules, module => {
-      this.mainRouter.registerSubRouter(module.router);
+      this.mainRouter.registerSubRouter(module);
     });
   }
 

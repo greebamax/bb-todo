@@ -63,4 +63,8 @@ export default class AppRoutersCache {
   forEach(cb) {
     return this[routers].forEach(cb);
   }
+
+  isLoaded(module) {
+    return this[routers].has(module.name);
+  }
 }

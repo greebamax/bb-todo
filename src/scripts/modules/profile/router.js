@@ -6,8 +6,8 @@ import ProfileCtrl from './controller';
  * @extends {Marionette.AppRouter}
  */
 export default class ProfileRouter extends BaseRouter {
-  constructor(options) {
-    super(options);
+  constructor() {
+    super();
     this.controller = new ProfileCtrl({ router: this });
     this.processAppRoutes(this.controller, ProfileCtrl.appRoutes);
   }

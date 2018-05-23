@@ -7,14 +7,8 @@ import ListsController from './controller';
  * @extends {Marionette.AppRouter}
  */
 export default class ListsRouter extends BaseRouter {
-  static get routesRoot() {
-    return 'lists';
-  }
-
-  constructor(options) {
-    super(_.extend({
-      routesRoot: ListsRouter.routesRoot,
-    }, options));
+  constructor() {
+    super();
     this.controller = new ListsController({ router: this });
     this.processAppRoutes(this.controller, ListsController.appRoutes);
   }

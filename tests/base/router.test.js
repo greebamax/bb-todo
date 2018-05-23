@@ -76,22 +76,6 @@ describe('Base Router', () => {
     expect(router.controller.afterEach).to.have.been.calledTwice;
   });
 
-  it('should allways return home route based on routesRoot or constructor name with ending slash', () => {
-    const router = new BaseRouter({
-      routesRoot: 'testRoute',
-    });
-    expect(/\/$/.test(router.homeRoute)).to.be.true;
-
-    const router2 = new BaseRouter();
-    expect(router2.homeRoute).to.be.equals(`${BaseRouter.routesRoot}/`);
-
-    const testDashRoute = 'test-dash-route';
-    const router3 = new BaseRouter({
-      routesRoot: testDashRoute,
-    });
-    expect((new RegExp(testDashRoute)).test(router3.homeRoute)).to.be.true;
-  });
-
   it('should have name based on provided option or constructor name', () => {
     let router;
 

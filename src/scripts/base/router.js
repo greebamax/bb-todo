@@ -23,24 +23,6 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
-   * Returns root route with ending slash to omit triggering navigation to `*otherwise` route of
-   * parent router.
-   *
-   * @readonly
-   * @memberof BaseRouter
-   * @returns {string}
-   */
-  static get routesRoot() {
-    return _.first(this.name.split('Router')).toLowerCase();
-  }
-
-  get homeRoute() {
-    const routesRoot = _.get(this.options, 'routesRoot', this.constructor.routesRoot);
-
-    return `${routesRoot}/`;
-  }
-
-  /**
    * @param {!string} fragment
    * @param {Function} fn
    * @memberof BaseRouter
@@ -59,7 +41,7 @@ export default class BaseRouter extends Mn.AppRouter {
 
   /**
    * @param {!string} fragment
-   * @param {object} options
+   * @param {object} [options]
    * @param {boolean} [options.trigger=true]
    * @memberof BaseRouter
    */

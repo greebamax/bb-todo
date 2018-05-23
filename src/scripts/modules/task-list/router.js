@@ -6,10 +6,6 @@ import TaskListCtrl from './controller';
  * @extends {Marionette.AppRouter}
  */
 export default class TaskListRouter extends BaseRouter {
-  static get routesRoot() {
-    return 'lists/:id';
-  }
-
   constructor(options) {
     super(options);
     this.controller = new TaskListCtrl({ router: this });
