@@ -87,4 +87,12 @@ describe('AppRouters Cache', () => {
       expect(passedArgs[2]).to.be.an.instanceOf(Map);
     });
   });
+
+  describe('.isLoaded(module)', () => {
+    it('should return true if router has been registered', () => {
+      expect(appRoutersCache.isLoaded(BaseRouter)).to.be.false;
+      appRoutersCache.registerRouter(BaseRouter);
+      expect(appRoutersCache.isLoaded(BaseRouter)).to.be.true;
+    });
+  });
 });
