@@ -5,7 +5,7 @@ const BaseRouter = require('base/router').default;
 
 const expect = chai.expect;
 
-describe('AppRouters Cache', () => {
+describe('Application routers cache', () => {
   let appRoutersCache;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('AppRouters Cache', () => {
     appRoutersCache = undefined;
   });
 
-  describe('.registerRouter()', () => {
+  describe('#registerRouter()', () => {
     it('should register router', () => {
       appRoutersCache.registerRouter(BaseRouter);
       const registeredRouter = appRoutersCache.getRouter(BaseRouter.name);
@@ -47,7 +47,7 @@ describe('AppRouters Cache', () => {
     });
   });
 
-  describe('.unregisterRouter()', () => {
+  describe('#unregisterRouter()', () => {
     it('should unregister router', () => {
       appRoutersCache.registerRouter(BaseRouter);
       expect(appRoutersCache.getRouter(BaseRouter.name) === BaseRouter).to.be.false;
@@ -70,7 +70,7 @@ describe('AppRouters Cache', () => {
     });
   });
 
-  describe('.forEach(callback)', () => {
+  describe('#forEach(callback)', () => {
     it('should iterate through the routers', () => {
       const spyCb = sinon.spy();
 
@@ -88,7 +88,7 @@ describe('AppRouters Cache', () => {
     });
   });
 
-  describe('.isLoaded(module)', () => {
+  describe('#isLoaded(module)', () => {
     it('should return true if router has been registered', () => {
       expect(appRoutersCache.isLoaded(BaseRouter)).to.be.false;
       appRoutersCache.registerRouter(BaseRouter);
