@@ -1,6 +1,9 @@
-import Backbone from 'backbone';
+import _ from 'lodash';
 import BaseController from 'base/controller';
+import ListModel from '../lists/list/model';
 import TaskListLayout from './layout';
+
+const isValidListId = id => _.isFinite(parseInt(id, 10));
 
 /**
  * @class TaskListController
@@ -10,27 +13,35 @@ export default class TaskListController extends BaseController {
   static get appRoutes() {
     return {
       'lists/:id': 'home',
+      'lists/:id/tasks': 'viewListDetails',
       'lists/*other': 'otherwise',
     };
   }
 
-  getView(params) {
-    return new TaskListLayout({
-      model: new Backbone.Model(params),
-    });
+  home(id) {
+    this.router.navigateTo(`lists/${id}/tasks`);
   }
 
-  home(id) {
-    if (!/\d{1,}/.test(id)) {
+  viewListDetails(id) {
+    if (isValidListId(id)) {
+      this.getView({ id }).then(view => this.show(view));
+    } else {
       this.otherwise();
     }
-
-    this.show(this.getView({
-      id,
-    }));
   }
 
   otherwise() {
     this.router.navigateTo('lists');
+  }
+
+  getView(params) {
+    const def = new Promise((resolve, reject) => {
+      const model = new ListModel(params);
+      model.fetch()
+        .then(() => resolve(new TaskListLayout({ model })))
+        .catch(({ error }) => reject(error));
+    });
+
+    return def;
   }
 }

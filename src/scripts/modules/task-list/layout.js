@@ -12,4 +12,10 @@ export default class TaskListLayout extends BaseView {
       template: TaskListLayoutTemplate,
     }, options));
   }
+
+  serializeData() {
+    return _.extend({
+      cid: this.model.cid,
+    }, this.model.toJSON());
+  }
 }

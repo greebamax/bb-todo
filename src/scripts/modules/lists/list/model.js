@@ -6,7 +6,7 @@ import BaseModel from 'base/model';
  */
 export default class TaskList extends BaseModel {
   get urlRoot() {
-    return this.collection.url;
+    return 'api/lists';
   }
 
   get defaults() {
