@@ -8,7 +8,7 @@
   "Import BaseController": {
     "prefix": "ibc",
     "body": [
-      "import Base$1 from 'base/$1';\n"
+      "import BaseController from 'base/Controller';\n"
     ]
   },
   "Import BaseView": {
