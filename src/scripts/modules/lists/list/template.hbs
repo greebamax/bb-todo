@@ -1,5 +1,5 @@
 <div>
   List id:{{id}}
-  <a href="#/lists/{{id}}/tasks">show tasks</a>
+  {{#route to="lists/{id}/tasks" id=id}}show tasks{{/route}}
   <button data-action="delete">delete</button>
 </div>

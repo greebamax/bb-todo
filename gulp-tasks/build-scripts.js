@@ -36,6 +36,7 @@ module.exports = async ({ isProd }) => {
             sourceMap: !isProd,
           },
         },
+        helpers: resolve('src/scripts/helpers/handlebars/index.js'),
         jquery: 'jquery',
       }),
       babel({

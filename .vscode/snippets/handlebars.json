@@ -1,0 +1,9 @@
+{
+	"Navigation Link": {
+		"prefix": "ll",
+		"body": [
+      "{{#route to=\"${1:to}\" id=${2:id}}}$0{{/route}}"
+		],
+		"description": "Creates simple navigation link"
+	}
+}
