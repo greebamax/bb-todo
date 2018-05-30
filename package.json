@@ -44,9 +44,9 @@
   },
   "scripts": {
     "watch": "gulp watch:all",
-    "test": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --require @babel/core --require @babel/register './tests/**/*.test.js'",
+    "test": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --require @babel/core --require @babel/register -R min './tests/**/*.test.js'",
     "test:coverage": "nyc --reporter=text --reporter=html npm test",
-    "test:watch": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --watch --require @babel/core --require @babel/register './tests/**/*.test.js'",
+    "test:watch": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --watch --require @babel/core --require @babel/register -R min './tests/**/*.test.js'",
     "build:prod": "NODE_ENV=production gulp build",
     "build": "gulp build",
     "start": "gulp dev"
