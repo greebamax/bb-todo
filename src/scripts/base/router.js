@@ -16,13 +16,6 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
-   * @param {string} name
-   */
-  set name(name) {
-    this.name = name;
-  }
-
-  /**
    * @param {!string} fragment
    * @param {Function} fn
    * @memberof BaseRouter
@@ -40,21 +33,21 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
-   * @param {!string} fragment
+   * @param {string} fragment
    * @param {object} [options]
    * @param {boolean} [options.trigger=true]
    * @memberof BaseRouter
    */
-  redirectTo(fragment = '', options) {
+  redirectTo(fragment, options) {
     if (!_.isString(fragment)) return;
     this.navigate(`${DEFAULT_PREFIX}${fragment}`, _.assign({ trigger: true }, options));
   }
 
   /**
-   * @param {!string} fragment
+   * @param {string} fragment
    * @memberof BaseRouter
    */
-  navigateTo(fragment = '') {
+  navigateTo(fragment) {
     if (!_.isString(fragment)) return;
     this.navigate(`${DEFAULT_PREFIX}${fragment}`);
   }
