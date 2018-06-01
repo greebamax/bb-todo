@@ -10,7 +10,7 @@ const getRoute = (target, routes) =>
  * @extends Marionette.Object
  */
 export default class BaseController extends Mn.Object {
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
 
     if (options.router) {
@@ -26,12 +26,12 @@ export default class BaseController extends Mn.Object {
    * @memberof BaseController
    */
   redirectTo(target) {
-    if (this.router) {
-      const route = getRoute(target, this.routes);
+    if (!this.router) return;
 
-      if (!_.isNull(route)) {
-        this.router.redirectTo(route);
-      }
+    const route = getRoute(target, this.routes);
+
+    if (!_.isNull(route)) {
+      this.router.redirectTo(route);
     }
   }
 
