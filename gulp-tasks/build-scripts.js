@@ -2,16 +2,12 @@ const rollup = require('rollup');
 const babel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const uglify = require('rollup-plugin-uglify');
+const { uglify } = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
 const handlebars = require('rollup-plugin-handlebars-plus');
 const alias = require('rollup-plugin-alias');
 const { resolve } = require('path');
-
-const ENV = {
-  DEV: 'development',
-  PROD: 'production',
-};
+const { ENV } = require('./helpers');
 
 module.exports = async ({ isProd }) => {
   const bundle = await rollup.rollup({
@@ -44,7 +40,7 @@ module.exports = async ({ isProd }) => {
       }),
       replace({
         exclude: 'node_modules/**',
-        __ENV__: JSON.stringify(process.env.NODE_ENV || ENV.DEV), // `development` by default
+        __ENV__: JSON.stringify(isProd ? ENV.PROD : ENV.DEV),
       }),
       (isProd && uglify()),
     ],
