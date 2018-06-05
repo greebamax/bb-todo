@@ -11,7 +11,7 @@ import MainRouter from './router';
 export default class extends BaseApplication {
   constructor(options) {
     super(_.assign({
-      region: '#app',
+      region: '#root',
       channelName: 'app',
       radioRequests: {
         'show:content': 'showContent',
@@ -38,6 +38,6 @@ export default class extends BaseApplication {
   }
 
   showContent(view) {
-    this.getView().getRegion('main').show(view);
+    this.getView().getRegion(MainLayout.mainRegion).show(view);
   }
 }

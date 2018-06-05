@@ -22,7 +22,7 @@ export default class BaseController extends Mn.Object {
   /**
    * Trigger redirection by controller method name
    *
-   * @param {Function|String} target
+   * @param {Function|string} target
    * @memberof BaseController
    */
   redirectTo(target) {
