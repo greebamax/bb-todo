@@ -2,26 +2,25 @@ import BaseView from 'base/view';
 import AppTemplate from './template.hbs';
 
 const SIDEBAR_REGION = 'sidebar';
-const MAIN_REGION = 'main';
+const CONTENT_REGION = 'content';
 
 export default class AppLayout extends BaseView {
   static get sidebarRegion() { return SIDEBAR_REGION; }
-  static get mainRegion() { return MAIN_REGION; }
+  static get contentRegion() { return CONTENT_REGION; }
 
   constructor() {
     super({
       template: AppTemplate,
-      tagName: 'section',
-      className: 'app',
+      className: 'app-layout',
       regions: {
-        [SIDEBAR_REGION]: '#sidebar',
-        [MAIN_REGION]: '#main',
+        [SIDEBAR_REGION]: `#${SIDEBAR_REGION}`,
+        [CONTENT_REGION]: `#${CONTENT_REGION}`,
       },
     });
   }
 
   onBeforeShow() {
     this.getRegion(SIDEBAR_REGION).show(/* SideBarView */);
-    this.getRegion(MAIN_REGION).show(/* MainRegionView */);
+    this.getRegion(CONTENT_REGION).show(/* contentRegionView */);
   }
 }

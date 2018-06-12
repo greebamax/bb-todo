@@ -38,6 +38,6 @@ export default class extends BaseApplication {
   }
 
   showContent(view) {
-    this.getView().getRegion(MainLayout.mainRegion).show(view);
+    this.getView().getRegion(MainLayout.contentRegion).show(view);
   }
 }
