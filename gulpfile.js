@@ -12,9 +12,7 @@ const loadTask = name => {
   return require(resolve(path));
 };
 
-gulp.task('clean', () => {
-  del('build/**/*.*');
-});
+gulp.task('clean', () => del('build'));
 
 gulp.task('html:build', () =>
   gulp.src('src/index.html')
@@ -58,11 +56,11 @@ gulp.task('reload', () => {
 gulp.task('build', ['clean', 'html:build', 'styles:build', 'scripts:build']);
 
 gulp.task('server', () => {
-  const taskServer = loadTask('server');
+  const serverTask = loadTask('server');
 
-  taskServer({
+  serverTask({
     port: 4379,
-    staticFolder: resolve('./build'),
+    staticFolder: resolve('build'),
   });
 });
 
