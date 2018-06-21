@@ -2,6 +2,8 @@ const gulp = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
 const { resolve, join } = require('path');
+const runSequence = require('run-sequence');
+
 const { ENV } = require('./gulp-tasks/helpers');
 
 const isProd = process.env.NODE_ENV === ENV.PROD;
@@ -59,7 +61,7 @@ gulp.task('reload', () => {
   });
 });
 
-gulp.task('build', ['clean', 'html:build', 'styles:build', 'scripts:build']);
+gulp.task('build', () => runSequence('clean', ['icons:build', 'html:build', 'styles:build', 'scripts:build']));
 
 gulp.task('server', () => {
   const serverTask = loadTask('server');
