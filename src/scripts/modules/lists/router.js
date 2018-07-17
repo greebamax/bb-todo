@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import BaseRouter from 'base/router';
 import ListsController from './controller';
 

@@ -35,7 +35,7 @@ export default class BaseController extends Mn.Object {
     }
   }
 
-  show(view) { // eslint-disable-line
+  show(view) {
     Radio.channel('app').request('show:content', view);
   }
 }
