@@ -1,7 +1,6 @@
 html,
 body,
 #root,
-.content,
 .app-layout,
 .app-container {
   height: 100%;
@@ -11,6 +10,11 @@ body,
   display: flex;
 }
 
-.content {
-  width: 100%;
+.app-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  width: 100% - $sidebar-width;
 }

@@ -1,3 +1,7 @@
+/* Layout */
+$sidebar-width: 20%;
+$sidebar-min-width: 170px;
+
 /* Icons */
 $icon-width: 16px;
 $icon-height: $icon-width;
@@ -17,3 +21,5 @@ $blue-light: rgb(130, 182, 240);
 $blue: rgb(72, 168, 238);
 $blue-dark: rgb(33, 150, 243);
 $blue-darker: rgb(46, 122, 233);
+
+$border-color: $gray-dark;
