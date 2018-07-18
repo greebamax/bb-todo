@@ -2,8 +2,7 @@ import _ from 'lodash';
 import Mn from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-const getRoute = (target, routes) =>
-  _.get(routes, _.isFunction(target) ? target.name : target, null);
+const getRoute = (target, routes) => _.get(routes, _.isFunction(target) ? target.name : target, null);
 
 /**
  * @class BaseController

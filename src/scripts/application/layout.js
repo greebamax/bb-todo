@@ -6,6 +6,7 @@ const CONTENT_REGION = 'content';
 
 export default class AppLayout extends BaseView {
   static get sidebarRegion() { return SIDEBAR_REGION; }
+
   static get contentRegion() { return CONTENT_REGION; }
 
   constructor() {

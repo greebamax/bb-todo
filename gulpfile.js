@@ -17,17 +17,14 @@ const loadTask = name => {
 
 gulp.task('clean', () => del('build'));
 
-gulp.task('html:build', () =>
-  gulp.src('src/index.html')
-    .pipe(gulp.dest('build')));
+gulp.task('html:build', () => gulp.src('src/index.html').pipe(gulp.dest('build')));
 
-gulp.task('icons:build', () =>
-  gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
+gulp.task('icons:build',
+  () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('build/assets')));
 
-gulp.task('html:watch', () =>
-  gulp.watch('src/index.html', ['html:build']));
+gulp.task('html:watch', () => gulp.watch('src/index.html', ['html:build']));
 
 gulp.task('styles:build', () => {
   const buildStylesTask = loadTask('build-styles');
