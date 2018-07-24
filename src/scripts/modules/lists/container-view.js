@@ -3,7 +3,6 @@ import BaseCollectionView from 'base/collection-view';
 import TaskListView from './list/view';
 
 /**
- * @export
  * @class TasksListContainerView
  * @extends {Marionette.CollectionView}
  */

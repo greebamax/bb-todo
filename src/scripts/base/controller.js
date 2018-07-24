@@ -6,7 +6,7 @@ const getRoute = (target, routes) => _.get(routes, _.isFunction(target) ? target
 
 /**
  * @class BaseController
- * @extends Marionette.Object
+ * @extends {Marionette.Object}
  */
 export default class BaseController extends Mn.Object {
   constructor(options = {}) {

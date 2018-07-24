@@ -5,7 +5,7 @@ const isExtendsBaseRouter = router => Object.prototype.isPrototypeOf.call(Object
 
 /**
  * @class AppRoutersCache
- * @extends Marionette.AppRouter
+ * @extends {Marionette.AppRouter}
  */
 export default class AppRoutersCache {
   constructor() {

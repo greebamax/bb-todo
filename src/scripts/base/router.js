@@ -5,7 +5,7 @@ const DEFAULT_PREFIX = '#/';
 
 /**
  * @class BaseRouter
- * @extends Marionette.AppRouter
+ * @extends {Marionette.AppRouter}
  */
 export default class BaseRouter extends Mn.AppRouter {
   /**

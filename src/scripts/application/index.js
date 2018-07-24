@@ -5,10 +5,10 @@ import MainLayout from './layout';
 import MainRouter from './router';
 
 /**
- * @class
- * @extends Marionette.Application
+ * @class Application
+ * @extends {Marionette.Application}
  */
-export default class extends BaseApplication {
+export default class Application extends BaseApplication {
   constructor(options) {
     super(_.assign({
       region: '#root',

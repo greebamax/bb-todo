@@ -1,6 +1,10 @@
 import BaseController from 'base/controller';
 
-export default class AppController extends BaseController {
+/**
+ * @class ApplicationController
+ * @extends {Marionette.Object}
+ */
+export default class ApplicationController extends BaseController {
   static get appRoutes() {
     return {
       '': 'home',
