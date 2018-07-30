@@ -1,12 +1,14 @@
 import BaseController from 'base/controller';
-import ListsLayout from './layout';
-import ListsCollection from './list/collection';
+import TaskListsLayout from './layout';
+import SideBarView from './sidebar';
+import TaskListsCollection from './list/collection';
+import TaskListsCollectionView from './list/task-lists-container';
 
 /**
  * @class ListsController
  * @extends {Marionette.Object}
  */
-export default class ListsController extends BaseController {
+export default class TaskListsController extends BaseController {
   static get appRoutes() {
     return {
       lists: 'home',
@@ -14,17 +16,42 @@ export default class ListsController extends BaseController {
   }
 
   getLayout() {
-    const taskLists = new ListsCollection();
-    taskLists.fetch();
+    const layout = new TaskListsLayout();
 
-    const layout = new ListsLayout({
-      collection: taskLists,
-    });
+    this.listenTo(layout, 'render', this.onShowLayout);
 
     return layout;
   }
 
   home() {
     this.show(this.getLayout());
+  }
+
+  /**
+   * @param {Marionette.View} taskListsLayout
+   */
+  onShowLayout(taskListsLayout) {
+    taskListsLayout.getRegion(TaskListsLayout.sidebarRegion).show(this.getSidebarView());
+    // taskListsLayout.getRegion(TaskListsLayout.contentRegion).show()
+  }
+
+  /**
+   * @param {Marionette.View} sidebarView
+   */
+  onShowSidebar(sidebarView) {
+    const taskLists = new TaskListsCollection();
+    taskLists.fetch();
+
+    sidebarView.getRegion(SideBarView.listsRegion).show(new TaskListsCollectionView({
+      collection: taskLists,
+    }));
+  }
+
+  getSidebarView() {
+    const sidebarView = new SideBarView();
+
+    this.listenTo(sidebarView, 'render', this.onShowSidebar);
+
+    return sidebarView;
   }
 }

@@ -1,14 +1,14 @@
 import BaseRouter from 'base/router';
-import ListsController from './controller';
+import TaskListsController from './controller';
 
 /**
  * @class ListsRouter
  * @extends {Marionette.AppRouter}
  */
-export default class ListsRouter extends BaseRouter {
+export default class TaskListsRouter extends BaseRouter {
   constructor() {
     super();
-    this.controller = new ListsController({ router: this });
-    this.processAppRoutes(this.controller, ListsController.appRoutes);
+    this.controller = new TaskListsController({ router: this });
+    this.processAppRoutes(this.controller, TaskListsController.appRoutes);
   }
 }

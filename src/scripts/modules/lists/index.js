@@ -1,8 +1,8 @@
-import ListsRouter from './router';
-import ListsController from './controller';
+import TaskListsRouter from './router';
+import TaskListsController from './controller';
 
 export default {
-  appRoutes: ListsController.appRoutes,
-  name: 'ListsModule',
-  router: ListsRouter,
+  appRoutes: TaskListsController.appRoutes,
+  name: 'TaskListsModule',
+  router: TaskListsRouter,
 };

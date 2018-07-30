@@ -1,28 +1,30 @@
 import _ from 'lodash';
 import BaseView from 'base/view';
 import TaskListsLayoutTemplate from './template.hbs';
-import TaskList from './container-view';
+
+const SIDEBAR_REGION = 'sidebar';
+const CONTENT_REGION = 'content';
 
 /**
  * @class TaskListsLayout
  * @extends {Marionette.View}
  */
 export default class TaskListsLayout extends BaseView {
+  static get sidebarRegion() { return SIDEBAR_REGION; }
+
+  static get contentRegion() { return CONTENT_REGION; }
+
   constructor(options) {
     super(_.extend({
+      className: 'lists-module',
       template: TaskListsLayoutTemplate,
       regions: {
-        listsContainer: {
-          el: '#lists',
+        [SIDEBAR_REGION]: `[data-region="${SIDEBAR_REGION}"]`,
+        [CONTENT_REGION]: {
+          el: `[data-region="${CONTENT_REGION}"]`,
           replaceElement: true,
         },
       },
     }, options));
-  }
-
-  onRender() {
-    this.showChildView('listsContainer', new TaskList({
-      collection: this.collection,
-    }));
   }
 }

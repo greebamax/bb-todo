@@ -9,11 +9,12 @@ import TaskListTemplate from './template.hbs';
 export default class TaskListView extends BaseView {
   constructor(options) {
     super(_.extend({
-      tagName: 'li',
-      template: TaskListTemplate,
+      className: 'nav-item',
       events: {
         'click [data-action="delete"]': 'onDeleteClick',
       },
+      tagName: 'li',
+      template: TaskListTemplate,
     }, options));
   }
 
