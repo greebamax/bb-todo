@@ -1,3 +1,5 @@
+$base-font-size: .875rem;
+
 /* Layout */
 $sidebar-width: 20%;
 $sidebar-min-width: 170px;
@@ -5,9 +7,12 @@ $sidebar-min-width: 170px;
 /* Icons */
 $icon-width: 16px;
 $icon-height: $icon-width;
+$icon-color: #999;
+$icon-color-active: #007bff;
 
 /* Navbar */
 $navbar-height: 48px;
+$navbar-link-font-color: #333;
 
 /* Colors */
 $gray-lighter: rgb(240, 240, 240);
