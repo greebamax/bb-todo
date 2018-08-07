@@ -2,8 +2,8 @@ import BaseView from 'base/view';
 import AppTemplate from './template.hbs';
 import HeaderView from './header';
 
-const CONTENT_REGION = 'content';
-const HEADER_REGION = 'header';
+const CONTENT_REGION = 'app-container';
+const HEADER_REGION = 'app-header';
 
 /**
  * @class ApplicationLayout
@@ -19,8 +19,8 @@ export default class ApplicationLayout extends BaseView {
       template: AppTemplate,
       className: 'app-layout',
       regions: {
-        [CONTENT_REGION]: `#${CONTENT_REGION}`,
-        [HEADER_REGION]: `#${HEADER_REGION}`,
+        [CONTENT_REGION]: `[data-region="${CONTENT_REGION}"]`,
+        [HEADER_REGION]: `[data-region="${HEADER_REGION}"]`,
       },
     });
   }
