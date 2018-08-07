@@ -18,7 +18,12 @@ export default class TaskListView extends BaseView {
     }, options));
   }
 
-  onDeleteClick() {
+  /**
+   * @param {JQueryEventObject} $event
+   */
+  onDeleteClick($event) {
+    $event.preventDefault();
+
     this.model.destroy({
       wait: true,
     });
