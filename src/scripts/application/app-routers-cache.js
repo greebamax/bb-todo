@@ -38,7 +38,7 @@ export default class AppRoutersCache {
   /**
    * @param {BaseRouter} RouterClass
    * @memberof AppRoutersCache
-   * @returns {boolean}
+   * @returns {Boolean}
    */
   unregisterRouter(RouterClass) {
     if (!isExtendsBaseRouter(RouterClass)) {
@@ -51,7 +51,7 @@ export default class AppRoutersCache {
   /**
    * Get registered router by name
    *
-   * @param {string} name
+   * @param {String} name
    * @returns {Marionette.AppRouter|undefined}
    * @memberof AppRoutersCache
    */

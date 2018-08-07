@@ -9,14 +9,14 @@ const DEFAULT_PREFIX = '#/';
  */
 export default class BaseRouter extends Mn.AppRouter {
   /**
-   * @returns {string}
+   * @returns {String}
    */
   get name() {
     return this.options.name || this.constructor.name;
   }
 
   /**
-   * @param {!string} fragment
+   * @param {!String} fragment
    * @param {Function} fn
    * @memberof BaseRouter
    */
@@ -33,9 +33,9 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
-   * @param {string} fragment
-   * @param {object} [options]
-   * @param {boolean} [options.trigger=true]
+   * @param {String} fragment
+   * @param {Object} [options]
+   * @param {Boolean} [options.trigger=true]
    * @memberof BaseRouter
    */
   redirectTo(fragment, options) {
@@ -44,7 +44,7 @@ export default class BaseRouter extends Mn.AppRouter {
   }
 
   /**
-   * @param {string} fragment
+   * @param {String} fragment
    * @memberof BaseRouter
    */
   navigateTo(fragment) {
