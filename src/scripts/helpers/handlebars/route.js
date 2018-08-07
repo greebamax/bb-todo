@@ -1,31 +1,45 @@
 import feather from 'feather-icons';
 
+const SKIPPED_PARAMS = ['to', 'icon'];
+
+/**
+ *  Render link element with passed URL.
+ *
+ *  Will transpile all passed params into URL by
+ *  its names if it was used in URL string
+ *
+ * @param {String} to URL, goes to href attribute
+ * @example
+ *   {{#route
+ *        to="path/with/{key2}/and/{id}/or_another/{key}/to"
+ *        id=id
+ *        key="value"
+ *        key2="value2"}}Test route{{/route}}
+ */
 export default Handlebars => options => {
   const {
     fn,
-    hash: {
-      to,
-      className,
-      icon,
-    },
+    hash: { to, className, icon },
   } = options;
-  const escapedText = Handlebars.escapeExpression(fn(this));
-  const iconSvg = icon ? feather.toSvg(icon) : null;
+  const iconSvg = icon ? feather.icons[icon].toSvg() : null;
 
   let url = Handlebars.escapeExpression(to);
   const passedArgs = Object.keys(options.hash);
 
   if (passedArgs.length > 1) {
     url = passedArgs.reduce((str, key) => {
-      if (key !== 'to') {
-        return str.replace(new RegExp(`{${key}}`), options.hash[key]);
+      if (SKIPPED_PARAMS.includes(key)) { // not expect to be used such params in URL string
+        return str;
       }
-      return str;
+      // replace all passed args by its name
+      return str.replace(new RegExp(`{${key}}`), options.hash[key]);
     }, url);
   }
 
-  return new Handlebars.SafeString(`<a href="#/${url}" class="nav-link ${className || ''}">
-    ${iconSvg || ''}
-    ${escapedText}</a>
-  `);
+  return `
+    <a href="#/${url}" class="nav-link ${className || ''}">
+      ${iconSvg || ''}
+      ${fn(this)}
+    </a>
+  `.trim();
 };

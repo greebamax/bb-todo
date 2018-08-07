@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const sinon = require('sinon');
 
 function FakeSafeString(str) {
   this.str = str;
@@ -13,12 +12,6 @@ const FakeHandlebars = {
   SafeString: FakeSafeString,
 };
 const routeHelper = require('helpers/handlebars/route').default(FakeHandlebars);
-
-/* {{#route
-  to="qwe/{key2}/to/{id}/qwe/{key}/zxc"
-  id=id
-  key="value"
-  key2="value2"}}test route{{/route}} */
 
 describe('Handlebars routeHelper', () => {
   it('should render route with passed href and inner text', () => {
