@@ -2,7 +2,7 @@ import BaseController from 'base/controller';
 import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
 import TaskListsCollection from './list/collection';
-import TaskListsCollectionView from './list/task-lists-container';
+import TaskListsCollectionView from './list/container';
 
 /**
  * @class ListsController
