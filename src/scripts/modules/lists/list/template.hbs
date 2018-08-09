@@ -1,6 +1,1 @@
-{{#route to="lists/{id}/tasks" id=id icon="list"}}
-  <span>List id: {{../id}}</span>
-  <button
-    class="btn btn-sm btn-outline-secondary"
-    data-action="delete">x</button>
-{{/route}}
+<a href="{{route to="lists/{id}/tasks" id=id}}">{{id}}</a>

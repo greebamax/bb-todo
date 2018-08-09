@@ -1,10 +1,7 @@
-import feather from 'feather-icons';
-
 const SKIPPED_PARAMS = ['to', 'icon'];
 
 /**
- *  Render link element with passed URL.
- *
+ *  Creates transpiled route.
  *  Will transpile all passed params into URL by
  *  its names if it was used in URL string
  *
@@ -14,14 +11,14 @@ const SKIPPED_PARAMS = ['to', 'icon'];
  *        to="path/with/{key2}/and/{id}/or_another/{key}/to"
  *        id=id
  *        key="value"
- *        key2="value2"}}Test route{{/route}}
+ *        key2="value2"}}
+ *
+ * @returns {String}
  */
 export default Handlebars => options => {
   const {
-    fn,
-    hash: { to, className, icon },
+    hash: { to },
   } = options;
-  const iconSvg = icon ? feather.icons[icon].toSvg() : null;
 
   let url = Handlebars.escapeExpression(to);
   const passedArgs = Object.keys(options.hash);
@@ -36,10 +33,5 @@ export default Handlebars => options => {
     }, url);
   }
 
-  return `
-    <a href="#/${url}" class="nav-link ${className || ''}">
-      ${iconSvg || ''}
-      ${fn(this)}
-    </a>
-  `.trim();
+  return `#${url}`;
 };
