@@ -1,12 +1,6 @@
 import feather from 'feather-icons';
 
-export default () => options => {
-  const {
-    hash: {
-      name,
-    },
-  } = options;
-
+export default () => name => {
   if (typeof name === 'undefined') {
     return '';
   }
