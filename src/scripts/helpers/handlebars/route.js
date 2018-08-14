@@ -33,5 +33,5 @@ export default Handlebars => options => {
     }, url);
   }
 
-  return `#${url}`;
+  return `#/${url}`;
 };
