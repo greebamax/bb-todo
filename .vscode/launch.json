@@ -6,10 +6,22 @@
       "request": "launch",
       "name": "gulp dev",
       "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
-      "runtimeVersion": "9.11.1",
+      "runtimeVersion": "9.11.2",
       "args": [
         "dev"
       ]
-    }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "npm run start",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run start",
+        "debug",
+      ],
+      "runtimeVersion": "9.11.2",
+      "port": 9229
+    },
   ]
 }
