@@ -1,1 +1,6 @@
-<a href="{{route to="lists/{id}/tasks" id=id}}">{{id}}</a>
+<a href="{{route to="lists/{id}/tasks" id=id}}">
+  <span>list #{{id}}</span>
+  <button data-action="delete">
+    {{> _icon name="delete"}}
+  </button>
+</a>
