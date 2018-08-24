@@ -15,7 +15,13 @@ const loadTask = name => {
   return require(resolve(path));
 };
 
-gulp.task('clean', () => del('build'));
+gulp.task('clean', () => {
+  del([
+    'build',
+    'src/scripts/common/partials/templates.js', // removes compiled index file for hbs common partials
+    'src/scripts/**/*.hbs.js', // removes compiled hbs templates
+  ]);
+});
 
 gulp.task('html:build', () => gulp.src('src/index.html').pipe(gulp.dest('build')));
 
@@ -42,6 +48,12 @@ gulp.task('scripts:build', () => {
   buildScriptsTask({
     isProd,
   });
+});
+
+gulp.task('templates:build', () => {
+  const buildTemplatesTask = loadTask('templates');
+
+  buildTemplatesTask({ isProd });
 });
 
 gulp.task('scripts:watch', () => {
