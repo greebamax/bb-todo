@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import BaseView from 'base/view';
-import TaskListLayoutTemplate from './template.hbs';
+import TaskListLayoutTemplate from './template.tmpl';
 
 /**
  * @class TaskListLayout

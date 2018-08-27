@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import BaseView from 'base/view';
-import TaskListsLayoutTemplate from './template.hbs';
+import TaskListsLayoutTemplate from './template.tmpl';
 
 const SIDEBAR_REGION = 'sidebar';
 const CONTENT_REGION = 'content';

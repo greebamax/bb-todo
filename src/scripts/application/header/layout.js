@@ -1,5 +1,5 @@
 import BaseView from 'base/view';
-import HeaderTemplate from './template.hbs';
+import HeaderTemplate from './template.tmpl';
 
 /**
  * @class HeaderLayout

@@ -1,5 +1,5 @@
 import BaseView from 'base/view';
-import SideBarTemplate from './template.hbs';
+import SideBarTemplate from './template.tmpl';
 
 const LISTS_REGION = 'listsRegion';
 

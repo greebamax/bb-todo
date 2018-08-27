@@ -1,5 +1,5 @@
 import BaseView from 'base/view';
-import AppTemplate from './template.hbs';
+import AppTemplate from './template.tmpl';
 import HeaderView from './header';
 
 const CONTENT_REGION = 'app-container';
