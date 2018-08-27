@@ -4,27 +4,20 @@ const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const { uglify } = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
-const handlebars = require('rollup-plugin-handlebars-plus');
 const alias = require('rollup-plugin-alias');
-const rootImport = require('rollup-plugin-root-import');
+const multiEntry = require('rollup-plugin-multi-entry');
 const { resolve } = require('path');
 const { ENV } = require('./helpers');
 
-const partialRoots = [
-  `${process.cwd()}/src/scripts`,
-  `${process.cwd()}/src/scripts/common/partials`,
-];
-
-module.exports = async ({ isProd }) => {
 module.exports = async ({ isProd }, callback) => {
   const bundle = await rollup.rollup({
-    input: 'src/scripts/main.js',
+    input: [
+      'src/scripts/common/partials/templates.js',
+      'src/scripts/helpers/handlebars/index.js',
+      'src/scripts/main.js',
+    ],
     plugins: [
-      rootImport({
-        useEntry: 'prepend',
-        extensions: ['.js', '.hbs', '.json'],
-        root: partialRoots,
-      }),
+      multiEntry(),
       alias({
         underscore: resolve('node_modules/lodash/index.js'),
         base: resolve('src/scripts/base'),
