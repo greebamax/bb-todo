@@ -14,6 +14,7 @@ module.exports = async ({ isProd }, callback) => {
     input: 'src/scripts/main.js',
     plugins: [
       alias({
+        handlebars: resolve('node_modules/handlebars/dist/handlebars.min.js'),
         underscore: resolve('node_modules/lodash/index.js'),
         base: resolve('src/scripts/base'),
       }),
