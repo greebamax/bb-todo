@@ -5,27 +5,19 @@ const commonjs = require('rollup-plugin-commonjs');
 const { uglify } = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
 const alias = require('rollup-plugin-alias');
-const multiEntry = require('rollup-plugin-multi-entry');
+
 const { resolve } = require('path');
 const { ENV } = require('./helpers');
 
 module.exports = async ({ isProd }, callback) => {
   const bundle = await rollup.rollup({
-    input: [
-      'src/scripts/common/partials/templates.js',
-      'src/scripts/helpers/handlebars/index.js',
-      'src/scripts/main.js',
-    ],
+    input: 'src/scripts/main.js',
     plugins: [
-      multiEntry(),
       alias({
         underscore: resolve('node_modules/lodash/index.js'),
         base: resolve('src/scripts/base'),
       }),
       nodeResolve({
-        extensions: ['.js', '.json', '.tmpl'],
-        jsnext: true,
-        main: true,
         browser: true,
       }),
       commonjs({
