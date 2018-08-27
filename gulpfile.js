@@ -18,8 +18,8 @@ const loadTask = name => {
 gulp.task('clean',
   () => del([
     'build',
-    'src/scripts/common/partials/templates.js', // removes compiled index file for hbs common partials
-    'src/scripts/**/*.hbs.js', // removes compiled hbs templates
+    'src/scripts/common/partials/index.js', // removes compiled index file of common partials
+    'src/scripts/**/*.tmpl', // removes compiled hbs templates
   ]));
 
 gulp.task('html:build', () => gulp.src('src/index.html').pipe(gulp.dest('build')));
@@ -47,10 +47,10 @@ gulp.task('scripts:build', callback => {
   buildScriptsTask({ isProd }, callback);
 });
 
-gulp.task('templates:build', () => {
+gulp.task('templates:build', callback => {
   const buildTemplatesTask = loadTask('templates');
 
-  buildTemplatesTask({ isProd });
+  buildTemplatesTask({ isProd }, callback);
 });
 
 gulp.task('scripts:watch', () => {
@@ -71,6 +71,7 @@ gulp.task('build',
   callback => {
     runSequence(
       'clean',
+      'templates:build',
       'html:build',
       'icons:build',
       [

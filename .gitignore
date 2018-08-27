@@ -4,8 +4,8 @@
 bower_components/
 build/
 node_modules/
-src/scripts/**/*.hbs.js
-src/scripts/common/partials/templates.js
+src/scripts/**/*.tmpl
+src/scripts/common/partials/index.js
 
 # nyc related files
 .nyc_output/

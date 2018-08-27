@@ -23,6 +23,7 @@ module.exports = async ({ isProd }, callback) => {
         base: resolve('src/scripts/base'),
       }),
       nodeResolve({
+        extensions: ['.js', '.json', '.tmpl'],
         jsnext: true,
         main: true,
         browser: true,
@@ -30,16 +31,6 @@ module.exports = async ({ isProd }, callback) => {
       commonjs({
         include: 'node_modules/**',
         sourceMap: !isProd,
-      }),
-      handlebars({
-        handlebars: {
-          options: {
-            sourceMap: !isProd,
-          },
-        },
-        helpers: resolve('src/scripts/helpers/handlebars/index.js'),
-        jquery: 'jquery',
-        partialRoot: partialRoots,
       }),
       babel({
         exclude: 'node_modules/**',

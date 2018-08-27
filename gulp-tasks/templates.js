@@ -1,11 +1,11 @@
-const path = require('path');
-const gulp = require('gulp');
-const wrap = require('gulp-wrap');
-const define = require('gulp-define-module');
 const concat = require('gulp-concat');
-const handlebars = require('gulp-handlebars');
-const debug = require('gulp-debug');
+const define = require('gulp-define-module');
+const gulp = require('gulp');
+const gulpHandlebars = require('gulp-handlebars');
+const handlebars = require('handlebars');
+const merge = require('gulp-merge');
 const rename = require('gulp-rename');
+const wrap = require('gulp-wrap');
 
 /**
  * Assume all partials start with an underscore.
@@ -13,39 +13,39 @@ const rename = require('gulp-rename');
  */
 module.exports = (options, callback) => {
   // Compile and register common partials
-  gulp
+  const compileCommons = gulp
     .src(['src/scripts/common/partials/**/*.hbs'])
-    .pipe(debug())
-    .pipe(handlebars())
+    .pipe(gulpHandlebars({
+      handlebars,
+    }))
     .pipe(
       wrap(
         'Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));',
         {},
         {
           imports: {
-            processPartialName(fileName) {
-              // Strip the extension and the underscore
-              // Escape the output with JSON.stringify
-              return JSON.stringify(path.basename(fileName, '.js').substr(1));
-            },
+            // _templateName.hbs => templateName
+            processPartialName: fileName => JSON.stringify(fileName.match(/[^_].*[^.hbs$]/g)),
           },
         },
       ),
     )
-    .pipe(concat('templates.js'))
+    .pipe(concat('index.js'))
     .pipe(define('es6', {
       wrapper: false,
     }))
     .pipe(gulp.dest('src/scripts/common/partials'));
 
   // Compile templates
-  gulp
+  const compileTemplates = gulp
     .src(['src/scripts/**/*.hbs', '!src/scripts/common/partials/**/*.hbs'])
-    .pipe(debug())
-    .pipe(handlebars())
+    .pipe(gulpHandlebars({
+      handlebars,
+    }))
     .pipe(define('es6'))
     .pipe(rename({ extname: '.tmpl' }))
     .pipe(gulp.dest('src/scripts'));
 
-  callback();
+  merge(compileCommons, compileTemplates)
+    .on('end', callback);
 };
