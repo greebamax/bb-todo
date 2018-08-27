@@ -11,7 +11,7 @@ const rename = require('gulp-rename');
  * Assume all partials start with an underscore.
  * Common hbs partials placed in src/scripts/common/partials.
  */
-module.exports = (/* TODO: { isProd } */) => {
+module.exports = (options, callback) => {
   // Compile and register common partials
   gulp
     .src(['src/scripts/common/partials/**/*.hbs'])
@@ -44,6 +44,8 @@ module.exports = (/* TODO: { isProd } */) => {
     .pipe(debug())
     .pipe(handlebars())
     .pipe(define('es6'))
-    .pipe(rename({ suffix: '.hbs' }))
+    .pipe(rename({ extname: '.tmpl' }))
     .pipe(gulp.dest('src/scripts'));
+
+  callback();
 };

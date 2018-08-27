@@ -15,13 +15,12 @@ const loadTask = name => {
   return require(resolve(path));
 };
 
-gulp.task('clean', () => {
-  del([
+gulp.task('clean',
+  () => del([
     'build',
     'src/scripts/common/partials/templates.js', // removes compiled index file for hbs common partials
     'src/scripts/**/*.hbs.js', // removes compiled hbs templates
-  ]);
-});
+  ]));
 
 gulp.task('html:build', () => gulp.src('src/index.html').pipe(gulp.dest('build')));
 
@@ -35,19 +34,17 @@ gulp.task('html:watch', () => gulp.watch('src/index.html', ['html:build']));
 gulp.task('styles:build', () => {
   const buildStylesTask = loadTask('build-styles');
 
-  buildStylesTask({ isProd });
+  return buildStylesTask({ isProd });
 });
 
 gulp.task('styles:watch', () => {
   gulp.watch('src/styles/**/*.scss', ['styles:build']);
 });
 
-gulp.task('scripts:build', () => {
+gulp.task('scripts:build', callback => {
   const buildScriptsTask = loadTask('build-scripts');
 
-  buildScriptsTask({
-    isProd,
-  });
+  buildScriptsTask({ isProd }, callback);
 });
 
 gulp.task('templates:build', () => {
@@ -70,7 +67,19 @@ gulp.task('reload', () => {
   });
 });
 
-gulp.task('build', () => runSequence('clean', ['icons:build', 'html:build', 'styles:build', 'scripts:build']));
+gulp.task('build',
+  callback => {
+    runSequence(
+      'clean',
+      'html:build',
+      'icons:build',
+      [
+        'styles:build',
+        'scripts:build',
+      ],
+      callback,
+    );
+  });
 
 gulp.task('server', () => {
   const serverTask = loadTask('server');

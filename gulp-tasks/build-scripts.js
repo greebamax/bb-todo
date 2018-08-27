@@ -16,6 +16,7 @@ const partialRoots = [
 ];
 
 module.exports = async ({ isProd }) => {
+module.exports = async ({ isProd }, callback) => {
   const bundle = await rollup.rollup({
     input: 'src/scripts/main.js',
     plugins: [
@@ -63,4 +64,6 @@ module.exports = async ({ isProd }) => {
     sourcemap: !isProd,
     file: 'build/js/bundle.js',
   });
+
+  callback();
 };
