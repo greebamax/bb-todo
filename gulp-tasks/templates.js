@@ -9,7 +9,7 @@ const wrap = require('gulp-wrap');
 
 /**
  * Assume all partials start with an underscore.
- * Common hbs partials placed in src/scripts/common/partials.
+ * Common hbs partials should be placed in src/scripts/common/partials.
  */
 module.exports = (options, callback) => {
   // Compile and register common partials
@@ -24,8 +24,8 @@ module.exports = (options, callback) => {
         {},
         {
           imports: {
-            // _templateName.hbs => templateName
-            processPartialName: fileName => JSON.stringify(fileName.match(/[^_].*[^.hbs$]/g)),
+            // _templateName.js => templateName
+            processPartialName: fileName => JSON.stringify(fileName.match(/[^_].*[^.js$]/g)[0]),
           },
         },
       ),
