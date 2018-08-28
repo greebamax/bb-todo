@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const { resolve, join } = require('path');
+const { resolve, join, extname } = require('path');
 const runSequence = require('run-sequence');
 
 const { ENV } = require('./gulp-tasks/helpers');
@@ -52,7 +52,17 @@ gulp.task('templates:build', done => {
 });
 
 gulp.task('scripts:watch', () => {
-  gulp.watch('src/scripts/**/*.{js,hbs}', ['scripts:build']);
+  const invokeBuild = ({ path }) => {
+    switch (extname(path)) {
+      case '.hbs': runSequence('templates:build', 'scripts:build'); break;
+      case '.js': runSequence('scripts:build'); break;
+      default: break;
+    }
+  };
+
+  return gulp.watch('src/scripts/**/*.{js,hbs}')
+    .on('add', invokeBuild)
+    .on('change', invokeBuild);
 });
 
 gulp.task('watch:all', ['styles:watch', 'scripts:watch', 'html:watch']);
