@@ -91,5 +91,10 @@ gulp.task('server', () => {
   });
 });
 
-gulp.task('dev', ['build', 'watch:all', 'reload', 'server']);
+gulp.task('dev', done => {
+  process.env.NODE_ENV = 'development';
+
+  runSequence('build', 'watch:all', 'reload', 'server', done);
+});
+
 gulp.task('default', ['dev']);
