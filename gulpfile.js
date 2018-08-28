@@ -37,9 +37,7 @@ gulp.task('styles:build', () => {
   return buildStylesTask({ isProd });
 });
 
-gulp.task('styles:watch', () => {
-  gulp.watch('src/styles/**/*.scss', ['styles:build']);
-});
+gulp.task('styles:watch', () => gulp.watch('src/styles/**/*.scss', ['styles:build']));
 
 gulp.task('scripts:build', done => {
   const buildScriptsTask = loadTask('build-scripts');
