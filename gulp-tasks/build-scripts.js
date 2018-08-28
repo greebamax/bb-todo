@@ -9,7 +9,7 @@ const alias = require('rollup-plugin-alias');
 const { resolve } = require('path');
 const { ENV } = require('./helpers');
 
-module.exports = async ({ isProd }, callback) => {
+module.exports = async ({ isProd }, done) => {
   const bundle = await rollup.rollup({
     input: 'src/scripts/main.js',
     plugins: [
@@ -42,5 +42,5 @@ module.exports = async ({ isProd }, callback) => {
     file: 'build/js/bundle.js',
   });
 
-  callback();
+  done();
 };

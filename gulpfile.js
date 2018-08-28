@@ -41,16 +41,16 @@ gulp.task('styles:watch', () => {
   gulp.watch('src/styles/**/*.scss', ['styles:build']);
 });
 
-gulp.task('scripts:build', callback => {
+gulp.task('scripts:build', done => {
   const buildScriptsTask = loadTask('build-scripts');
 
-  buildScriptsTask({ isProd }, callback);
+  buildScriptsTask({ isProd }, done);
 });
 
-gulp.task('templates:build', callback => {
+gulp.task('templates:build', done => {
   const buildTemplatesTask = loadTask('templates');
 
-  buildTemplatesTask({ isProd }, callback);
+  buildTemplatesTask({ isProd }, done);
 });
 
 gulp.task('scripts:watch', () => {
@@ -68,7 +68,7 @@ gulp.task('reload', () => {
 });
 
 gulp.task('build',
-  callback => {
+  done => {
     runSequence(
       'clean',
       'templates:build',
@@ -78,7 +78,7 @@ gulp.task('build',
         'styles:build',
         'scripts:build',
       ],
-      callback,
+      done,
     );
   });
 

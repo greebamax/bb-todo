@@ -11,7 +11,7 @@ const wrap = require('gulp-wrap');
  * Assume all partials start with an underscore.
  * Common hbs partials should be placed in src/scripts/common/partials.
  */
-module.exports = (options, callback) => {
+module.exports = (options, done) => {
   // Compile and register common partials
   const compileCommons = gulp
     .src(['src/scripts/common/partials/**/*.hbs'])
@@ -47,5 +47,5 @@ module.exports = (options, callback) => {
     .pipe(gulp.dest('src/scripts'));
 
   merge(compileCommons, compileTemplates)
-    .on('end', callback);
+    .on('end', done);
 };
