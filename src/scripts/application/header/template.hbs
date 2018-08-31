@@ -1,11 +1,7 @@
-<li class="nav-item">
-  <a href="{{route to="lists"}}" class="nav-link">
-    Lists
-  </a>
-</li>
-<li class="nav-item">
-  <a href="{{route to="profile"}}" class="nav-link">
-    Profile
-    {{> icon name="profile" }}
-  </a>
-</li>
+{{#> nav-item to=(route 'lists')}}
+  Lists
+{{/nav-item}}
+
+{{#> nav-item to=(route 'profile')}}
+  Profile
+{{/nav-item}}
