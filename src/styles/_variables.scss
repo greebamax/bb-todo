@@ -1,5 +1,18 @@
 $base-font-size: .875rem;
 
+/* Colors */
+$gray-lighter: rgb(240, 240, 240);
+$gray-light: rgb(242, 242, 242);
+$gray: rgb(202, 202, 202);
+$gray-dark: rgb(193, 193, 193);
+$gray-darker: rgb(154, 154, 154);
+
+$blue-lighter: rgb(214, 234, 254);
+$blue-light: rgb(130, 182, 240);
+$blue: rgb(72, 168, 238);
+$blue-dark: rgb(33, 150, 243);
+$blue-darker: rgb(46, 122, 233);
+
 /* Layout */
 $sidebar-width: 20%;
 $sidebar-min-width: 170px;
@@ -14,17 +27,5 @@ $icon-color-active: #007bff;
 $navbar-height: 48px;
 $navbar-link-font-color: #333;
 
-/* Colors */
-$gray-lighter: rgb(240, 240, 240);
-$gray-light: rgb(242, 242, 242);
-$gray: rgb(202, 202, 202);
-$gray-dark: rgb(193, 193, 193);
-$gray-darker: rgb(154, 154, 154);
-
-$blue-lighter: rgb(214, 234, 254);
-$blue-light: rgb(130, 182, 240);
-$blue: rgb(72, 168, 238);
-$blue-dark: rgb(33, 150, 243);
-$blue-darker: rgb(46, 122, 233);
-
 $border-color: $gray-dark;
+$sidbar-bg-color: $gray-light;
