@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const SKIPPED_PARAMS = ['to', 'icon'];
 
 /**
@@ -7,7 +9,11 @@ const SKIPPED_PARAMS = ['to', 'icon'];
  *
  * @param {String} to URL, goes to href attribute
  * @example
- *   {{#route
+ *   Common usage:
+ *   {{route 'route-link'}}
+ *
+ *   With params:
+ *   {{route
  *        to="path/with/{key2}/and/{id}/or_another/{key}/to"
  *        id=id
  *        key="value"
@@ -16,14 +22,18 @@ const SKIPPED_PARAMS = ['to', 'icon'];
  * @returns {String}
  */
 export default Handlebars => options => {
-  const {
-    hash: { to },
-  } = options;
+  let to;
+  let passedArgs;
 
+  if (_.isString(options)) {
+    to = options;
+  } else {
+    passedArgs = Object.keys(options.hash);
+    to = options.hash.to; // eslint-disable-line
+  }
   let url = Handlebars.escapeExpression(to);
-  const passedArgs = Object.keys(options.hash);
 
-  if (passedArgs.length > 1) {
+  if (passedArgs && passedArgs.length) {
     url = passedArgs.reduce((str, key) => {
       if (SKIPPED_PARAMS.includes(key)) { // not expect to be used such params in URL string
         return str;
