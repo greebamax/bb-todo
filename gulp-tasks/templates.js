@@ -7,14 +7,19 @@ const merge = require('gulp-merge');
 const rename = require('gulp-rename');
 const wrap = require('gulp-wrap');
 
+const { PATH } = require('./helpers');
+
 /**
  * Assume all partials start with an underscore.
  * Common hbs partials should be placed in src/scripts/common/partials.
  */
-module.exports = (options, done) => {
+module.exports = () => {
+  const partials = `${PATH.SRC}/scripts/common/partials/**/*.hbs`;
+  const templates = `${PATH.SRC}/scripts/**/*.hbs`;
+
   // Compile and register common partials
   const compileCommons = gulp
-    .src(['src/scripts/common/partials/**/*.hbs'])
+    .src(partials)
     .pipe(gulpHandlebars({
       handlebars,
     }))
@@ -34,18 +39,21 @@ module.exports = (options, done) => {
     .pipe(define('es6', {
       wrapper: false,
     }))
-    .pipe(gulp.dest('src/scripts/common/partials'));
+    .pipe(gulp.dest(`${PATH.SRC}/scripts/common/partials`));
 
   // Compile templates
   const compileTemplates = gulp
-    .src(['src/scripts/**/*.hbs', '!src/scripts/common/partials/**/*.hbs'])
+    .src([templates, `!${partials}`])
     .pipe(gulpHandlebars({
       handlebars,
     }))
     .pipe(define('es6'))
     .pipe(rename({ extname: '.tmpl' }))
-    .pipe(gulp.dest('src/scripts'));
+    .pipe(gulp.dest(`${PATH.SRC}/scripts`));
 
-  merge(compileCommons, compileTemplates)
-    .on('end', done);
+  return new Promise((resolve, reject) => {
+    merge(compileCommons, compileTemplates)
+      .on('error', () => reject())
+      .on('end', () => resolve());
+  });
 };

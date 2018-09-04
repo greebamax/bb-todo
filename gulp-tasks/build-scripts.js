@@ -6,17 +6,17 @@ const { uglify } = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
 const alias = require('rollup-plugin-alias');
 
-const { resolve } = require('path');
-const { ENV } = require('./helpers');
+const { join } = require('path');
+const { ENV, PATH } = require('./helpers');
 
-module.exports = async ({ isProd }, done) => {
+module.exports = async ({ isProd }) => {
   const bundle = await rollup.rollup({
-    input: 'src/scripts/main.js',
+    input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
       alias({
-        handlebars: resolve('node_modules/handlebars/dist/handlebars.min.js'),
-        underscore: resolve('node_modules/lodash/index.js'),
-        base: resolve('src/scripts/base'),
+        handlebars: join(PATH.ROOT, 'node_modules', 'handlebars', 'dist', 'handlebars.min.js'),
+        underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
+        base: join(PATH.SRC, 'scripts', 'base'),
       }),
       nodeResolve({
         browser: true,
@@ -36,11 +36,9 @@ module.exports = async ({ isProd }, done) => {
     ],
   });
 
-  await bundle.write({
+  return bundle.write({
     format: 'iife',
     sourcemap: !isProd,
-    file: 'build/js/bundle.js',
+    file: join(PATH.DEST, 'js', 'bundle.js'),
   });
-
-  done();
 };

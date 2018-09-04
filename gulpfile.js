@@ -42,13 +42,13 @@ gulp.task('styles:watch', () => gulp.watch('src/styles/**/*.scss', ['styles:buil
 gulp.task('scripts:build', done => {
   const buildScriptsTask = loadTask('build-scripts');
 
-  buildScriptsTask({ isProd }, done);
+  buildScriptsTask({ isProd }).then(() => done());
 });
 
 gulp.task('templates:build', done => {
   const buildTemplatesTask = loadTask('templates');
 
-  buildTemplatesTask({ isProd }, done);
+  buildTemplatesTask({ isProd }).then(() => done());
 });
 
 gulp.task('scripts:watch', () => {
@@ -109,7 +109,20 @@ gulp.task('lint', () => {
 gulp.task('dev', done => {
   process.env.NODE_ENV = 'development';
 
-  runSequence('build', 'watch:all', 'reload', 'server', done);
+  runSequence(
+    'clean',
+    'templates:build',
+    'html:build',
+    'icons:build',
+    [
+      'styles:build',
+      'scripts:build',
+    ],
+    'watch:all',
+    'reload',
+    'server',
+    done,
+  );
 });
 
 gulp.task('default', ['dev']);

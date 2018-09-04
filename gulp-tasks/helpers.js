@@ -1,11 +1,12 @@
-const { resolve } = require('path');
+const { join } = require('path');
 
-const rootDir = resolve(__dirname, '..');
+const rootDir = join(__dirname, '..');
 
 module.exports = {
-  PATHS: {
+  PATH: {
     ROOT: rootDir,
-    SRC: resolve(rootDir, 'src'),
+    SRC: join(rootDir, 'src'),
+    DEST: join(rootDir, 'build'),
   },
   ENV: {
     DEV: 'development',

@@ -1,16 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { resolve, isAbsolute } = require('path');
+const { resolve, isAbsolute, join } = require('path');
 const jsonServer = require('json-server');
 const delayMiddleware = require('./delay');
+const { PATH } = require('./helpers');
 
 const getAbsPathToFile = path => (isAbsolute(path) ? path : resolve(__dirname, path));
 
 const defaults = {
-  dbFile: './db.json',
+  dbFile: join(__dirname, 'db.json'),
   hostName: 'localhost',
   port: 3000,
-  routesFile: './routes.json',
-  staticFolder: 'build',
+  routesFile: join(__dirname, 'routes.json'),
+  staticFolder: PATH.DEST,
 };
 
 module.exports = options => {
