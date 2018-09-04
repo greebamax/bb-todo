@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import _ from 'lodash';
 import TodoModel from './task-model';
-import Template from './task-template';
+import Template from './task-template.tmpl';
 
 export default Backbone.View.extend({
   tagName: 'li',
