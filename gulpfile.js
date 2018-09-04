@@ -78,6 +78,7 @@ gulp.task('reload', () => {
 gulp.task('build',
   done => {
     runSequence(
+      'lint',
       'clean',
       'templates:build',
       'html:build',
@@ -97,6 +98,12 @@ gulp.task('server', () => {
     port: 4379,
     staticFolder: resolve('build'),
   });
+});
+
+gulp.task('lint', () => {
+  const lintTask = loadTask('lint');
+
+  return lintTask();
 });
 
 gulp.task('dev', done => {

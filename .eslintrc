@@ -5,6 +5,7 @@
       "error",
       "as-needed"
     ],
+    "arrow-body-style": "off",
     "import/no-extraneous-dependencies": "off"
   },
   "plugins": [
