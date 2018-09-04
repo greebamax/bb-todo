@@ -18,7 +18,8 @@
       "error",
       {
         "ignore": [
-          "base"
+          "base",
+          ".tmpl$"
         ]
       }
     ],
