@@ -12,6 +12,13 @@ export default class TasksListContainerView extends BaseCollectionView {
       tagName: 'ul',
       className: 'nav flex-column',
       childView: TaskListView,
+      childViewEvents: {
+        'list-details:show': 'showListDetails',
+      },
     }, options));
+  }
+
+  showListDetails(model) {
+    this.trigger('list-details:show', model);
   }
 }

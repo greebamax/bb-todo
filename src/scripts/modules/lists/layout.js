@@ -16,7 +16,7 @@ export default class TaskListsLayout extends BaseView {
 
   constructor(options) {
     super(_.extend({
-      className: 'lists-module',
+      className: 'task-lists-module',
       template: TaskListsLayoutTemplate,
       regions: {
         [SIDEBAR_REGION]: `[data-region="${SIDEBAR_REGION}"]`,

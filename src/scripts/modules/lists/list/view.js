@@ -11,6 +11,7 @@ export default class TaskListView extends BaseView {
     super(_.extend({
       className: 'nav-item',
       events: {
+        'click [data-action="show-list-details"]': 'onShowListDetailsClick',
         'click [data-action="delete"]': 'onDeleteClick',
       },
       tagName: 'li',
@@ -27,5 +28,14 @@ export default class TaskListView extends BaseView {
     this.model.destroy({
       wait: true,
     });
+  }
+
+  /**
+   * @param {JQuery.Event} $event
+   */
+  onShowListDetailsClick($event) {
+    $event.preventDefault();
+
+    this.trigger('list-details:show', this.model);
   }
 }
