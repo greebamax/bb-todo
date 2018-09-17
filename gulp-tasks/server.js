@@ -4,6 +4,9 @@ const jsonServer = require('json-server');
 const delayMiddleware = require('./delay');
 const { PATH } = require('./helpers');
 
+/**
+ * Normalize path to file passed via params or used by default.
+ */
 const getAbsPathToFile = path => (isAbsolute(path) ? path : resolve(__dirname, path));
 
 const defaults = {

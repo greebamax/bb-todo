@@ -2,7 +2,7 @@ import BaseRouter from 'base/router';
 import TaskListsController from './controller';
 
 /**
- * @class ListsRouter
+ * @class TaskListsRouter
  * @extends {Marionette.AppRouter}
  */
 export default class TaskListsRouter extends BaseRouter {

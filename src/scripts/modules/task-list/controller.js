@@ -3,6 +3,10 @@ import BaseController from 'base/controller';
 import ListModel from '../lists/list/model';
 import TaskListLayout from './layout';
 
+/**
+ * @param {Number} id
+ * @returns {Boolean}
+ */
 const isValidListId = id => _.isFinite(parseInt(id, 10));
 
 /**

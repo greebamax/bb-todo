@@ -6,7 +6,7 @@ import TaskListsCollectionView from './list/container';
 import ListPlaceholderView from './list-placeholder';
 
 /**
- * @class ListsController
+ * @class TaskListsController
  * @extends {Marionette.Object}
  */
 export default class TaskListsController extends BaseController {
