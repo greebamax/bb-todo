@@ -3,6 +3,7 @@ import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
 import TaskListsCollection from './list/collection';
 import TaskListsCollectionView from './list/container';
+import ListPlaceholderView from './list-placeholder';
 
 /**
  * @class ListsController
@@ -32,7 +33,7 @@ export default class TaskListsController extends BaseController {
    */
   onShowLayout(taskListsLayout) {
     taskListsLayout.getRegion(TaskListsLayout.sidebarRegion).show(this.getSidebarView());
-    // taskListsLayout.getRegion(TaskListsLayout.contentRegion).show()
+    taskListsLayout.getRegion(TaskListsLayout.contentRegion).show(new ListPlaceholderView());
   }
 
   /**
