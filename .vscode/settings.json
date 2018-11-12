@@ -8,8 +8,9 @@
     "**/.DS_Store": true,
     "**/.git": true,
     "**/.idea": true,
-    "**/.vscode": true,
+    "**/.vscode": false,
     "**/*.tmpl": true,
+    "**/package-lock.json": true,
     "node_modules": true,
     "src/scripts/common/partials/index.js": true
   },
@@ -21,12 +22,14 @@
     "**/*.tmpl": true,
     "**/bower_components": true,
     "**/node_modules": true,
-    "src/scripts/common/partials/index.js": true
+    "src/scripts/common/partials/index.js": true,
+    "coverage/**": true
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/**": true,
-    "src/scripts/common/partials/index.js": true
+    "src/scripts/common/partials/index.js": true,
+    "coverage/**": true
   }
 }
