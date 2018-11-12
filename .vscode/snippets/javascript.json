@@ -2,13 +2,13 @@
   "Import Base Entity": {
     "prefix": "ib",
     "body": [
-      "import Base$1 from 'base/$1';\n"
+      "import Base$1 from 'base/$2';\n"
     ]
   },
   "Import BaseController": {
     "prefix": "ibc",
     "body": [
-      "import BaseController from 'base/Controller';\n"
+      "import BaseController from 'base/controller';\n"
     ]
   },
   "Import BaseView": {
