@@ -1,12 +1,20 @@
+import _ from 'lodash';
 import BaseController from 'base/controller';
 import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
+import TasksListsModel from './list/model';
 import TasksListsCollection from './list/collection';
 import TasksListsCollectionView from './list/container';
 import TaskListPlaceholderView from './list/placeholder';
-import TaskListDetailsView from './task-list-details/layout';
+import TaskListDetails from './task-list-details';
 
 const layout = Symbol('layout');
+
+/**
+ * @param {Number} id
+ * @returns {Boolean}
+ */
+const isValidListId = id => _.isFinite(parseInt(id, 10));
 
 /**
  * @class TaskListsController
@@ -15,12 +23,31 @@ const layout = Symbol('layout');
 export default class TaskListsController extends BaseController {
   static get appRoutes() {
     return {
-      lists: 'homeRoute',
+      'lists': 'homeRoute',
+      'lists/:id': 'redirectToDetailsRoute',
+      'lists/:id/tasks': 'listDetailsRoute',
+      'lists/*other': 'otherwise',
     };
   }
 
   homeRoute() {
     this.show(this.getLayout());
+  }
+
+  redirectToDetailsRoute(id) {
+    this.router.navigateTo(`lists/${id}/tasks`);
+  }
+
+  listDetailsRoute(id) {
+    if (isValidListId(id)) {
+      this.showListDetails({ id });
+    } else {
+      this.otherwise();
+    }
+  }
+
+  otherwise() {
+    this.router.navigateTo('lists');
   }
 
   /**
@@ -71,24 +98,23 @@ export default class TaskListsController extends BaseController {
     const taskListsCollectionView = new TasksListsCollectionView({
       collection: taskListCollection,
     });
-    this.listenTo(taskListsCollectionView, 'list-details:show', this.showListDetails);
+    this.listenTo(taskListsCollectionView, 'list-details:show', model => {
+      this.listDetailsRoute(model[model.idAttribute]);
+    });
     return taskListsCollectionView;
   }
 
   /**
-   * @param {Backbone.Model} model
+   * @param {Backbone.Model} params
    */
-  showListDetails(model) {
-    this.getLayout()
-      .getRegion(TaskListsLayout.contentRegion)
-      .show(this.getListDetailsView(model));
-  }
-
-  /**
-   * @param {Backbone.Model} listModel
-   * @returns {Marionette.View}
-   */
-  getListDetailsView(listModel) {
-    return new TaskListDetailsView({ model: listModel });
+  showListDetails(params) {
+    const tasksListsModel = new TasksListsModel(params);
+    tasksListsModel.fetch()
+      .then(() => {
+        this.getLayout()
+          .getRegion(TaskListsLayout.contentRegion)
+          .show(new TaskListDetails({ model: tasksListsModel }));
+      })
+      .catch(console.error.bind(console, '[ERROR]: '));
   }
 }
