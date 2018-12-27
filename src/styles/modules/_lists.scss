@@ -1,4 +1,8 @@
 .task-lists-module {
   display: flex;
   width: 100%;
+
+  .content {
+    width: 100%;
+  }
 }
