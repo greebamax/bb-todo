@@ -33,6 +33,7 @@ export default class TaskListsController extends BaseController {
 
     this.listenTo(taskListsLayout, 'render', this.onShowLayout);
 
+    this[layout] = taskListsLayout;
     return taskListsLayout;
   }
 
