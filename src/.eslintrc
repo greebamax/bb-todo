@@ -28,7 +28,8 @@
     "quote-props": [
       "error",
       "consistent-as-needed"
-    ]
+    ],
+    "no-plusplus": "off"
   },
   "plugins": [
     "import"
