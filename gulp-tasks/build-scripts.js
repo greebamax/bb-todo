@@ -14,9 +14,11 @@ module.exports = async ({ isProd }) => {
     input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
       alias({
-        handlebars: join(PATH.ROOT, 'node_modules', 'handlebars', 'dist', 'handlebars.min.js'),
-        underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
         base: join(PATH.SRC, 'scripts', 'base'),
+        common: join(PATH.SRC, 'scripts', 'common'),
+        handlebars: join(PATH.ROOT, 'node_modules', 'handlebars', 'dist', 'handlebars.min.js'),
+        helpers: join(PATH.SRC, 'scripts', 'helpers'),
+        underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
       }),
       nodeResolve({
         browser: true,
