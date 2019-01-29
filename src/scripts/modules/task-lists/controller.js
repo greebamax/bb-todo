@@ -3,10 +3,10 @@ import BaseController from 'base/controller';
 import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
-import TasksListsModel from './list/model';
-import TasksListsCollection from './list/collection';
-import TasksListsCollectionView from './list/container';
-import TaskListPlaceholderView from './list/placeholder';
+import TaskListModel from './task-list/model';
+import TaskListCollection from './task-list/collection';
+import TasksListsCollectionView from './task-list/container';
+import TaskListDetailsPlaceholder from './task-list-details/placeholder';
 import TaskListDetails from './task-list-details';
 
 const layout = Symbol('layout');
@@ -39,8 +39,15 @@ export default class TaskListsController extends BaseController {
     this.router.navigateTo(`lists/${id}/tasks`);
   }
 
+  redirectToErrorPage() {
+    this.router.redirectTo('error');
+  }
+
   listDetailsRoute(id) {
     if (isValidListId(id)) {
+      if (!this[layout]) {
+        this.show(this.getLayout());
+      }
       this.showListDetails({ id });
     } else {
       this.otherwise();
@@ -68,14 +75,14 @@ export default class TaskListsController extends BaseController {
    */
   onShowLayout(taskListsLayout) {
     taskListsLayout.getRegion(TaskListsLayout.sidebarRegion).show(this.getSidebarView());
-    taskListsLayout.getRegion(TaskListsLayout.contentRegion).show(new TaskListPlaceholderView());
+    taskListsLayout.getRegion(TaskListsLayout.contentRegion).show(new TaskListDetailsPlaceholder());
   }
 
   /**
    * @param {Marionette.View} sidebarView
    */
   onShowSidebar(sidebarView) {
-    const taskLists = new TasksListsCollection();
+    const taskLists = new TaskListCollection();
     taskLists.fetch();
 
     sidebarView.getRegion(SideBarView.listsRegion).show(this.getTaskListsView(taskLists));
@@ -108,7 +115,7 @@ export default class TaskListsController extends BaseController {
    */
   showListDetails(params) {
     this.abortRequests();
-    const tasksListsModel = new TasksListsModel(params);
+    const tasksListsModel = new TaskListModel(params);
     const fetching = tasksListsModel.fetch();
     fetching
       .then(() => {
@@ -116,7 +123,15 @@ export default class TaskListsController extends BaseController {
           .getRegion(TaskListsLayout.contentRegion)
           .show(new TaskListDetails({ model: tasksListsModel }));
       })
-      .catch(error);
+      .catch(resp => {
+        if (resp.status) { // check if not aborted by controller
+          error(resp.status, resp.statusText);
+          this.redirectToErrorPage({
+            statusCode: resp.status,
+            statusText: resp.statusText,
+          });
+        }
+      });
     this.registerRequest(fetching);
   }
 }
