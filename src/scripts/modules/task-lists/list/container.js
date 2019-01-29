@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import BaseCollectionView from 'base/collection-view';
+import LoadingBehavior from 'common/behaviors/loading-behavior';
 import TaskListView from './view';
 
 /**
@@ -15,6 +16,7 @@ export default class TasksListContainerView extends BaseCollectionView {
       childViewEvents: {
         'list-details:show': 'showListDetails',
       },
+      behaviors: [LoadingBehavior],
     }, options));
   }
 

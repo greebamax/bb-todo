@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import BaseController from 'base/controller';
+import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
 import TasksListsModel from './list/model';
@@ -54,8 +55,6 @@ export default class TaskListsController extends BaseController {
    * @returns {Marionette.View}
    */
   getLayout() {
-    if (this[layout]) return this[layout];
-
     const taskListsLayout = new TaskListsLayout();
 
     this.listenTo(taskListsLayout, 'render', this.onShowLayout);
@@ -108,13 +107,16 @@ export default class TaskListsController extends BaseController {
    * @param {Backbone.Model} params
    */
   showListDetails(params) {
+    this.abortRequests();
     const tasksListsModel = new TasksListsModel(params);
-    tasksListsModel.fetch()
+    const fetching = tasksListsModel.fetch();
+    fetching
       .then(() => {
-        this.getLayout()
+        this[layout]
           .getRegion(TaskListsLayout.contentRegion)
           .show(new TaskListDetails({ model: tasksListsModel }));
       })
-      .catch(console.error.bind(console, '[ERROR]: '));
+      .catch(error);
+    this.registerRequest(fetching);
   }
 }

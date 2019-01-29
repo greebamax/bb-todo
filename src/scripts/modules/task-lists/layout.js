@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import BaseView from 'base/view';
 import TaskListsLayoutTemplate from './template.tmpl';
 
@@ -14,14 +13,14 @@ export default class TaskListsLayout extends BaseView {
 
   static get contentRegion() { return CONTENT_REGION; }
 
-  constructor(options) {
-    super(_.extend({
+  constructor() {
+    super({
       className: 'task-lists-module',
       template: TaskListsLayoutTemplate,
       regions: {
         [SIDEBAR_REGION]: `[data-region="${SIDEBAR_REGION}"]`,
         [CONTENT_REGION]: `[data-region="${CONTENT_REGION}"]`,
       },
-    }, options));
+    });
   }
 }
