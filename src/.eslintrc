@@ -19,6 +19,8 @@
       {
         "ignore": [
           "base",
+          "common",
+          "helpers",
           ".tmpl$"
         ]
       }
@@ -27,7 +29,7 @@
     "no-underscore-dangle": "off",
     "quote-props": [
       "error",
-      "consistent-as-needed"
+      "consistent"
     ],
     "no-plusplus": "off"
   },
