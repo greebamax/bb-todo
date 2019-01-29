@@ -1,3 +1,14 @@
 body {
   font-size: $base-font-size;
 }
+
+.loading-component {
+  &::before {
+    display: none;
+  }
+
+  &.isLoading::before {
+    display: block;
+    content: 'loading...';
+  }
+}
