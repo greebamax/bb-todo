@@ -1,6 +1,5 @@
 /* eslint-disable import/first */
 import './plugins';
-import 'bootstrap';
 import $ from 'jquery';
 
 import './common/partials';
