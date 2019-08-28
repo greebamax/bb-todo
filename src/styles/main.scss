@@ -1,19 +1,19 @@
 /* Third-party */
-@import "./plugins.scss";
+@import "plugins";
 
 /* Utilities */
-@import "./variables.scss";
+@import "variables";
 
 /* Common */
-@import './common.scss';
+@import "common";
 
 /* Components */
-@import "./icons.scss";
+@import "icons";
 
 /* Layout */
-@import "./content.scss";
-@import "./header.scss";
-@import "./sidebar.scss";
+@import "content";
+@import "header";
+@import "sidebar";
 
 /* Modules */
-@import "./modules/lists.scss";
+@import "modules/lists";
