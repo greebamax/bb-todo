@@ -5,6 +5,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const { uglify } = require('rollup-plugin-uglify');
 const replace = require('rollup-plugin-replace');
 const alias = require('rollup-plugin-alias');
+const inject = require('rollup-plugin-inject');
 
 const { join } = require('path');
 const { ENV, PATH } = require('./helpers');
@@ -33,6 +34,9 @@ module.exports = async ({ isProd }) => {
       replace({
         exclude: 'node_modules/**',
         __ENV__: JSON.stringify(isProd ? ENV.PROD : ENV.DEV),
+      }),
+      inject({
+        jQuery: 'jquery',
       }),
       (isProd && uglify()),
     ],

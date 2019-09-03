@@ -7,7 +7,8 @@
     "feather-icons": "^4.9.0",
     "handlebars": "^4.0.12",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "semantic-ui-css": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -43,6 +44,7 @@
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-inject": "^3.0.1",
     "rollup-plugin-multi-entry": "^2.0.2",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.1.0",
