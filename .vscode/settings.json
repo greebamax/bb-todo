@@ -12,7 +12,11 @@
     "**/*.tmpl": true,
     "**/package-lock.json": true,
     "node_modules": true,
-    "src/scripts/common/partials/index.js": true
+    "src/scripts/common/partials/index.js": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
   },
   "search.exclude": {
     ".nyc_output": true,
