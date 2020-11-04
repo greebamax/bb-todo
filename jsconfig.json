@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "paths": {
+      "base/*": ["scripts/base/*"],
+      "common/*": ["scripts/common/*"],
+      "helpers/*": ["scripts/helpers/*"]
+    }
+  }
+}
