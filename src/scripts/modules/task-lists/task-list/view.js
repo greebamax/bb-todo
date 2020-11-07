@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 import BaseView from 'base/view';
 import TaskListTemplate from './template.tmpl';
 
@@ -8,7 +8,7 @@ import TaskListTemplate from './template.tmpl';
  */
 export default class TaskListView extends BaseView {
   constructor(options) {
-    super(_.extend({
+    super(extend({
       className: 'nav-item',
       events: {
         'click [data-action="show-list-details"]': 'onShowListDetailsClick',

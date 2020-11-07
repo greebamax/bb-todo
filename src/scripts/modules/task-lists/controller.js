@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isFinite } from 'lodash';
 import BaseController from 'base/controller';
 import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
@@ -15,7 +15,7 @@ const layout = Symbol('layout');
  * @param {Number} id
  * @returns {Boolean}
  */
-const isValidListId = id => _.isFinite(parseInt(id, 10));
+const isValidListId = id => isFinite(parseInt(id, 10));
 
 /**
  * @class TaskListsController

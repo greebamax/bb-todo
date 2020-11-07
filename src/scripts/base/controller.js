@@ -1,8 +1,10 @@
-import _ from 'lodash';
+import {
+  invert, get, isFunction, isNull,
+} from 'lodash';
 import Mn from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-const getRoute = (target, routes) => _.get(routes, _.isFunction(target) ? target.name : target, null);
+const getRoute = (target, routes) => get(routes, isFunction(target) ? target.name : target, null);
 const requests = Symbol('layout');
 
 /**
@@ -15,7 +17,7 @@ export default class BaseController extends Mn.Object {
 
     if (options.router) {
       this.router = options.router;
-      this.routes = _.invert(this.__proto__.constructor.appRoutes); // eslint-disable-line
+      this.routes = invert(this.__proto__.constructor.appRoutes); // eslint-disable-line
     }
 
     this[requests] = [];
@@ -32,7 +34,7 @@ export default class BaseController extends Mn.Object {
 
     const route = getRoute(target, this.routes);
 
-    if (!_.isNull(route)) {
+    if (!isNull(route)) {
       this.router.redirectTo(route);
     }
   }

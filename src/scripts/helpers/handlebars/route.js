@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isString } from 'lodash';
 
 const SKIPPED_PARAMS = ['to', 'icon'];
 
@@ -25,7 +25,7 @@ export default Handlebars => options => {
   let to;
   let passedArgs;
 
-  if (_.isString(options)) {
+  if (isString(options)) {
     to = options;
   } else {
     passedArgs = Object.keys(options.hash);

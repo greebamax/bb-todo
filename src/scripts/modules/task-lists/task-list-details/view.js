@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 import BaseView from 'base/view';
 import TaskListLayoutTemplate from './template.tmpl';
 
@@ -8,13 +8,13 @@ import TaskListLayoutTemplate from './template.tmpl';
  */
 export default class TaskListLayout extends BaseView {
   constructor(options) {
-    super(_.extend({
+    super(extend({
       template: TaskListLayoutTemplate,
     }, options));
   }
 
   serializeData() {
-    return _.extend({
+    return extend({
       cid: this.model.cid,
     }, this.model.toJSON());
   }

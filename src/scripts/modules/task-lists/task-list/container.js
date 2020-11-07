@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 import BaseCollectionView from 'base/collection-view';
 import LoadingBehavior from 'common/behaviors/loading-behavior';
 import TaskListView from './view';
@@ -9,7 +9,7 @@ import TaskListView from './view';
  */
 export default class TasksListContainerView extends BaseCollectionView {
   constructor(options) {
-    super(_.extend({
+    super(extend({
       tagName: 'ul',
       className: 'nav flex-column',
       childView: TaskListView,

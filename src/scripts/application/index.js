@@ -1,5 +1,5 @@
 import Bb from 'backbone';
-import _ from 'lodash';
+import { assign, forEach } from 'lodash';
 import BaseApplication from 'base/application';
 import MainLayout from './layout';
 import MainRouter from './router';
@@ -10,7 +10,7 @@ import MainRouter from './router';
  */
 export default class Application extends BaseApplication {
   constructor(options) {
-    super(_.assign({
+    super(assign({
       region: '#root',
       channelName: 'app',
       radioRequests: {
@@ -23,7 +23,7 @@ export default class Application extends BaseApplication {
   onBeforeStart() {
     const modules = this.getOption('modules');
 
-    _.forEach(modules, module => {
+    forEach(modules, module => {
       this.mainRouter.registerSubRouter(module);
     });
   }

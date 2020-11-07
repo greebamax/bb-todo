@@ -1,5 +1,5 @@
 import Mn from 'backbone.marionette';
-import _ from 'lodash';
+import { get, isString, assign } from 'lodash';
 
 const DEFAULT_PREFIX = '#/';
 
@@ -21,9 +21,9 @@ export default class BaseRouter extends Mn.AppRouter {
    * @memberof BaseRouter
    */
   route(fragment, fn) {
-    const callback = _.get(this.controller, fn);
-    const beforeEachHook = _.get(this.controller, 'beforeEach');
-    const afterEachHook = _.get(this.controller, 'afterEach');
+    const callback = get(this.controller, fn);
+    const beforeEachHook = get(this.controller, 'beforeEach');
+    const afterEachHook = get(this.controller, 'afterEach');
 
     super.route.call(this, fragment, fn, (...args) => {
       if (beforeEachHook && Boolean(beforeEachHook.apply(this.controller, args))) return;
@@ -39,8 +39,8 @@ export default class BaseRouter extends Mn.AppRouter {
    * @memberof BaseRouter
    */
   redirectTo(fragment, options) {
-    if (!_.isString(fragment)) return;
-    this.navigate(`${DEFAULT_PREFIX}${fragment}`, _.assign({ trigger: true }, options));
+    if (!isString(fragment)) return;
+    this.navigate(`${DEFAULT_PREFIX}${fragment}`, assign({ trigger: true }, options));
   }
 
   /**
@@ -48,7 +48,7 @@ export default class BaseRouter extends Mn.AppRouter {
    * @memberof BaseRouter
    */
   navigateTo(fragment) {
-    if (!_.isString(fragment)) return;
+    if (!isString(fragment)) return;
     this.navigate(`${DEFAULT_PREFIX}${fragment}`);
   }
 }

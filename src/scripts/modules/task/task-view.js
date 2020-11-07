@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import _ from 'lodash';
+import { extend } from 'lodash';
 import TodoModel from './task-model';
 import Template from './task-template.tmpl';
 
@@ -10,7 +10,7 @@ export default Backbone.View.extend({
   model: TodoModel,
 
   render() {
-    this.$el.html(this.template(_.extend({
+    this.$el.html(this.template(extend({
       cid: this.model.cid,
     }, this.model.toJSON())));
     return this;

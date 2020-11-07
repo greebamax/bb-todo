@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend, each } from 'lodash';
 import Backbone from 'backbone';
 import BaseRouter from 'base/router';
 import AppRoutersCache from './app-routers-cache';
@@ -16,7 +16,7 @@ export default class AppRouter extends BaseRouter {
     const handlers = {};
     const redirectionMethodName = `redirectTo${module.name}`;
 
-    _.extend(this.controller, {
+    extend(this.controller, {
       [redirectionMethodName]: () => {
         if (this.routers.isLoaded(module)) return;
 
@@ -26,7 +26,7 @@ export default class AppRouter extends BaseRouter {
       },
     });
 
-    _.each(module.appRoutes, (method, route) => {
+    each(module.appRoutes, (method, route) => {
       handlers[route] = redirectionMethodName;
     });
 
