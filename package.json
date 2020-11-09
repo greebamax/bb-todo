@@ -4,6 +4,7 @@
     "backbone": "^1.4.0",
     "backbone.marionette": "^3.5.1",
     "backbone.radio": "^2.0.0",
+    "css-reset-and-normalize": "^2.1.0",
     "feather-icons": "^4.28.0",
     "handlebars": "^4.7.6",
     "jquery": "^3.5.1",
