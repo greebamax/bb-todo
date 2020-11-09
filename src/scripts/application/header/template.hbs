@@ -1,7 +1,7 @@
-{{#> nav-item to=(route 'lists')}}
-  Lists
-{{/nav-item}}
+{{#> link-to to=(route 'lists') className="header_btn" }}
+  {{> icon name="menu"}}
+{{/link-to}}
 
-{{#> nav-item to=(route 'profile')}}
-  Profile
-{{/nav-item}}
+{{#> link-to to=(route 'profile') className="header_btn header_btn--right-alight" }}
+  {{> icon name="user"}}
+{{/link-to}}
