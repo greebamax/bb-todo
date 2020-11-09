@@ -8,8 +8,7 @@ import HeaderTemplate from './template.tmpl';
 export default class HeaderLayout extends BaseView {
   constructor() {
     super({
-      className: 'header',
-      tagName: 'ul',
+      className: 'app-header',
       template: HeaderTemplate,
     });
   }

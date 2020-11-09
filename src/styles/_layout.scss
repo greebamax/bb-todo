@@ -11,13 +11,10 @@ body,
   grid-template-rows: $header-height 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    'app-header'
+    'app-header-region'
     'app-content';
 }
 
-.app-header {
-  grid-area: app-header;
-}
 .app-content {
   grid-area: app-content;
 }
