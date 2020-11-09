@@ -2,7 +2,7 @@ import BaseView from 'base/view';
 import AppTemplate from './template.tmpl';
 import HeaderView from './header';
 
-const CONTENT_REGION = 'app-container';
+const CONTENT_REGION = 'app-content';
 const HEADER_REGION = 'app-header';
 
 /**
@@ -17,7 +17,7 @@ export default class ApplicationLayout extends BaseView {
   constructor() {
     super({
       template: AppTemplate,
-      className: 'app-layout',
+      className: 'app-container',
       regions: {
         [CONTENT_REGION]: `[data-region="${CONTENT_REGION}"]`,
         [HEADER_REGION]: `[data-region="${HEADER_REGION}"]`,
