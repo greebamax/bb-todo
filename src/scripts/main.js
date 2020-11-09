@@ -1,7 +1,6 @@
 /* eslint-disable import/first */
 import './plugins';
 import $ from 'jquery';
-import 'semantic-ui-css';
 
 import './common/partials';
 import './helpers/handlebars';
