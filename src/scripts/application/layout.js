@@ -26,7 +26,6 @@ export default class ApplicationLayout extends BaseView {
   }
 
   onAttach() {
-    // this.getRegion(CONTENT_REGION).show(/* ContentView */);
     this.getRegion(HEADER_REGION).show(new HeaderView());
   }
 }
