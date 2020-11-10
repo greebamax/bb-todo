@@ -1,0 +1,84 @@
+@mixin for-phone {
+  /* Small screen, non-retina */
+  @media only screen and (max-width: $bp-mobile) {
+    @content;
+  }
+
+  /* Small screen, retina, to override above media query */
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $bp-mobile),
+         only screen and (min--moz-device-pixel-ratio: 2)    and (max-width: $bp-mobile),
+         only screen and (-o-min-device-pixel-ratio: 2/1)    and (max-width: $bp-mobile),
+         only screen and (min-device-pixel-ratio: 2)         and (max-width: $bp-mobile),
+         only screen and (min-resolution: 192dpi)            and (max-width: $bp-mobile),
+         only screen and (min-resolution: 2dppx)             and (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait {
+  /* Normal screen, non-retina */
+  @media only screen and (min-width: $bp-tablet-portrait) {
+    @content;
+  }
+
+  /* Normal screen, retina, to override above media query */
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-tablet-landscape),
+         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-tablet-landscape),
+         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-tablet-landscape),
+         only screen and (min-resolution: 192dpi)            and (min-width: $bp-tablet-landscape),
+         only screen and (min-resolution: 2dppx)             and (min-width: $bp-tablet-landscape) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape {
+  /* Medium screen, non-retina */
+  @media only screen and (min-width: $bp-tablet-landscape) {
+    @content;
+  }
+
+  /* Medium screen, retina, to override above media query */
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-tablet-landscape),
+         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-tablet-landscape),
+         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-tablet-landscape),
+         only screen and (min-resolution: 192dpi)            and (min-width: $bp-tablet-landscape),
+         only screen and (min-resolution: 2dppx)             and (min-width: $bp-tablet-landscape) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  /* Large screen, non-retina */
+  @media only screen and (min-width: $bp-desktop) {
+    @content;
+  }
+
+  /* Large screen, retina, to override above media query */
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-desktop),
+         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-desktop),
+         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-desktop),
+         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-desktop),
+         only screen and (min-resolution: 192dpi)            and (min-width: $bp-desktop),
+         only screen and (min-resolution: 2dppx)             and (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin for-large-desktop {
+  /* Huge screen, non-retina */
+  @media only screen and (min-width: $bp-desktop-large) {
+    @content;
+  }
+
+  /* Huge screen, retina, to override above media query */
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-desktop-large),
+         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-desktop-large),
+         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-desktop-large),
+         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-desktop-large),
+         only screen and (min-resolution: 192dpi)            and (min-width: $bp-desktop-large),
+         only screen and (min-resolution: 2dppx)             and (min-width: $bp-desktop-large) {
+    @content;
+  }
+}
