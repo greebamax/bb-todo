@@ -1,15 +1,49 @@
 .task-lists-module {
   display: flex;
   height: 100%;
+  position: relative;
 
   &__wrapper {
-    max-width: 800px;
-    margin: 0 auto;
+    height: 100%;
 
-    background-color: burlywood;
+    @include for-tablet-landscape {
+      position: relative;
+      min-width: $bp-tablet-landscape - $sidebar-width - 1px;
+      margin: 0 auto;
+      background-color: $default-bg-color;
+      box-shadow: 0px 0px 3px 1px $box-shadow-color;
+    }
+
+    @include for-desktop {
+      min-width: $bp-desktop - $sidebar-width - 1px;
+    }
+  }
+}
+
+.sidebar-region {
+  min-width: $sidebar-width;
+  border-right: 1px solid $border-color;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: none;
+
+  &.--opened {
+    display: block !important;
   }
 
-  .task-list {
-    background-color: aqua;
+  @include for-tablet-landscape {
+    $sidebar-landscape-width: $sidebar-width - 100px;
+    min-width: $sidebar-landscape-width;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -$sidebar-landscape-width;
+  }
+
+  @include for-tablet-landscape {
+    min-width: $sidebar-width;
+    left: -$sidebar-width;
   }
 }

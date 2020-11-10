@@ -16,8 +16,7 @@ $blue-darker: rgb(46, 122, 233);
 $box-shadow-color: rgba(0, 0, 0, .25);
 
 /* Layout */
-$sidebar-width: 20%;
-$sidebar-min-width: 170px;
+$sidebar-width: 250px;
 
 $bp-mobile: 599px;
 $bp-tablet-portrait: 600px;
@@ -25,15 +24,9 @@ $bp-tablet-landscape: 900px;
 $bp-desktop: 1200px;
 $bp-desktop-large: 1800px;
 
-/* Icons */
-$icon-width: 24px;
-$icon-height: $icon-width;
-$icon-color: #999;
-$icon-color-active: #007bff;
-
 /* Header */
 $header-height: 50px;
-$navbar-link-font-color: #333;
 
 $border-color: $gray-dark;
 $sidbar-bg-color: $gray-light;
+$default-bg-color: white;

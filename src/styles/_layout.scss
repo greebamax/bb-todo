@@ -17,12 +17,26 @@ body,
 
 .app-header-region {
   grid-area: app-header-region;
-  background-color: $gray-lighter;
-  border-bottom: 1px solid $border-color;
   box-shadow: 0px 0px 5px 1px $box-shadow-color;
+
+  @include for-phone {
+    background-color: $gray-lighter;
+  }
+
+  @include for-tablet-portrait {
+    background-color: $gray-lighter;
+  }
+
+  @include for-tablet-landscape {
+    background-color: $default-bg-color;
+  }
 }
 
 .app-content {
   grid-area: app-content;
   z-index: -1;
+
+  @include for-tablet-landscape {
+    background-color: $gray-lighter;
+  }
 }
