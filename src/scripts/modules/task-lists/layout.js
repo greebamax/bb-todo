@@ -2,7 +2,7 @@ import BaseView from 'base/view';
 import TaskListsLayoutTemplate from './template.tmpl';
 
 const SIDEBAR_REGION = 'sidebar';
-const CONTENT_REGION = 'content';
+const CONTENT_REGION = 'task-list';
 
 /**
  * @class TaskListsLayout

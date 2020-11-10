@@ -1,0 +1,15 @@
+.task-lists-module {
+  display: flex;
+  height: 100%;
+
+  &__wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+
+    background-color: burlywood;
+  }
+
+  .task-list {
+    background-color: aqua;
+  }
+}
