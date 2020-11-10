@@ -2,12 +2,12 @@ body {
   font-size: $base-font-size;
 }
 
-.loading-component {
+.loading-behavior {
   &::before {
     display: none;
   }
 
-  &.isLoading::before {
+  &.--loading::before {
     display: block;
     content: 'loading...';
   }

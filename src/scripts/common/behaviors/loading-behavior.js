@@ -1,6 +1,6 @@
 import BaseBehavior from 'base/behavior';
 
-const LOADING_CLASS_NAME = 'isLoading';
+const LOADING_CLASS_NAME = '--loading';
 
 export default class LoadingBehavior extends BaseBehavior {
   get modelEvents() {
@@ -26,6 +26,6 @@ export default class LoadingBehavior extends BaseBehavior {
   }
 
   onBeforeRender() {
-    this.view.$el.addClass(`loading-component ${LOADING_CLASS_NAME}`);
+    this.view.$el.addClass(`loading-behavior ${LOADING_CLASS_NAME}`);
   }
 }
