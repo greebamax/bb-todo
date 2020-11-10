@@ -16,6 +16,7 @@ body,
 }
 
 .app-header-region {
+  z-index: 1;
   grid-area: app-header-region;
   box-shadow: 0px 0px 5px 1px $box-shadow-color;
 
@@ -34,7 +35,6 @@ body,
 
 .app-content {
   grid-area: app-content;
-  z-index: -1;
 
   @include for-tablet-landscape {
     background-color: $gray-lighter;
