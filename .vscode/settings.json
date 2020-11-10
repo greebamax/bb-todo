@@ -16,7 +16,8 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.factorypath": true,
+    "build/**": true
   },
   "search.exclude": {
     ".nyc_output": true,
@@ -27,13 +28,15 @@
     "**/bower_components": true,
     "**/node_modules": true,
     "src/scripts/common/partials/index.js": true,
-    "coverage/**": true
+    "coverage/**": true,
+    "build/**": true
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/**": true,
     "src/scripts/common/partials/index.js": true,
-    "coverage/**": true
+    "coverage/**": true,
+    "build/**": true
   }
 }
