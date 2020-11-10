@@ -25,7 +25,10 @@ $bp-desktop: 1200px;
 $bp-desktop-large: 1800px;
 
 /* Icons */
-$icon-width: 24px;
+$icon-size-default: 17px;
+$icon-size-large: 24px;
+
+$icon-width: $icon-size-default;
 $icon-height: $icon-width;
 
 /* Header */

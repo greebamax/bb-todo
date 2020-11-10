@@ -1,4 +1,11 @@
 .icon {
-  width: $icon-width;
-  height: $icon-height;
+  > svg {
+    width: $icon-width;
+  }
+
+  &.--large {
+    > svg {
+      width: $icon-size-large;
+    }
+  }
 }
