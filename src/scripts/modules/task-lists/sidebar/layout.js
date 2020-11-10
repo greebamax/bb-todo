@@ -1,7 +1,7 @@
 import BaseView from 'base/view';
 import SideBarTemplate from './template.tmpl';
 
-const LISTS_REGION = 'listsRegion';
+const LISTS_REGION = 'lists-region';
 
 /**
  * @class SideBarLayout
@@ -13,7 +13,7 @@ export default class SideBarLayout extends BaseView {
   constructor() {
     super({
       template: SideBarTemplate,
-      className: 'sidebar__inner',
+      className: 'sidebar',
       regions: {
         [LISTS_REGION]: {
           el: `[data-region="${LISTS_REGION}"]`,
