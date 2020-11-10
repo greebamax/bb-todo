@@ -4,7 +4,6 @@ import TodoModel from './task-model';
 import Template from './task-template.tmpl';
 
 export default Backbone.View.extend({
-  tagName: 'li',
   template: Template,
 
   model: TodoModel,

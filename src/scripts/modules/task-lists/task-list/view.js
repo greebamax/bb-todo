@@ -9,12 +9,10 @@ import TaskListTemplate from './template.tmpl';
 export default class TaskListView extends BaseView {
   constructor(options) {
     super(extend({
-      className: 'nav-item',
       events: {
         'click [data-action="show-list-details"]': 'onShowListDetailsClick',
         'click [data-action="delete"]': 'onDeleteClick',
       },
-      tagName: 'li',
       template: TaskListTemplate,
     }, options));
   }

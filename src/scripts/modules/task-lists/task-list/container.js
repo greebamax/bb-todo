@@ -10,8 +10,6 @@ import TaskListView from './view';
 export default class TasksListContainerView extends BaseCollectionView {
   constructor(options) {
     super(extend({
-      tagName: 'ul',
-      className: 'nav flex-column',
       childView: TaskListView,
       childViewEvents: {
         'list-details:show': 'showListDetails',
