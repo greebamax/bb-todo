@@ -48,4 +48,59 @@
     min-width: $sidebar-width;
     left: -$sidebar-width;
   }
+
+  .sidebar {
+    padding: 1rem 0;
+  }
+
+  .task-list {
+    $border-radius: 5px;
+    $task-list-bg-color: #ebecf0;
+
+    cursor: pointer;
+    width: 100%;
+    background-color: $task-list-bg-color;
+    display: flex;
+    justify-content: flex-end;
+    padding: .3rem 1rem;
+    align-items: center;
+
+    @include for-tablet-landscape {
+      border-radius: $border-radius 0 0 $border-radius;
+    }
+
+    & + .task-list {
+      margin-top: 1rem;
+    }
+
+    .list-title {
+      margin-right: 1rem;
+      flex-grow: 1;
+    }
+
+    button {
+      text-align: center;
+      visibility: hidden;
+      padding: 1px 2px;
+      border-radius: 2px;
+      display: inline-block;
+      width: $icon-size-default + 10px;
+      height: $icon-size-default + 10px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: darken($task-list-bg-color, 10%);
+      }
+
+      & + button {
+        margin-left: .5rem;
+      }
+    }
+
+    &:hover {
+      button {
+        visibility: visible;
+      }
+    }
+  }
 }

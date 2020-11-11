@@ -10,6 +10,7 @@ import TaskListView from './view';
 export default class TasksListContainerView extends BaseCollectionView {
   constructor(options) {
     super(extend({
+      className: 'task-lists',
       childView: TaskListView,
       childViewEvents: {
         'list-details:show': 'showListDetails',
