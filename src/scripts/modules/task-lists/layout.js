@@ -18,7 +18,10 @@ export default class TaskListsLayout extends BaseView {
       className: 'task-lists-module',
       template: TaskListsLayoutTemplate,
       regions: {
-        [SIDEBAR_REGION]: `[data-region="${SIDEBAR_REGION}"]`,
+        [SIDEBAR_REGION]: {
+          el: `[data-region="${SIDEBAR_REGION}"]`,
+          replaceElement: true,
+        },
         [CONTENT_REGION]: `[data-region="${CONTENT_REGION}"]`,
       },
     });

@@ -20,7 +20,7 @@
   }
 }
 
-.sidebar-region {
+.sidebar {
   min-width: $sidebar-width;
   border-right: 1px solid $border-color;
   position: absolute;
@@ -28,6 +28,7 @@
   bottom: 0;
   display: none;
   background-color: $sidebar-bg-color;
+  padding: 1rem 0;
 
   &.--opened {
     display: block !important;
@@ -47,10 +48,6 @@
   @include for-tablet-landscape {
     min-width: $sidebar-width;
     left: -$sidebar-width;
-  }
-
-  .sidebar {
-    padding: 1rem 0;
   }
 
   .task-list {
