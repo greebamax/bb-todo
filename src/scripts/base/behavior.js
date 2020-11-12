@@ -1,3 +1,7 @@
-import Mn from 'backbone.marionette';
+import Marionette from 'backbone.marionette';
 
-export default class BaseBehavior extends Mn.Behavior {}
+/**
+ * @class BaseBehavior
+ * @extends {Marionette.Behavior}
+ */
+export default class BaseBehavior extends Marionette.Behavior {}
