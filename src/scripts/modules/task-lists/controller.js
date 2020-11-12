@@ -1,5 +1,4 @@
 import { isFinite } from 'lodash';
-import Radio from 'backbone.radio';
 import BaseController from 'base/controller';
 import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
@@ -11,7 +10,6 @@ import TaskListDetailsPlaceholder from './task-list-details/placeholder';
 import TaskListDetails from './task-list-details';
 
 const layout = Symbol('layout');
-const globalEvents = Radio.channel('app');
 
 /**
  * @param {Number} id
@@ -58,10 +56,6 @@ export default class TaskListsController extends BaseController {
 
   otherwise() {
     this.router.navigateTo('lists');
-  }
-
-  initialize() {
-    this.listenTo(globalEvents, 'sidebar:toggle', this.toggleSidebar);
   }
 
   /**
@@ -119,7 +113,6 @@ export default class TaskListsController extends BaseController {
    * @param {Backbone.Model} params
    */
   showListDetails(params) {
-    this.toggleSidebar();
     this.abortRequests();
     const tasksListsModel = new TaskListModel(params);
     const fetching = tasksListsModel.fetch();
@@ -139,11 +132,5 @@ export default class TaskListsController extends BaseController {
         }
       });
     this.registerRequest(fetching);
-  }
-
-  toggleSidebar() {
-    if (this[layout].isRendered()) {
-      this[layout].getRegion(TaskListsLayout.sidebarRegion).$el.toggleClass('--opened');
-    }
   }
 }
