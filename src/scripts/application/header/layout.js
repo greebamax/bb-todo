@@ -17,7 +17,8 @@ export default class HeaderLayout extends BaseView {
     });
   }
 
-  onSidebarBtnClick() {
+  onSidebarBtnClick($e) {
+    $e.stopPropagation();
     Radio.channel('app').trigger('sidebar:toggle');
   }
 }
