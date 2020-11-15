@@ -1,4 +1,4 @@
-import Bb from 'backbone';
+import Backbone from 'backbone';
 import { assign, forEach } from 'lodash';
 import BaseApplication from 'base/application';
 import MainLayout from './layout';
@@ -30,7 +30,7 @@ export default class Application extends BaseApplication {
 
   onStart() {
     this.showView(new MainLayout());
-    Bb.history.start();
+    Backbone.history.start();
   }
 
   onBeforeDestroy() {

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const Bb = require('backbone');
+const Backbone = require('backbone');
 const chai = require('chai');
 const sinon = require('sinon');
 
@@ -33,13 +33,13 @@ describe('Base Router', () => {
     global.document = document;
     global.location = location;
 
-    Bb.history.location = location;
-    Bb.history.start({ pushState: true });
+    Backbone.history.location = location;
+    Backbone.history.start({ pushState: true });
   });
 
   afterEach(() => {
-    Bb.history.stop();
-    delete Bb.history.location;
+    Backbone.history.stop();
+    delete Backbone.history.location;
 
     delete global.window;
     delete global.document;

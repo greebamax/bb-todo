@@ -1,7 +1,7 @@
-import Bb from 'backbone';
+import Backbone from 'backbone';
 
 /**
  * @class BaseApplication
  * @extends {Backbone.Collection}
  */
-export default class BaseApplication extends Bb.Collection {}
+export default class BaseApplication extends Backbone.Collection {}
