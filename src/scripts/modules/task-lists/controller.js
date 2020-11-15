@@ -104,7 +104,7 @@ export default class TaskListsController extends BaseController {
       collection: taskListCollection,
     });
     this.listenTo(taskListsCollectionView, 'list-details:show', model => {
-      this.listDetailsRoute(model[model.idAttribute]);
+      this.router.navigateTo(`lists/${model.id}/tasks`);
     });
     return taskListsCollectionView;
   }
