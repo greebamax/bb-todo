@@ -10,6 +10,7 @@ import TaskListDetailsPlaceholder from './task-list-details/placeholder';
 import TaskListDetails from './task-list-details';
 
 const layout = Symbol('layout');
+const sidebar = Symbol('sidebar');
 
 /**
  * @param {Number} id
@@ -92,6 +93,7 @@ export default class TaskListsController extends BaseController {
     const sidebarView = new SideBarView();
 
     this.listenTo(sidebarView, 'render', this.onShowSidebar);
+    this[sidebar] = sidebarView;
     return sidebarView;
   }
 
@@ -104,6 +106,7 @@ export default class TaskListsController extends BaseController {
       collection: taskListCollection,
     });
     this.listenTo(taskListsCollectionView, 'list-details:show', model => {
+      this[sidebar].toggleSidebar(false);
       this.router.navigateTo(`lists/${model.id}/tasks`);
     });
     return taskListsCollectionView;
