@@ -18,6 +18,7 @@ export default class HeaderLayout extends BaseView {
   }
 
   onSidebarBtnClick($e) {
+    $e.preventDefault();
     $e.stopPropagation();
     Radio.channel('app').trigger('sidebar:toggle');
   }
