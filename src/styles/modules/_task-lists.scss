@@ -21,6 +21,8 @@
 }
 
 .sidebar {
+  $sidebar-bg-color: $gray-lighter;
+
   min-width: $sidebar-width;
   border-right: 1px solid $border-color;
   position: absolute;
@@ -52,7 +54,7 @@
 
   .task-list {
     $border-radius: 5px;
-    $task-list-bg-color: #ebecf0;
+    $task-list-bg-color: $blue-lighter;
 
     cursor: pointer;
     width: 100%;
@@ -86,7 +88,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: darken($task-list-bg-color, 10%);
+        background-color: $blue;
       }
 
       & + button {
