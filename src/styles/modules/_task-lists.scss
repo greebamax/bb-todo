@@ -72,6 +72,10 @@
       margin-top: 1rem;
     }
 
+    &.--selected {
+      background-color: darken($task-list-bg-color, 10%);
+    }
+
     .list-title {
       margin-right: 1rem;
       flex-grow: 1;

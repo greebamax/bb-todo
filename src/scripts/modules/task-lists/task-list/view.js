@@ -1,6 +1,9 @@
 import { extend } from 'lodash';
 import BaseView from 'base/view';
-import TaskListTemplate from './template.tmpl';
+import { EVENT_NAME } from 'common/mixin/selectable-item';
+import Template from './template.tmpl';
+
+const SELECTED_CLASS_NAME = '--selected';
 
 /**
  * @class TaskListView
@@ -9,13 +12,19 @@ import TaskListTemplate from './template.tmpl';
 export default class TaskListView extends BaseView {
   constructor(options) {
     super(extend({
-      className: 'task-list',
       events: {
         'click': 'onShowListDetailsClick',
         'click [data-action="delete"]': 'onDeleteClick',
       },
-      template: TaskListTemplate,
+      modelEvents: {
+        [EVENT_NAME]: 'onChangeSelectedState',
+      },
+      template: Template,
     }, options));
+  }
+
+  className() {
+    return `task-list ${this.model.isSelected() ? SELECTED_CLASS_NAME : ''}`.toString();
   }
 
   /**
@@ -35,6 +44,11 @@ export default class TaskListView extends BaseView {
   onShowListDetailsClick($event) {
     $event.preventDefault();
 
+    this.model.select();
     this.trigger('list-details:show', this.model);
+  }
+
+  onChangeSelectedState(isSelected) {
+    this.$el.toggleClass(SELECTED_CLASS_NAME, isSelected);
   }
 }
