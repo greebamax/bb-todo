@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import { extend } from 'lodash';
-import TodoModel from './task-model';
-import Template from './task-template.tmpl';
+import TodoModel from './model';
+import Template from './template.tmpl';
 
 export default Backbone.View.extend({
   template: Template,

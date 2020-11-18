@@ -1,5 +1,5 @@
 import BaseCollection from 'base/collection';
-import TodoModel from './task-model';
+import TodoModel from './model';
 
 export default class TasksCollection extends BaseCollection {
   get url() {
