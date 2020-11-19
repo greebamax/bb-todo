@@ -1,3 +1,5 @@
+import { defaults, get } from 'lodash';
+
 export const FIELD_NAME = 'selected';
 export const EVENT_NAME = 'selected:change';
 
@@ -6,23 +8,33 @@ export default {
     [FIELD_NAME]: false,
   },
 
+  init() {
+    defaults(this.attributes, this.defaults);
+  },
+
   isSelected() {
     return Boolean(this.get(FIELD_NAME));
   },
 
-  select() {
+  select(...args) {
     this.set(FIELD_NAME, true);
-    this.trigger(EVENT_NAME, true);
+    this.notify.call(this, ...args);
   },
 
-  deselect() {
+  deselect(...args) {
     this.set(FIELD_NAME, false);
-    this.trigger(EVENT_NAME, false);
+    this.notify.call(this, ...args);
   },
 
-  toggle() {
+  toggle(...args) {
     const newState = !this.get(FIELD_NAME);
     this.set(FIELD_NAME, newState);
-    this.trigger(EVENT_NAME, newState);
+    this.notify.call(this, ...args);
+  },
+
+  notify(options) {
+    if (!get(options, 'silent')) {
+      this.trigger(EVENT_NAME, this);
+    }
   },
 };
