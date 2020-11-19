@@ -14,6 +14,7 @@ export default class TasksListContainerView extends BaseCollectionView {
       childView: TaskListView,
       childViewEvents: {
         'list-details:show': 'showListDetails',
+        'list:selected': 'onSelectList',
       },
       behaviors: [LoadingBehavior],
     }, options));
@@ -21,5 +22,6 @@ export default class TasksListContainerView extends BaseCollectionView {
 
   showListDetails(model) {
     this.trigger('list-details:show', model);
+    this.render();
   }
 }
