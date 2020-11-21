@@ -24,4 +24,8 @@ export default class TasksListContainerView extends BaseCollectionView {
     this.trigger('list-details:show', model);
     this.render();
   }
+
+  initialize() {
+    this.listenTo(this.collection, 'sync', () => this.render());
+  }
 }

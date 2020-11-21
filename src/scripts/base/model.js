@@ -6,8 +6,8 @@ import { extend, isFunction } from 'lodash';
  * @extends {Backbone.Model}
  */
 export default class BaseModel extends Backbone.Model {
-  constructor(options) {
-    super(options);
+  constructor(...args) {
+    super(...args);
 
     if (this.mixins && this.mixins.length) {
       this.mixins.forEach(mixin => {

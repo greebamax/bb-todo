@@ -6,8 +6,8 @@ import { extend, isFunction } from 'lodash';
  * @extends {Backbone.Collection}
  */
 export default class BaseCollection extends Backbone.Collection {
-  constructor(options) {
-    super(options);
+  constructor(...args) {
+    super(...args);
 
     if (this.mixins && this.mixins.length) {
       this.mixins.forEach(mixin => {

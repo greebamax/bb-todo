@@ -46,10 +46,11 @@ export default class TaskListsController extends BaseController {
 
   listDetailsRoute(id) {
     if (isValidListId(id)) {
+      this.setToState({ selectedListId: id });
       if (!this[layout]) {
         this.show(this.getLayout());
       }
-      this.showListDetails({ id });
+      this.showListDetails();
     } else {
       this.otherwise();
     }
@@ -83,7 +84,8 @@ export default class TaskListsController extends BaseController {
    * @param {Marionette.View} sidebarView
    */
   onShowSidebar(sidebarView) {
-    const taskLists = new TaskListCollection();
+    const selectedListId = this.getFromState('selectedListId');
+    const taskLists = new TaskListCollection(null, { selectedListId });
     taskLists.fetch();
 
     sidebarView.getRegion(SideBarView.listsRegion).show(this.getTaskListsView(taskLists));
@@ -115,9 +117,10 @@ export default class TaskListsController extends BaseController {
   /**
    * @param {Backbone.Model} params
    */
-  showListDetails(params) {
+  showListDetails() {
+    const listId = this.getFromState('selectedListId');
     this.abortRequests();
-    const tasksListsModel = new TaskListModel(params);
+    const tasksListsModel = new TaskListModel({ id: listId });
     const fetching = tasksListsModel.fetch();
     fetching
       .then(() => {

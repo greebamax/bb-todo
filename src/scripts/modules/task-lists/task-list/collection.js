@@ -19,4 +19,13 @@ export default class TaskListsCollection extends BaseCollection {
   get model() {
     return ListModel;
   }
+
+  initialize(models, { selectedListId } = {}) {
+    this.listenToOnce(this, 'sync', () => {
+      const selectedModel = this.findWhere({ id: selectedListId });
+      if (selectedModel && selectedModel.select) {
+        selectedModel.select();
+      }
+    });
+  }
 }

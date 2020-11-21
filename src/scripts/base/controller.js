@@ -3,9 +3,11 @@ import {
 } from 'lodash';
 import Mn from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import BaseModel from './model';
 
 const getRoute = (target, routes) => get(routes, isFunction(target) ? target.name : target, null);
 const requests = Symbol('layout');
+const state = Symbol('state');
 
 /**
  * @class BaseController
@@ -21,6 +23,7 @@ export default class BaseController extends Mn.Object {
     }
 
     this[requests] = [];
+    this[state] = new BaseModel();
   }
 
   /**
@@ -57,5 +60,13 @@ export default class BaseController extends Mn.Object {
         this[requests].splice(i, 1);
       }
     }
+  }
+
+  setToState(attrs) {
+    this[state].set(attrs);
+  }
+
+  getFromState(field) {
+    return this[state].get(field);
   }
 }
