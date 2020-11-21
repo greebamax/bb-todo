@@ -8,7 +8,32 @@ body {
   }
 
   &.--loading::before {
+    $spinner-height: 30px;
+    $spinner-thickness: 5px;
+
     display: block;
-    content: 'loading...';
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: $spinner-height;
+    width: $spinner-height;
+    margin-top: -$spinner-height/2;
+    margin-left: -$spinner-height/4;
+    animation: rotation 1.5s infinite linear;
+    border-left: $spinner-thickness solid $blue-lighter;
+    border-right: $spinner-thickness solid $blue-lighter;
+    border-bottom: $spinner-thickness solid $blue-lighter;
+    border-top: $spinner-thickness solid $blue-light;
+    border-radius: 100%;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }
