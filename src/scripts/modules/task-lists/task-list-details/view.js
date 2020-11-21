@@ -1,6 +1,7 @@
 import { extend } from 'lodash';
 import BaseView from 'base/view';
-import TaskListLayoutTemplate from './template.tmpl';
+import LoadingBehavior from 'common/behaviors/loading-behavior';
+import Template from './template.tmpl';
 
 /**
  * @class TaskListLayout
@@ -9,7 +10,11 @@ import TaskListLayoutTemplate from './template.tmpl';
 export default class TaskListLayout extends BaseView {
   constructor(options) {
     super(extend({
-      template: TaskListLayoutTemplate,
+      template: Template,
+      behaviors: [LoadingBehavior],
+      modelEvents: {
+        'sync': 'render',
+      },
     }, options));
   }
 

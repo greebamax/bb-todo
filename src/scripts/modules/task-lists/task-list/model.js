@@ -1,5 +1,6 @@
 import BaseModel from 'base/model';
 import SelectableItem from 'common/mixin/selectable-item';
+import Synchronized from 'common/mixin/synchronized';
 
 /**
  * @class TaskList
@@ -7,7 +8,7 @@ import SelectableItem from 'common/mixin/selectable-item';
  */
 export default class TaskList extends BaseModel {
   get mixins() {
-    return [SelectableItem];
+    return [SelectableItem, Synchronized];
   }
 
   get urlRoot() {

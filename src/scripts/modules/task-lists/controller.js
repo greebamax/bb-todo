@@ -118,16 +118,13 @@ export default class TaskListsController extends BaseController {
    * @param {Backbone.Model} params
    */
   showListDetails() {
-    const listId = this.getFromState('selectedListId');
     this.abortRequests();
+
+    const listId = this.getFromState('selectedListId');
     const tasksListsModel = new TaskListModel({ id: listId });
     const fetching = tasksListsModel.fetch();
+
     fetching
-      .then(() => {
-        this[layout]
-          .getRegion(TaskListsLayout.contentRegion)
-          .show(new TaskListDetails({ model: tasksListsModel }));
-      })
       .catch(resp => {
         if (resp.status) { // check if not aborted by controller
           error(resp.status, resp.statusText);
@@ -137,6 +134,11 @@ export default class TaskListsController extends BaseController {
           });
         }
       });
+
     this.registerRequest(fetching);
+
+    this[layout]
+      .getRegion(TaskListsLayout.contentRegion)
+      .show(new TaskListDetails({ model: tasksListsModel }));
   }
 }
