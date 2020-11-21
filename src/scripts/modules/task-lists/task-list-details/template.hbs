@@ -1,20 +1,22 @@
-<div>task list layout</div>
-<pre>
-  title: {{title}}
-  listId: {{id}}
-  cid: {{cid}}
-</pre>
-<ol>
-  {{#each tasks as |task|}}
-    <li>
-      <label for="{{../cid}}-{{task.id}}">
-        <input
-          type="checkbox"
-          name="completed"
-          id="{{../cid}}-{{task.id}}"
-          {{#if task.completed}}checked{{/if}}>
-        {{task.title}}
-      </label>
-    </li>
-  {{/each}}
-</ol>
+{{#unless isFetching}}
+  <div>task list layout</div>
+  <pre>
+    title: {{title}}
+    listId: {{id}}
+    cid: {{cid}}
+  </pre>
+  <ol>
+    {{#each tasks as |task|}}
+      <li>
+        <label for="{{../cid}}-{{task.id}}">
+          <input
+            type="checkbox"
+            name="completed"
+            id="{{../cid}}-{{task.id}}"
+            {{#if task.completed}}checked{{/if}}>
+          {{task.title}}
+        </label>
+      </li>
+    {{/each}}
+  </ol>
+{{/unless}}

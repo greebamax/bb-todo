@@ -20,7 +20,7 @@ export default class TaskListLayout extends BaseView {
 
   serializeData() {
     return extend({
-      cid: this.model.cid,
+      isFetching: this.model.isFetching(),
     }, this.model.toJSON());
   }
 }
