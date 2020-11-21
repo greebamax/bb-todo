@@ -137,8 +137,10 @@ export default class TaskListsController extends BaseController {
 
     this.registerRequest(fetching);
 
-    this[layout]
-      .getRegion(TaskListsLayout.contentRegion)
-      .show(new TaskListDetails({ model: tasksListsModel }));
+    if (this[layout] && this[layout].isRendered()) {
+      this[layout]
+        .getRegion(TaskListsLayout.contentRegion)
+        .show(new TaskListDetails({ model: tasksListsModel }));
+    }
   }
 }
