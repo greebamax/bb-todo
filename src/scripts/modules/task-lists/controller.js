@@ -33,6 +33,7 @@ export default class TaskListsController extends BaseController {
   }
 
   homeRoute() {
+    this.setToState({ selectedListId: null });
     this.show(this.getLayout());
   }
 
