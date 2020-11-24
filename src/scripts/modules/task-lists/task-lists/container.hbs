@@ -1,1 +1,4 @@
 <div data-region="list"></div>
+{{#unless isFetching}}
+  <button data-action="add" class="add-new-list">{{> icon name="plus"}} add list</button>
+{{/unless}}

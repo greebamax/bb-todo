@@ -1,6 +1,7 @@
 import { extend, get } from 'lodash';
 import BaseView from 'base/view';
 import TaskListsCollectionView from './collection-view';
+import TaskListModel from './model';
 import Template from './container.tmpl';
 
 /**
@@ -18,16 +19,30 @@ export default class TasksListContainerView extends BaseView {
           replaceElement: true,
         },
       },
+      events: {
+        'click [data-action="add"]': 'onAddListClick',
+      },
     }, options));
   }
 
   initialize(options) {
     this.collection = get(options, 'collection', []);
+    this.listenTo(this.collection, 'sync:stop', this.render);
   }
 
   onRender() {
     this.showChildView('list', new TaskListsCollectionView({
       collection: this.collection,
     }));
+  }
+
+  serializeData() {
+    return {
+      isFetching: this.collection.isFetching(),
+    };
+  }
+
+  onAddListClick() {
+    this.collection.add(new TaskListModel());
   }
 }

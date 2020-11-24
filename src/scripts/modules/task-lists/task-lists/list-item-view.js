@@ -43,4 +43,10 @@ export default class TaskListView extends BaseView {
     this.model.select();
     this.trigger('list-details:show', this.model);
   }
+
+  onRender() {
+    if (this.model.isNew()) {
+      console.log('created: ' + JSON.stringify(this.model.toJSON())); // eslint-disable-line
+    }
+  }
 }
