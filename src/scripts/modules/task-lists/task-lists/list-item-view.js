@@ -1,6 +1,6 @@
 import { extend } from 'lodash';
 import BaseView from 'base/view';
-import Template from './template.tmpl';
+import Template from './list-item.tmpl';
 
 const SELECTED_CLASS_NAME = '--selected';
 

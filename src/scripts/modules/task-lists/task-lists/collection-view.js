@@ -1,7 +1,7 @@
 import { extend } from 'lodash';
 import BaseCollectionView from 'base/collection-view';
 import LoadingBehavior from 'common/behaviors/loading-behavior';
-import TaskListView from './view';
+import TaskListView from './list-item-view';
 
 /**
  * @class TasksListContainerView

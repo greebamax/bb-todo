@@ -3,9 +3,9 @@ import BaseController from 'base/controller';
 import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
-import TaskListModel from './task-list/model';
-import TaskListCollection from './task-list/collection';
-import TasksListsCollectionView from './task-list/container';
+import TaskListModel from './task-lists/model';
+import TaskListCollection from './task-lists/collection';
+import TasksListsCollectionView from './task-lists/container';
 import TaskListDetailsPlaceholder from './task-list-details/placeholder';
 import TaskListDetails from './task-list-details';
 
