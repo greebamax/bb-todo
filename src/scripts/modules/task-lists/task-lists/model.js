@@ -2,6 +2,7 @@ import { isString } from 'lodash';
 import BaseModel from 'base/model';
 import SelectableItem from 'common/mixin/selectable-item';
 import Synchronized from 'common/mixin/synchronized';
+import Reversible from 'common/mixin/reversible';
 
 /**
  * @class TaskList
@@ -9,7 +10,7 @@ import Synchronized from 'common/mixin/synchronized';
  */
 export default class TaskList extends BaseModel {
   get mixins() {
-    return [SelectableItem, Synchronized];
+    return [SelectableItem, Synchronized, Reversible];
   }
 
   get urlRoot() {

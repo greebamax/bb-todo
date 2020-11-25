@@ -87,11 +87,12 @@ export default class TaskListView extends BaseView {
   onTitleInputKeyPress($e) {
     switch ($e.key) {
       case KEY_ESC:
+        this.model.revert('title');
         this.model.stopEdit();
         return false;
 
       case KEY_ENTER:
-        this.model.set('title', toString($e.currentTarget.value));
+        this.model.set('title', toString($e.currentTarget.value), { silent: true });
 
         if (this.model.isValid()) {
           this.model.stopEdit();
