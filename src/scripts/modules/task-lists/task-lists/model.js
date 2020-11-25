@@ -1,3 +1,4 @@
+import { isString } from 'lodash';
 import BaseModel from 'base/model';
 import SelectableItem from 'common/mixin/selectable-item';
 import Synchronized from 'common/mixin/synchronized';
@@ -32,5 +33,17 @@ export default class TaskList extends BaseModel {
 
   stopEdit() {
     this.set('editing', false);
+  }
+
+  validate(attrs) {
+    if (!isString(attrs.title)) {
+      return 'Title should be a string';
+    }
+
+    if (!/^[A-Za-z\s\d]+$/.test(attrs.title)) {
+      return 'Title should be valid';
+    }
+
+    return undefined;
   }
 }
