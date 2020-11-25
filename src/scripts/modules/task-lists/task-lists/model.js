@@ -18,6 +18,19 @@ export default class TaskList extends BaseModel {
   defaults() {
     return {
       title: 'Untitled',
+      editing: false,
     };
+  }
+
+  get isEditing() {
+    return this.get('editing');
+  }
+
+  startEdit() {
+    this.set('editing', true);
+  }
+
+  stopEdit() {
+    this.set('editing', false);
   }
 }

@@ -1,7 +1,11 @@
-<span class="list-title">{{title}}</span>
-<button data-action="rename">
-  {{> icon name="edit-3"}}
-</button>
-<button data-action="delete">
-  {{> icon name="trash"}}
-</button>
+{{#if isEditing}}
+  <input type="text" name="list-title" value="{{title}}" autocomplete="off">
+{{else}}
+  <span class="list-title">{{title}}</span>
+  <button data-action="rename">
+    {{> icon name="edit-3"}}
+  </button>
+  <button data-action="delete">
+    {{> icon name="trash"}}
+  </button>
+{{/if}}
