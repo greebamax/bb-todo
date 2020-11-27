@@ -1,10 +1,15 @@
 import { extend, toString } from 'lodash';
 import BaseView from 'base/view';
+import ClickOutsideBehavior from 'common/behaviors/click-outside';
 import { KEY_ENTER, KEY_ESC } from 'common/constants';
 import Template from './list-item.tmpl';
 
 const SELECTED_CLASS_NAME = '--selected';
 const TITLE_INTPUT_SELECTOR = 'input[name="list-title"]';
+const EVENTS = {
+  LIST_EDIT_START: 'list-item-edit:start',
+  LIST_EDIT_STOP: 'list-item-edit:stop',
+};
 
 /**
  * @class TaskListView
@@ -20,7 +25,7 @@ export default class TaskListView extends BaseView {
         [`keyup ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputKeyPress',
         [`click ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputClick',
         [`focus ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputFocus',
-        [`blur ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputFocusout',
+        [`blur ${TITLE_INTPUT_SELECTOR}`]: 'handleOutsideClick',
       },
       modelEvents: {
         'change': 'render',
@@ -33,11 +38,26 @@ export default class TaskListView extends BaseView {
     return `task-list ${this.model.isSelected() ? SELECTED_CLASS_NAME : ''}`.toString();
   }
 
+  behaviors() {
+    return [
+      {
+        behaviorClass: ClickOutsideBehavior,
+        handler: this.handleOutsideClick,
+        startListeningEvent: EVENTS.LIST_EDIT_START,
+        stopListeningEvent: EVENTS.LIST_EDIT_STOP,
+      },
+    ];
+  }
+
   serializeData() {
     return extend({
       isEditing: this.model.isEditing(),
       isNew: this.model.isNew(),
     }, this.model.toJSON());
+  }
+
+  onBeforeRender() {
+    this.trigger(this.model.isEditing() ? EVENTS.LIST_EDIT_START : EVENTS.LIST_EDIT_STOP);
   }
 
   onRender() {
@@ -123,7 +143,7 @@ export default class TaskListView extends BaseView {
     this.selectTitleInput($e);
   }
 
-  onTitleInputFocusout() {
+  handleOutsideClick() {
     this.model.stopEdit();
   }
 
