@@ -4,6 +4,8 @@ import SelectableItem from 'common/mixin/selectable-item';
 import Synchronized from 'common/mixin/synchronized';
 import Reversible from 'common/mixin/reversible';
 
+const IS_EDITING = Symbol('is-editing');
+
 /**
  * @class TaskList
  * @extends {Backbone.Model}
@@ -20,20 +22,25 @@ export default class TaskList extends BaseModel {
   defaults() {
     return {
       title: 'Untitled',
-      editing: false,
     };
   }
 
-  get isEditing() {
-    return this.get('editing');
+  initialize() {
+    this[IS_EDITING] = false;
+  }
+
+  isEditing() {
+    return this[IS_EDITING];
   }
 
   startEdit() {
-    this.set('editing', true);
+    this[IS_EDITING] = true;
+    this.trigger('change');
   }
 
   stopEdit() {
-    this.set('editing', false);
+    this[IS_EDITING] = false;
+    this.trigger('change');
   }
 
   validate(attrs) {

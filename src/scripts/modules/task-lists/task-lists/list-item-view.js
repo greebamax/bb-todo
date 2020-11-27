@@ -35,7 +35,7 @@ export default class TaskListView extends BaseView {
 
   serializeData() {
     return extend({
-      isEditing: this.model.isEditing,
+      isEditing: this.model.isEditing(),
       isNew: this.model.isNew(),
     }, this.model.toJSON());
   }
@@ -126,10 +126,12 @@ export default class TaskListView extends BaseView {
   }
 
   selectTitleInput($e) {
-    const input = $e ? $e.currentTarget : this.$(TITLE_INTPUT_SELECTOR).currentTarget;
+    if (this.isRendered() && this.model.isEditing()) {
+      const input = $e ? $e.currentTarget : this.$(TITLE_INTPUT_SELECTOR).currentTarget;
 
-    if (this.isRendered() && this.model.isEditing && input && input.select) {
-      input.select();
+      if (input && input.select) {
+        input.select();
+      }
     }
   }
 }
