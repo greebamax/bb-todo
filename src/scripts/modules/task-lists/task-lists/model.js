@@ -24,6 +24,7 @@ export default class TaskList extends BaseModel {
   defaults() {
     return {
       title: 'Untitled',
+      tasks: [],
     };
   }
 
