@@ -11,8 +11,8 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
     "@babel/register": "^7.12.1",
     "@types/backbone": "^1.4.5",
     "@types/backbone.marionette": "^3.3.12",
