@@ -35,12 +35,12 @@ export default class TaskList extends BaseModel {
 
   startEdit() {
     this[IS_EDITING] = true;
-    this.trigger('change');
+    this.trigger('change:editing');
   }
 
   stopEdit() {
     this[IS_EDITING] = false;
-    this.trigger('change');
+    this.trigger('change:editing');
   }
 
   validate(attrs) {

@@ -5,7 +5,6 @@ import { KEY_ENTER, KEY_ESC } from 'common/constants';
 import Template from './list-item.tmpl';
 
 const SELECTED_CLASS_NAME = '--selected';
-const TITLE_INTPUT_SELECTOR = 'input[name="list-title"]';
 const EVENTS = {
   LIST_EDIT_START: 'list-item-edit:start',
   LIST_EDIT_STOP: 'list-item-edit:stop',
@@ -18,17 +17,22 @@ const EVENTS = {
 export default class TaskListView extends BaseView {
   constructor(options) {
     super(extend({
+      ui: {
+        listTitleInput: 'input[name="list-title"]',
+        deleteBtn: '[data-action="delete"]',
+        renameBtn: '[data-action="rename"]',
+      },
       events: {
         'click': 'onShowListDetailsClick',
-        'click [data-action="delete"]': 'onDeleteClick',
-        'click [data-action="rename"]': 'onRenameClick',
-        [`keyup ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputKeyPress',
-        [`click ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputClick',
-        [`focus ${TITLE_INTPUT_SELECTOR}`]: 'onTitleInputFocus',
-        [`blur ${TITLE_INTPUT_SELECTOR}`]: 'handleOutsideClick',
+        'click @ui.deleteBtn': 'onDeleteClick',
+        'click @ui.renameBtn': 'onRenameClick',
+        'keyup @ui.listTitleInput': 'onTitleInputKeyPress',
+        'click @ui.listTitleInput': 'onTitleInputClick',
+        'focus @ui.listTitleInput': 'onTitleInputFocus',
+        'blur @ui.listTitleInput': 'handleOutsideClick',
       },
       modelEvents: {
-        'change': 'render',
+        'change:editing': 'render',
       },
       template: Template,
     }, options));
@@ -61,11 +65,6 @@ export default class TaskListView extends BaseView {
   }
 
   onRender() {
-    if (this.model.isNew()) {
-      // TODO: start editing mode and focus on input field, disable other models for editing
-      console.log('created: ' + JSON.stringify(this.model.toJSON())); // eslint-disable-line
-    }
-
     this.selectTitleInput();
   }
 
@@ -149,7 +148,7 @@ export default class TaskListView extends BaseView {
 
   selectTitleInput($e) {
     if (this.isRendered() && this.model.isEditing()) {
-      const input = $e ? $e.currentTarget : this.$(TITLE_INTPUT_SELECTOR).currentTarget;
+      const input = $e ? $e.currentTarget : this.ui.listTitleInput;
 
       if (input && input.select) {
         input.select();
