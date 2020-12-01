@@ -10,11 +10,11 @@ const SKIPPED_PARAMS = ['to', 'icon'];
  * @param {String} to URL, goes to href attribute
  * @example
  *   Common usage:
- *   {{route 'route-link'}}
+ *    {{link (route "route-link")}}
  *
  *   With params:
- *   {{route
- *        to="path/with/{key2}/and/{id}/or_another/{key}/to"
+ *    {{link
+ *        to=(route "path/with/{key2}/and/{id}/or_another/{key}/to")
  *        id=id
  *        key="value"
  *        key2="value2"}}
