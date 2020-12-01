@@ -101,7 +101,6 @@ export default class TaskListView extends BaseView {
 
     if (!this.model.isSelected()) {
       this.model.select();
-      this.trigger('list-details:show', this.model);
     }
   }
 

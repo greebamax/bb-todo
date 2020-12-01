@@ -12,14 +12,7 @@ export default class TasksListContainerView extends BaseCollectionView {
     super(extend({
       className: 'task-lists',
       childView: TaskListView,
-      childViewEvents: {
-        'list-details:show': 'showListDetails',
-      },
       behaviors: [LoadingBehavior],
     }, options));
-  }
-
-  showListDetails(model) {
-    this.trigger('list-details:show', model);
   }
 }

@@ -97,9 +97,11 @@ export default class TaskListsController extends BaseController {
     const taskListsCollectionView = new TasksListsCollectionView({
       collection: taskListCollection,
     });
-    this.listenTo(taskListsCollectionView, 'list-details:show', model => {
-      this[sidebar].toggleSidebar(false);
-      this.router.navigateTo(`lists/${model.id}/tasks`);
+    this.listenTo(taskListCollection, 'change:selected', model => {
+      if (model.isSelected()) {
+        this[sidebar].toggleSidebar(false);
+        this.router.navigateTo(`lists/${model.id}/tasks`);
+      }
     });
     return taskListsCollectionView;
   }
