@@ -1,5 +1,6 @@
 import { extend, get } from 'lodash';
 import BaseView from 'base/view';
+import { EVENT_START, EVENT_STOP } from 'common/mixin/synchronized';
 import TaskListsCollectionView from './collection-view';
 import TaskListModel from './model';
 import Template from './container.tmpl';
@@ -19,27 +20,26 @@ export default class TasksListContainerView extends BaseView {
           replaceElement: true,
         },
       },
+      ui: {
+        add: '[data-action="add"]',
+      },
       events: {
-        'click [data-action="add"]': 'onAddListClick',
+        'click @ui.add': 'onAddListClick',
       },
     }, options));
   }
 
   initialize(options) {
     this.collection = get(options, 'collection', []);
-    this.listenTo(this.collection, 'sync:stop', this.render);
+    this.listenTo(this.collection, EVENT_START, () => this.ui.add.hide());
+    this.listenTo(this.collection, EVENT_STOP, () => this.ui.add.show());
   }
 
   onRender() {
+    this.ui.add.hide();
     this.showChildView('list', new TaskListsCollectionView({
       collection: this.collection,
     }));
-  }
-
-  serializeData() {
-    return {
-      isFetching: this.collection.isFetching(),
-    };
   }
 
   onAddListClick() {

@@ -5,7 +5,7 @@ import TaskListsLayout from './layout';
 import SideBarView from './sidebar';
 import TaskListModel from './task-lists/model';
 import TaskListCollection from './task-lists/collection';
-import TasksListsCollectionView from './task-lists/container';
+import TasksListsCollectionView from './task-lists/container-view';
 import TaskListDetailsPlaceholder from './task-list-details/placeholder';
 import TaskListDetails from './task-list-details';
 
