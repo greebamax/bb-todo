@@ -2,8 +2,8 @@
 import './plugins';
 import $ from 'jquery';
 
-import './common/partials';
-import './helpers/handlebars';
+import 'common/partials';
+import 'helpers/handlebars';
 import App from './application';
 import modules from './modules';
 

@@ -29,7 +29,7 @@ gulp.task('icons:build',
     .pipe(rename('icons.svg'))
     .pipe(gulp.dest('build/assets')));
 
-gulp.task('html:watch', () => gulp.watch('src/index.html', ['html:build']));
+gulp.task('html:watch', () => gulp.watch('src/index.html', gulp.series('html:build')));
 
 gulp.task('styles:build', () => {
   const buildStylesTask = loadTask('build-styles');
@@ -37,9 +37,9 @@ gulp.task('styles:build', () => {
   return buildStylesTask({ isProd });
 });
 
-gulp.task('styles:watch', () => gulp.watch('src/styles/**/*.scss', ['styles:build']));
+gulp.task('styles:watch', () => gulp.watch('src/styles/**/*.scss', gulp.series('styles:build')));
 
-gulp.task('scripts:build', done => {
+gulp.task('scripts:build', done => { /* DOESN'T WORK */
   const buildScriptsTask = loadTask('build-scripts');
 
   buildScriptsTask({ isProd }).then(() => done());
@@ -65,7 +65,7 @@ gulp.task('scripts:watch', () => {
     .on('change', invokeBuild);
 });
 
-gulp.task('watch:all', ['styles:watch', 'scripts:watch', 'html:watch']);
+gulp.task('watch:all', gulp.parallel('styles:watch', 'scripts:watch', 'html:watch'));
 
 gulp.task('reload', () => {
   const reloadTask = loadTask('reload');
@@ -109,20 +109,18 @@ gulp.task('lint', () => {
 gulp.task('dev', done => {
   process.env.NODE_ENV = 'development';
 
-  runSequence(
+  gulp.series(
     'clean',
     'templates:build',
     'html:build',
     'icons:build',
-    [
-      'styles:build',
-      'scripts:build',
-    ],
+    gulp.parallel('styles:build', 'scripts:build'),
     'watch:all',
     'reload',
     'server',
-    done,
   );
+
+  done();
 });
 
-gulp.task('default', ['dev']);
+gulp.task('default', gulp.series('dev'));
