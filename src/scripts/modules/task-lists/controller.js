@@ -1,4 +1,3 @@
-import { isFinite } from 'lodash';
 import BaseController from 'base/controller';
 import { error } from 'helpers/logger';
 import TaskListsLayout from './layout';
@@ -11,12 +10,6 @@ import TaskListDetails from './task-list-details';
 
 const layout = Symbol('layout');
 const sidebar = Symbol('sidebar');
-
-/**
- * @param {Number} id
- * @returns {Boolean}
- */
-const isValidListId = id => isFinite(parseInt(id, 10));
 
 /**
  * @class TaskListsController
@@ -46,15 +39,11 @@ export default class TaskListsController extends BaseController {
   }
 
   listDetailsRoute(id) {
-    if (isValidListId(id)) {
-      this.setToState({ selectedListId: id });
-      if (!this[layout]) {
-        this.show(this.getLayout());
-      }
-      this.showListDetails();
-    } else {
-      this.otherwise();
+    this.setToState({ selectedListId: id });
+    if (!this[layout]) {
+      this.show(this.getLayout());
     }
+    this.showListDetails();
   }
 
   otherwise() {
