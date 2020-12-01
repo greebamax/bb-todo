@@ -6,6 +6,8 @@ import Reversible from 'common/mixin/reversible';
 
 const IS_EDITING = Symbol('is-editing');
 
+export const CHANGE_EDITING_EVENT_NAME = 'change:editing';
+
 /**
  * @class TaskList
  * @extends {Backbone.Model}
@@ -35,12 +37,12 @@ export default class TaskList extends BaseModel {
 
   startEdit() {
     this[IS_EDITING] = true;
-    this.trigger('change:editing');
+    this.trigger(CHANGE_EDITING_EVENT_NAME);
   }
 
   stopEdit() {
     this[IS_EDITING] = false;
-    this.trigger('change:editing');
+    this.trigger(CHANGE_EDITING_EVENT_NAME);
   }
 
   validate(attrs) {

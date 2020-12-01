@@ -2,6 +2,8 @@ import { extend, toString } from 'lodash';
 import BaseView from 'base/view';
 import ClickOutsideBehavior from 'common/behaviors/click-outside';
 import { KEY_ENTER, KEY_ESC } from 'common/constants';
+import { CHANGE_SELECTED_EVENT_NAME } from 'common/mixin/selectable-item';
+import { CHANGE_EDITING_EVENT_NAME } from './model';
 import Template from './list-item.tmpl';
 
 const SELECTED_CLASS_NAME = '--selected';
@@ -32,7 +34,8 @@ export default class TaskListView extends BaseView {
         'blur @ui.listTitleInput': 'handleOutsideClick',
       },
       modelEvents: {
-        'change:editing': 'render',
+        [CHANGE_EDITING_EVENT_NAME]: 'render',
+        [CHANGE_SELECTED_EVENT_NAME]: 'onSelectedStateChange',
       },
       template: Template,
     }, options));
@@ -154,5 +157,9 @@ export default class TaskListView extends BaseView {
         input.select();
       }
     }
+  }
+
+  onSelectedStateChange() {
+    this.$el.toggleClass(SELECTED_CLASS_NAME, this.model.isSelected());
   }
 }

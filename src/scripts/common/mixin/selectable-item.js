@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 
 export const FIELD_NAME = Symbol('selected');
-export const EVENT_NAME = 'selected:change';
+export const CHANGE_SELECTED_EVENT_NAME = 'change:selected';
 
 export default {
   init() {
@@ -22,7 +22,7 @@ export default {
     this.notify.call(this, ...args);
   },
 
-  toggle(...args) {
+  toggleSelection(...args) {
     const newState = !this[FIELD_NAME];
     this[FIELD_NAME] = newState;
     this.notify.call(this, ...args);
@@ -30,7 +30,7 @@ export default {
 
   notify(options) {
     if (!get(options, 'silent')) {
-      this.trigger(EVENT_NAME, this);
+      this.trigger(CHANGE_SELECTED_EVENT_NAME, this);
     }
   },
 };

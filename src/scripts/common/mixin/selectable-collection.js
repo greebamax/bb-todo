@@ -1,5 +1,5 @@
 import { defaults } from 'lodash';
-import { EVENT_NAME } from './selectable-item';
+import { CHANGE_SELECTED_EVENT_NAME } from './selectable-item';
 
 export default {
   defaults: {
@@ -8,7 +8,7 @@ export default {
 
   init() {
     defaults(this, this.defaults);
-    this.listenTo(this, EVENT_NAME, this.onModelSelect);
+    this.listenTo(this, CHANGE_SELECTED_EVENT_NAME, this.onModelSelectedStateChange);
   },
 
   /**
@@ -16,19 +16,11 @@ export default {
    *
    * @param {Backbone.Model<SelectableItem>} model
    */
-  onModelSelect(model) {
-    if (model.isSelected() && !this.isMultiSelect) {
+  onModelSelectedStateChange(model) {
+    if (!this.isMultiSelect && model.isSelected()) {
       this.without(model).forEach(item => {
-        item.deselect({ silent: true });
+        item.deselect({ silent: this.isMultiSelect });
       });
     }
-  },
-
-  isSelected(model) {
-    const target = this.find(model);
-    if (target) {
-      return target.isSelected();
-    }
-    return false;
   },
 };
