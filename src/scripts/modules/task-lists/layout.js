@@ -22,7 +22,7 @@ export default class TaskListsLayout extends BaseView {
           el: `[data-region="${SIDEBAR_REGION}"]`,
           replaceElement: true,
         },
-        [CONTENT_REGION]:{
+        [CONTENT_REGION]: {
           el: `[data-region="${CONTENT_REGION}"]`,
           replaceElement: true,
         },
