@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
 const { resolve, join, extname } = require('path');
-const runSequence = require('run-sequence');
 
 const { ENV } = require('./gulp-tasks/helpers');
 
@@ -15,47 +14,53 @@ const loadTask = name => {
   return require(resolve(path));
 };
 
-gulp.task('clean',
-  () => del([
-    'build',
-    'src/scripts/common/partials/index.js', // removes compiled index file of common partials
-    'src/scripts/**/*.tmpl', // removes compiled hbs templates
-  ]));
+const clean = () => del([
+  'build',
+  'src/scripts/common/partials/index.js', // removes compiled index file of common partials
+  'src/scripts/**/*.tmpl', // removes compiled hbs templates
+]);
+exports.clean = clean;
 
-gulp.task('html:build', () => gulp.src('src/index.html').pipe(gulp.dest('build')));
+const htmlBuild = () => gulp.src('src/index.html').pipe(gulp.dest('build'));
+exports.htmlBuild = htmlBuild;
 
-gulp.task('icons:build',
-  () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
-    .pipe(rename('icons.svg'))
-    .pipe(gulp.dest('build/assets')));
+const iconsBuild = () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
+  .pipe(rename('icons.svg'))
+  .pipe(gulp.dest('build/assets'));
+exports.iconsBuild = iconsBuild;
 
-gulp.task('html:watch', () => gulp.watch('src/index.html', gulp.series('html:build')));
+const htmlWatch = () => gulp.watch('src/index.html', gulp.series(htmlBuild));
+exports.htmlWatch = htmlWatch;
 
-gulp.task('styles:build', () => {
+const stylesBuild = () => {
   const buildStylesTask = loadTask('build-styles');
 
   return buildStylesTask({ isProd });
-});
+};
+exports.stylesBuild = stylesBuild;
 
-gulp.task('styles:watch', () => gulp.watch('src/styles/**/*.scss', gulp.series('styles:build')));
+const stylesWatch = () => gulp.watch('src/styles/**/*.scss', gulp.series(stylesBuild));
+exports.stylesWatch = stylesWatch;
 
-gulp.task('scripts:build', done => { /* DOESN'T WORK */
+const scriptsBuild = done => { /* DOESN'T WORK */
   const buildScriptsTask = loadTask('build-scripts');
 
   buildScriptsTask({ isProd }).then(() => done());
-});
+};
+exports.scriptsBuild = scriptsBuild;
 
-gulp.task('templates:build', done => {
+const templatesBuild = done => {
   const buildTemplatesTask = loadTask('templates');
 
   buildTemplatesTask({ isProd }).then(() => done());
-});
+};
+exports.templatesBuild = templatesBuild;
 
-gulp.task('scripts:watch', () => {
+const scriptsWatch = () => {
   const invokeBuild = ({ path }) => {
     switch (extname(path)) {
-      case '.hbs': runSequence('templates:build', 'scripts:build'); break;
-      case '.js': runSequence('scripts:build'); break;
+      case '.hbs': gulp.series(templatesBuild, scriptsBuild); break;
+      case '.js': gulp.series(scriptsBuild); break;
       default: break;
     }
   };
@@ -63,64 +68,71 @@ gulp.task('scripts:watch', () => {
   return gulp.watch('src/scripts/**/*.{js,hbs}')
     .on('add', invokeBuild)
     .on('change', invokeBuild);
-});
+};
+exports.scriptsWatch = scriptsWatch;
 
-gulp.task('watch:all', gulp.parallel('styles:watch', 'scripts:watch', 'html:watch'));
+const watchAll = gulp.parallel(stylesWatch, scriptsWatch, htmlWatch);
+exports.watchAll = watchAll;
 
-gulp.task('reload', () => {
+const reload = () => {
   const reloadTask = loadTask('reload');
 
   reloadTask({
     target: resolve('build'),
   });
-});
+};
+exports.reload = reload;
 
-gulp.task('build',
-  done => {
-    runSequence(
-      'lint',
-      'clean',
-      'templates:build',
-      'html:build',
-      'icons:build',
-      [
-        'styles:build',
-        'scripts:build',
-      ],
-      done,
-    );
-  });
+const lint = () => {
+  const lintTask = loadTask('lint');
 
-gulp.task('server', () => {
+  return lintTask();
+};
+exports.lint = lint;
+
+const build = done => {
+  gulp.series(
+    lint,
+    clean,
+    templatesBuild,
+    htmlBuild,
+    iconsBuild,
+    gulp.parallel(
+      stylesBuild,
+      scriptsBuild,
+    ),
+  );
+
+  done();
+};
+exports.build = build;
+
+const server = () => {
   const serverTask = loadTask('server');
 
   serverTask({
     port: 4379,
     staticFolder: resolve('build'),
   });
-});
+};
+exports.server = server;
 
-gulp.task('lint', () => {
-  const lintTask = loadTask('lint');
-
-  return lintTask();
-});
-
-gulp.task('dev', done => {
+const dev = done => {
   process.env.NODE_ENV = 'development';
 
   gulp.series(
-    'clean',
-    'templates:build',
-    'html:build',
-    'icons:build',
-    gulp.parallel('styles:build', 'scripts:build'),
-    'watch:all',
-    'reload',
-    'server',
+    clean,
+    templatesBuild,
+    htmlBuild,
+    iconsBuild,
+    gulp.parallel(stylesBuild, scriptsBuild),
+    watchAll,
+    reload,
+    server,
   );
 
   done();
-});
+};
+exports.dev = dev;
 
-gulp.task('default', gulp.series('dev'));
+exports.default = gulp.series(dev);
