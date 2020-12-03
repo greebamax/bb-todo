@@ -175,9 +175,9 @@ const dev = gulp.series(
   htmlBuild,
   templatesBuild,
   gulp.parallel(stylesBuild, scriptsBuildWithTemplates),
-  watchAll,
   reload,
   devServer,
+  watchAll,
 );
 exports.dev = dev;
 //#endregion
