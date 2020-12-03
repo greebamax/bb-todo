@@ -154,16 +154,17 @@ exports.build = build;
 //#endregion
 
 
-//#region server
-const server = () => {
-  const serverTask = loadTask('server');
+//#region dev:server
+const devServer = async () => {
+  const devServerTask = loadTask('dev-server');
 
-  serverTask({
+  devServerTask({
     port: 4379,
     staticFolder: resolve('build'),
   });
 };
-exports.server = server;
+devServer.displayName = 'dev:server';
+exports.server = devServer;
 //#endregion
 
 
@@ -176,7 +177,7 @@ const dev = gulp.series(
   gulp.parallel(stylesBuild, scriptsBuildWithTemplates),
   watchAll,
   reload,
-  server,
+  devServer,
 );
 exports.dev = dev;
 //#endregion

@@ -41,6 +41,6 @@ module.exports = options => {
   server.use(router);
 
   server.listen(port, () => {
-    console.log(`DEV Server is running on port: http://${hostName}:${port}`);
+    console.log(`dev-server is running on port: http://${hostName}:${port}`); // eslint-disable-line
   });
 };
