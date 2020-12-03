@@ -23,6 +23,7 @@ module.exports = async ({ isProd }) => {
       }),
       nodeResolve({
         browser: true,
+        extensions: ['.js', '.json', '.tmpl'],
       }),
       commonjs({
         include: 'node_modules/**',

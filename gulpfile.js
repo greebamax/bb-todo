@@ -78,13 +78,15 @@ exports.templatesBuild = templatesBuild;
 
 
 //#region scripts:build
-const scriptsBuild = gulp.series(templatesBuild, done => { /* DOESN'T WORK */
+const scriptsBuild = done => {
   const buildScriptsTask = loadTask('build-scripts');
 
   buildScriptsTask({ isProd }).then(() => done());
-});
-scriptsBuild.displayName = 'scripts:build';
-exports.scriptsBuild = scriptsBuild;
+};
+scriptsBuild.displayName = 'scripts:post-templates-build';
+const scriptsBuildWithTemplates = gulp.series(templatesBuild, scriptsBuild);
+scriptsBuildWithTemplates.displayName = 'scripts:build';
+exports.scriptsBuildSeries = scriptsBuildWithTemplates;
 //#endregion
 
 
@@ -92,8 +94,8 @@ exports.scriptsBuild = scriptsBuild;
 const scriptsWatch = () => {
   const invokeBuild = ({ path }) => {
     switch (extname(path)) {
-      case '.hbs': gulp.series(templatesBuild, scriptsBuild); break;
-      case '.js': gulp.series(scriptsBuild); break;
+      case '.hbs': scriptsBuildWithTemplates(); break;
+      case '.js': scriptsBuild(); break;
       default: break;
     }
   };
@@ -144,7 +146,7 @@ const build = gulp.series(
   iconsBuild,
   gulp.parallel(
     stylesBuild,
-    scriptsBuild,
+    scriptsBuildWithTemplates,
   ),
 );
 exports.build = build;
@@ -170,7 +172,7 @@ const dev = gulp.series(
   iconsBuild,
   htmlBuild,
   templatesBuild,
-  gulp.parallel(stylesBuild, scriptsBuild),
+  gulp.parallel(stylesBuild, scriptsBuildWithTemplates),
   watchAll,
   reload,
   server,
