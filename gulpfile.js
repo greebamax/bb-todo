@@ -14,48 +14,81 @@ const loadTask = name => {
   return require(resolve(path));
 };
 
+
+//#region clean
 const clean = () => del([
   'build',
   'src/scripts/common/partials/index.js', // removes compiled index file of common partials
   'src/scripts/**/*.tmpl', // removes compiled hbs templates
 ]);
 exports.clean = clean;
+//#endregion
 
+
+//#region html:build
 const htmlBuild = () => gulp.src('src/index.html').pipe(gulp.dest('build'));
+htmlBuild.displayName = 'html:build';
 exports.htmlBuild = htmlBuild;
+//#endregion
 
+
+//#region icons:build
 const iconsBuild = () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
   .pipe(rename('icons.svg'))
   .pipe(gulp.dest('build/assets'));
+iconsBuild.displayName = 'icons:build';
 exports.iconsBuild = iconsBuild;
+//#endregion
 
+
+//#region html:watch
 const htmlWatch = () => gulp.watch('src/index.html', gulp.series(htmlBuild));
+htmlWatch.displayName = 'html:watch';
 exports.htmlWatch = htmlWatch;
+//#endregion
 
+
+//#region styles:build
 const stylesBuild = () => {
   const buildStylesTask = loadTask('build-styles');
 
   return buildStylesTask({ isProd });
 };
+stylesBuild.displayName = 'styles:build';
 exports.stylesBuild = stylesBuild;
+//#endregion
 
+
+//#region styles:watch
 const stylesWatch = () => gulp.watch('src/styles/**/*.scss', gulp.series(stylesBuild));
+stylesWatch.displayName = 'styles:watch';
 exports.stylesWatch = stylesWatch;
+//#endregion
 
-const scriptsBuild = done => { /* DOESN'T WORK */
-  const buildScriptsTask = loadTask('build-scripts');
 
-  buildScriptsTask({ isProd }).then(() => done());
-};
-exports.scriptsBuild = scriptsBuild;
-
+//#region templates:build
 const templatesBuild = done => {
   const buildTemplatesTask = loadTask('templates');
 
   buildTemplatesTask({ isProd }).then(() => done());
 };
+templatesBuild.displayName = 'templates:build';
 exports.templatesBuild = templatesBuild;
+//#endregion
 
+
+//#region scripts:build
+const scriptsBuild = gulp.series(templatesBuild, done => { /* DOESN'T WORK */
+  const buildScriptsTask = loadTask('build-scripts');
+
+  buildScriptsTask({ isProd }).then(() => done());
+});
+scriptsBuild.displayName = 'scripts:build';
+exports.scriptsBuild = scriptsBuild;
+//#endregion
+
+
+//#region scripts:watch
 const scriptsWatch = () => {
   const invokeBuild = ({ path }) => {
     switch (extname(path)) {
@@ -69,11 +102,19 @@ const scriptsWatch = () => {
     .on('add', invokeBuild)
     .on('change', invokeBuild);
 };
+scriptsWatch.displayName = 'scripts:watch';
 exports.scriptsWatch = scriptsWatch;
+//#endregion
 
+
+//#region watch:all
 const watchAll = gulp.parallel(stylesWatch, scriptsWatch, htmlWatch);
+watchAll.displayName = 'watch:all';
 exports.watchAll = watchAll;
+//#endregion
 
+
+//#region reload
 const reload = () => {
   const reloadTask = loadTask('reload');
 
@@ -82,31 +123,35 @@ const reload = () => {
   });
 };
 exports.reload = reload;
+//#endregion
 
+
+//#region lint
 const lint = () => {
   const lintTask = loadTask('lint');
 
   return lintTask();
 };
 exports.lint = lint;
+//#endregion
 
-const build = done => {
-  gulp.series(
-    lint,
-    clean,
-    templatesBuild,
-    htmlBuild,
-    iconsBuild,
-    gulp.parallel(
-      stylesBuild,
-      scriptsBuild,
-    ),
-  );
 
-  done();
-};
+//#region build
+const build = gulp.series(
+  lint,
+  clean,
+  htmlBuild,
+  iconsBuild,
+  gulp.parallel(
+    stylesBuild,
+    scriptsBuild,
+  ),
+);
 exports.build = build;
+//#endregion
 
+
+//#region server
 const server = () => {
   const serverTask = loadTask('server');
 
@@ -116,23 +161,22 @@ const server = () => {
   });
 };
 exports.server = server;
+//#endregion
 
-const dev = done => {
-  process.env.NODE_ENV = 'development';
 
-  gulp.series(
-    clean,
-    templatesBuild,
-    htmlBuild,
-    iconsBuild,
-    gulp.parallel(stylesBuild, scriptsBuild),
-    watchAll,
-    reload,
-    server,
-  );
-
-  done();
-};
+//#region dev
+const dev = gulp.series(
+  clean,
+  iconsBuild,
+  htmlBuild,
+  templatesBuild,
+  gulp.parallel(stylesBuild, scriptsBuild),
+  watchAll,
+  reload,
+  server,
+);
 exports.dev = dev;
+//#endregion
+
 
 exports.default = gulp.series(dev);

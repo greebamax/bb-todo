@@ -62,6 +62,6 @@
     "test:coverage": "nyc --reporter=text --reporter=html npm test",
     "test:watch": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --watch --require @babel/core --require @babel/register -R min './tests/**/*.test.js'",
     "test": "NODE_PATH=./src/scripts BABEL_ENV=test mocha --require @babel/core --require @babel/register -R min './tests/**/*.test.js'",
-    "watch": "gulp watchAll"
+    "watch": "gulp watch:all"
   }
 }
