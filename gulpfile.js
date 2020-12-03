@@ -117,11 +117,12 @@ exports.watchAll = watchAll;
 
 
 //#region reload
-const reload = () => {
+const reload = async () => {
   const reloadTask = loadTask('reload');
 
   reloadTask({
     target: resolve('build'),
+    delay: 300, // ms
   });
 };
 exports.reload = reload;
