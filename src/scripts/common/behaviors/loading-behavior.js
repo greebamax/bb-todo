@@ -2,7 +2,6 @@ import { get } from 'lodash';
 import BaseBehavior from 'base/behavior';
 import { EVENT_START, EVENT_STOP } from 'common/mixin/synchronized';
 
-
 const LOADING_CLASS_NAME = '--loading';
 
 export default class LoadingBehavior extends BaseBehavior {
