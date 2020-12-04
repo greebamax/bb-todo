@@ -74,40 +74,36 @@ exports.templatesBuild = templatesBuild;
 //#endregion
 
 
-//#region scripts:build
-const scriptsBuild = done => {
+//#region scripts:build-js|build-all
+const scriptsBuild = async done => {
   const buildScriptsTask = loadTask('build-scripts');
 
-  buildScriptsTask({ isProd }).then(() => done());
+  return buildScriptsTask({ isProd }).then(() => done());
 };
-scriptsBuild.displayName = 'scripts:post-templates-build';
+scriptsBuild.displayName = 'scripts:build-js';
+exports.scriptsBuild = scriptsBuild;
 const scriptsBuildWithTemplates = gulp.series(templatesBuild, scriptsBuild);
-scriptsBuildWithTemplates.displayName = 'scripts:build';
+scriptsBuildWithTemplates.displayName = 'scripts:build-all';
 exports.scriptsBuildSeries = scriptsBuildWithTemplates;
 //#endregion
 
 
 //#region scripts:watch
-const scriptsWatch = () => {
-  const invokeBuild = ({ path }) => {
-    switch (extname(path)) {
-      case '.hbs': scriptsBuildWithTemplates(); break;
-      case '.js': scriptsBuild(); break;
-      default: break;
-    }
-  };
-
-  return gulp.watch('src/scripts/**/*.{js,hbs}')
-    .on('add', invokeBuild)
-    .on('change', invokeBuild);
-};
+const scriptsWatch = () => gulp.watch(['src/scripts/**/*.js', '!src/scripts/common/partials/index.js'], gulp.series(scriptsBuild));
 scriptsWatch.displayName = 'scripts:watch';
 exports.scriptsWatch = scriptsWatch;
 //#endregion
 
 
+//#region templates:watch
+const templatesWatch = () => gulp.watch('src/scripts/**/*.hbs', gulp.series(templatesBuild, scriptsBuild));
+templatesWatch.displayName = 'templates:watch';
+exports.templatesWatch = templatesWatch;
+//#endregion
+
+
 //#region watch:all
-const watchAll = gulp.parallel(stylesWatch, scriptsWatch, htmlWatch);
+const watchAll = gulp.parallel(htmlWatch, stylesWatch, templatesWatch, scriptsWatch);
 watchAll.displayName = 'watch:all';
 exports.watchAll = watchAll;
 //#endregion
@@ -142,10 +138,8 @@ const build = gulp.series(
   clean,
   htmlBuild,
   iconsBuild,
-  gulp.parallel(
-    stylesBuild,
-    scriptsBuildWithTemplates,
-  ),
+  stylesBuild,
+  scriptsBuildWithTemplates,
 );
 exports.build = build;
 //#endregion
@@ -170,8 +164,8 @@ const dev = gulp.series(
   clean,
   iconsBuild,
   htmlBuild,
-  templatesBuild,
-  gulp.parallel(stylesBuild, scriptsBuildWithTemplates),
+  stylesBuild,
+  scriptsBuildWithTemplates,
   reload,
   devServer,
   watchAll,
