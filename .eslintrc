@@ -6,7 +6,13 @@
       "as-needed"
     ],
     "arrow-body-style": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "spaced-comment": ["error", "always", {
+      "line": {
+        "markers": ["#region"],
+          "exceptions": ["#endregion"]
+      },
+  }]
   },
   "plugins": [
     "import"

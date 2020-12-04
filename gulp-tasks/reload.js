@@ -1,9 +1,9 @@
 const livereload = require('livereload');
 
-module.exports = opts => {
+module.exports = ({ target, delay }) => {
   const liveReloadServer = livereload.createServer({
-    delay: opts.delay || 1000,
+    delay,
   });
 
-  liveReloadServer.watch(opts.target);
+  liveReloadServer.watch(target);
 };
