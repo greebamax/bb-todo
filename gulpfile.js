@@ -1,9 +1,10 @@
 const gulp = require('gulp');
 const del = require('del');
 const rename = require('gulp-rename');
-const { resolve, join, extname } = require('path');
+const { resolve, join } = require('path');
 
 const { ENV } = require('./gulp-tasks/helpers');
+const { compileCommonPartials, compileTemplates } = require('./gulp-tasks/templates');
 
 const isProd = process.env.NODE_ENV === ENV.PROD;
 
@@ -67,11 +68,7 @@ exports.stylesWatch = stylesWatch;
 
 
 //#region templates:build
-const templatesBuild = done => {
-  const buildTemplatesTask = loadTask('templates');
-
-  buildTemplatesTask({ isProd }).then(() => done());
-};
+const templatesBuild = gulp.series(compileCommonPartials, compileTemplates);
 templatesBuild.displayName = 'templates:build';
 exports.templatesBuild = templatesBuild;
 //#endregion
