@@ -1,8 +1,8 @@
-const rollup = require('rollup');
+const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const { uglify } = require('rollup-plugin-uglify');
+const { terser } = require('rollup-plugin-terser');
 const replace = require('rollup-plugin-replace');
 const alias = require('rollup-plugin-alias');
 const inject = require('rollup-plugin-inject');
@@ -11,7 +11,7 @@ const { join } = require('path');
 const { ENV, PATH } = require('./helpers');
 
 module.exports = async ({ isProd }) => {
-  const bundle = await rollup.rollup({
+  const bundle = await rollup({
     input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
       alias({
@@ -39,8 +39,9 @@ module.exports = async ({ isProd }) => {
       inject({
         jQuery: 'jquery',
       }),
-      (isProd && uglify()),
+      (isProd && terser()),
     ],
+    treeshake: !isProd,
   });
 
   return bundle.write({
