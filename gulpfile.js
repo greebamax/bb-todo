@@ -126,7 +126,7 @@ exports.reload = reload;
 const lint = () => {
   const lintTask = loadTask('lint');
 
-  return lintTask();
+  return lintTask({ isProd });
 };
 exports.lint = lint;
 //#endregion

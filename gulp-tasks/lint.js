@@ -14,9 +14,9 @@ const eslintignoreFile = fs.readFileSync(resolve(PATH.SRC, '.eslintignore'), 'ut
 // convert .eslintignore into gulp.src negotiation rule
 const filesToIgnore = eslintignoreFile.trim().split(EOL).map(path => `!${path}`);
 
-module.exports = () => {
+module.exports = ({ isProd }) => {
   return gulp.src(targetFiles.concat(filesToIgnore))
-    .pipe(eslint(eslintRules))
+    .pipe(eslint({ quiet: isProd, ...eslintRules }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 };
