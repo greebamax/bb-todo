@@ -6,9 +6,19 @@
       "request": "launch",
       "name": "gulp dev",
       "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
-      "runtimeVersion": "9.11.2",
+      "runtimeVersion": "14.15.1",
       "args": [
         "dev"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "gulp scripts:build-all",
+      "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
+      "runtimeVersion": "14.15.1",
+      "args": [
+        "scripts:build-all"
       ]
     },
     {
@@ -20,7 +30,7 @@
         "run start",
         "debug",
       ],
-      "runtimeVersion": "9.11.2",
+      "runtimeVersion": "14.15.1",
       "port": 9229
     },
   ]

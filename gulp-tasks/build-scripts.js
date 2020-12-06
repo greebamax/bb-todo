@@ -1,11 +1,11 @@
 import { join } from 'path';
 import { rollup } from 'rollup';
-import alias from 'rollup-plugin-alias';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import inject from 'rollup-plugin-inject';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
+import alias from '@rollup/plugin-alias';
+import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import inject from '@rollup/plugin-inject';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import { ENV, PATH } from './helpers.js';
 
@@ -14,11 +14,19 @@ export default async ({ isProd }) => {
     input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
       alias({
-        base: join(PATH.SRC, 'scripts', 'base'),
-        common: join(PATH.SRC, 'scripts', 'common'),
-        handlebars: join(PATH.ROOT, 'node_modules', 'handlebars', 'dist', 'handlebars.min.js'),
-        helpers: join(PATH.SRC, 'scripts', 'helpers'),
-        underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
+        entries: {
+          base: join(PATH.SRC, 'scripts', 'base'),
+          common: join(PATH.SRC, 'scripts', 'common'),
+          handlebars: join(
+            PATH.ROOT,
+            'node_modules',
+            'handlebars',
+            'dist',
+            'handlebars.min.js',
+          ),
+          helpers: join(PATH.SRC, 'scripts', 'helpers'),
+          underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
+        },
       }),
       nodeResolve({
         browser: true,
@@ -30,6 +38,7 @@ export default async ({ isProd }) => {
       }),
       babel({
         exclude: 'node_modules/**',
+        babelHelpers: 'bundled',
       }),
       replace({
         exclude: 'node_modules/**',
@@ -37,8 +46,9 @@ export default async ({ isProd }) => {
       }),
       inject({
         jQuery: 'jquery',
+        $: 'jquery',
       }),
-      (isProd && terser()),
+      isProd && terser(),
     ],
     treeshake: !isProd,
   });
