@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "backbone": "^1.4.0",
+    "backbone": "^1.3.3",
     "backbone.marionette": "^3.5.1",
     "backbone.radio": "^2.0.0",
     "css-reset-and-normalize": "^2.3.3",
