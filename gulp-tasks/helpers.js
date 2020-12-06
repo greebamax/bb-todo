@@ -1,15 +1,13 @@
-const { join } = require('path');
+import { join } from 'path';
 
-const rootDir = join(__dirname, '..');
+export const PATH = {
+  ROOT: process.cwd(),
+  TASKS_ROOT: join(process.cwd(), 'gulp-tasks'),
+  SRC: join(process.cwd(), 'src'),
+  DEST: join(process.cwd(), 'build'),
+};
 
-module.exports = {
-  PATH: {
-    ROOT: rootDir,
-    SRC: join(rootDir, 'src'),
-    DEST: join(rootDir, 'build'),
-  },
-  ENV: {
-    DEV: 'development',
-    PROD: 'production',
-  },
+export const ENV = {
+  DEV: 'development',
+  PROD: 'production',
 };

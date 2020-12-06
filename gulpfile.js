@@ -1,139 +1,100 @@
-const gulp = require('gulp');
-const del = require('del');
-const rename = require('gulp-rename');
-const { resolve, join } = require('path');
+import gulp from 'gulp';
+import del from 'del';
+import rename from 'gulp-rename';
+import { resolve } from 'path';
 
-const { ENV } = require('./gulp-tasks/helpers');
-const { compileCommonPartials, compileTemplates } = require('./gulp-tasks/templates');
+import { ENV } from './gulp-tasks/helpers.js';
+import buildStylesTask from './gulp-tasks/build-styles.js';
+import buildScriptsTask from './gulp-tasks/build-scripts.js';
+import devServerTask from './gulp-tasks/dev-server.js';
+import lintTask from './gulp-tasks/lint.js';
+import liveReloadTask from './gulp-tasks/live-reload.js';
+import { compileCommonPartials, compileTemplates } from './gulp-tasks/templates.js';
 
 const isProd = process.env.NODE_ENV === ENV.PROD;
 
-const loadTask = name => {
-  const path = join(__dirname, 'gulp-tasks', name);
-
-  // eslint-disable-next-line import/no-dynamic-require,global-require
-  return require(resolve(path));
-};
-
-
 //#region clean
-const clean = () => del([
+export const clean = () => del([
   'build',
   'src/scripts/common/partials/index.js', // removes compiled index file of common partials
   'src/scripts/**/*.tmpl', // removes compiled hbs templates
 ]);
-exports.clean = clean;
 //#endregion
-
 
 //#region html:build
-const htmlBuild = () => gulp.src('src/index.html').pipe(gulp.dest('build'));
+export const htmlBuild = () => gulp.src('src/index.html').pipe(gulp.dest('build'));
 htmlBuild.displayName = 'html:build';
-exports.htmlBuild = htmlBuild;
 //#endregion
 
-
 //#region icons:build
-const iconsBuild = () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
+export const iconsBuild = () => gulp.src('node_modules/feather-icons/dist/feather-sprite.svg')
   .pipe(rename('icons.svg'))
   .pipe(gulp.dest('build/assets'));
 iconsBuild.displayName = 'icons:build';
-exports.iconsBuild = iconsBuild;
 //#endregion
-
 
 //#region html:watch
-const htmlWatch = () => gulp.watch('src/index.html', gulp.series(htmlBuild));
+export const htmlWatch = () => gulp.watch('src/index.html', gulp.series(htmlBuild));
 htmlWatch.displayName = 'html:watch';
-exports.htmlWatch = htmlWatch;
 //#endregion
 
-
 //#region styles:build
-const stylesBuild = () => {
-  const buildStylesTask = loadTask('build-styles');
-
+export const stylesBuild = () => {
   return buildStylesTask({ isProd });
 };
 stylesBuild.displayName = 'styles:build';
-exports.stylesBuild = stylesBuild;
 //#endregion
-
 
 //#region styles:watch
 const stylesWatch = () => gulp.watch('src/styles/**/*.scss', gulp.series(stylesBuild));
 stylesWatch.displayName = 'styles:watch';
-exports.stylesWatch = stylesWatch;
 //#endregion
-
 
 //#region templates:build
-const templatesBuild = gulp.series(compileCommonPartials, compileTemplates);
+export const templatesBuild = gulp.series(compileCommonPartials, compileTemplates);
 templatesBuild.displayName = 'templates:build';
-exports.templatesBuild = templatesBuild;
 //#endregion
 
-
 //#region scripts:build-js|build-all
-const scriptsBuild = async done => {
-  const buildScriptsTask = loadTask('build-scripts');
-
+export const scriptsBuild = async done => {
   return buildScriptsTask({ isProd }).then(() => done());
 };
 scriptsBuild.displayName = 'scripts:build-js';
-exports.scriptsBuild = scriptsBuild;
-const scriptsBuildWithTemplates = gulp.series(templatesBuild, scriptsBuild);
-scriptsBuildWithTemplates.displayName = 'scripts:build-all';
-exports.scriptsBuildSeries = scriptsBuildWithTemplates;
-//#endregion
 
+export const scriptsBuildWithTemplates = gulp.series(templatesBuild, scriptsBuild);
+scriptsBuildWithTemplates.displayName = 'scripts:build-all';
+//#endregion
 
 //#region scripts:watch
-const scriptsWatch = () => gulp.watch(['src/scripts/**/*.js', '!src/scripts/common/partials/index.js'], gulp.series(scriptsBuild));
+export const scriptsWatch = () => gulp.watch(['src/scripts/**/*.js', '!src/scripts/common/partials/index.js'], gulp.series(scriptsBuild));
 scriptsWatch.displayName = 'scripts:watch';
-exports.scriptsWatch = scriptsWatch;
 //#endregion
-
 
 //#region templates:watch
-const templatesWatch = () => gulp.watch('src/scripts/**/*.hbs', gulp.series(templatesBuild, scriptsBuild));
+export const templatesWatch = () => gulp.watch('src/scripts/**/*.hbs', gulp.series(templatesBuild, scriptsBuild));
 templatesWatch.displayName = 'templates:watch';
-exports.templatesWatch = templatesWatch;
 //#endregion
-
 
 //#region watch:all
-const watchAll = gulp.parallel(htmlWatch, stylesWatch, templatesWatch, scriptsWatch);
+export const watchAll = gulp.parallel(htmlWatch, stylesWatch, templatesWatch, scriptsWatch);
 watchAll.displayName = 'watch:all';
-exports.watchAll = watchAll;
 //#endregion
 
-
 //#region reload
-const reload = async () => {
-  const reloadTask = loadTask('reload');
-
-  reloadTask({
+export const liveReload = async () => {
+  liveReloadTask({
     target: resolve('build'),
     delay: 300, // ms
   });
 };
-exports.reload = reload;
 //#endregion
-
 
 //#region lint
-const lint = () => {
-  const lintTask = loadTask('lint');
-
-  return lintTask({ isProd });
-};
-exports.lint = lint;
+export const lint = () => lintTask({ isProd });
 //#endregion
 
-
 //#region build
-const build = gulp.series(
+export const build = gulp.series(
   lint,
   clean,
   htmlBuild,
@@ -141,37 +102,25 @@ const build = gulp.series(
   stylesBuild,
   scriptsBuildWithTemplates,
 );
-exports.build = build;
 //#endregion
 
-
 //#region dev:server
-const devServer = async () => {
-  const devServerTask = loadTask('dev-server');
-
+export const devServer = async () => {
   devServerTask({
     port: 4379,
     staticFolder: resolve('build'),
   });
 };
 devServer.displayName = 'dev:server';
-exports.server = devServer;
 //#endregion
 
-
 //#region dev
-const dev = gulp.series(
-  clean,
-  iconsBuild,
-  htmlBuild,
-  stylesBuild,
-  scriptsBuildWithTemplates,
-  reload,
+export const dev = gulp.series(
+  build,
+  liveReload,
   devServer,
   watchAll,
 );
-exports.dev = dev;
 //#endregion
 
-
-exports.default = gulp.series(dev);
+export default gulp.series(dev);

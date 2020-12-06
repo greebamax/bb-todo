@@ -1,4 +1,4 @@
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
   const delay = Math.floor((Math.random() * 10)) * 100;
   setTimeout(() => {
     next();

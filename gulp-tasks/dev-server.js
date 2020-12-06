@@ -1,28 +1,28 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const { resolve, isAbsolute, join } = require('path');
-const jsonServer = require('json-server');
-const delayMiddleware = require('./delay');
-const { PATH } = require('./helpers');
+import jsonServer from 'json-server';
+import { isAbsolute, join, resolve } from 'path';
+import delayMiddleware from './delay.js';
+import { PATH } from './helpers.js';
+import defaultRoutes from './routes.js';
 
 /**
  * Normalize path to file passed via params or used by default.
  */
-const getAbsPathToFile = path => (isAbsolute(path) ? path : resolve(__dirname, path));
+const getAbsPathToFile = path => (isAbsolute(path) ? path : resolve(PATH.TASKS_ROOT, path));
 
 const defaults = {
-  dbFile: join(__dirname, 'db.json'),
+  dbFile: join(PATH.TASKS_ROOT, 'db.json'),
   hostName: 'localhost',
   port: 3000,
-  routesFile: join(__dirname, 'routes.json'),
+  routes: defaultRoutes,
   staticFolder: PATH.DEST,
 };
 
-module.exports = options => {
+export default options => {
   const {
     dbFile,
     hostName,
     port,
-    routesFile,
+    routes,
     staticFolder,
   } = Object.assign(defaults, options);
 
@@ -35,8 +35,7 @@ module.exports = options => {
   server.use(middleware);
   server.use(delayMiddleware);
 
-  const rewriteRules = require(getAbsPathToFile(routesFile)); // eslint-disable-line
-  server.use(jsonServer.rewriter(rewriteRules));
+  server.use(jsonServer.rewriter(routes));
 
   server.use(router);
 
