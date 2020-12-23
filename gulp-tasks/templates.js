@@ -1,11 +1,11 @@
-import gulp from 'gulp';
-import concat from 'gulp-concat';
-import define from 'gulp-define-module';
-import gulpHandlebars from 'gulp-handlebars';
-import rename from 'gulp-rename';
-import wrap from 'gulp-wrap';
-import handlebars from 'handlebars';
-import { PATH } from './helpers.js';
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const define = require('gulp-define-module');
+const gulpHandlebars = require('gulp-handlebars');
+const rename = require('gulp-rename');
+const wrap = require('gulp-wrap');
+const handlebars = require('handlebars');
+const { PATH } = require('./helpers.js');
 
 const partials = `${PATH.SRC}/scripts/common/partials/**/*.hbs`;
 const templates = `${PATH.SRC}/scripts/**/*.hbs`;
@@ -16,7 +16,7 @@ const templates = `${PATH.SRC}/scripts/**/*.hbs`;
  * All partials files are expected to be placed in src/scripts/common/partials
  * and its name begins with an underscore.
  */
-export const compileCommonPartials = () => gulp
+const compileCommonPartials = () => gulp
   .src(partials)
   .pipe(
     gulpHandlebars({
@@ -43,10 +43,11 @@ export const compileCommonPartials = () => gulp
   )
   .pipe(gulp.dest(`${PATH.SRC}/scripts/common/partials`));
 compileCommonPartials.displayName = 'templates:compile-common-partials';
+exports.compileCommonPartials = compileCommonPartials;
 //#endregion
 
 //#region templates:compile
-export const compileTemplates = () => gulp
+const compileTemplates = () => gulp
   .src([templates, `!${partials}`])
   .pipe(
     gulpHandlebars({
@@ -57,4 +58,5 @@ export const compileTemplates = () => gulp
   .pipe(rename({ extname: '.tmpl' }))
   .pipe(gulp.dest(`${PATH.SRC}/scripts`));
 compileTemplates.displayName = 'templates:compile';
+exports.compileTemplates = compileTemplates;
 //#endregion

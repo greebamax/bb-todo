@@ -1,9 +1,9 @@
-import gulp from 'gulp';
-import sass from 'gulp-sass';
-import { join, resolve } from 'path';
-import { PATH } from './helpers.js';
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const { join, resolve } = require('path');
+const { PATH } = require('./helpers.js');
 
-export default ({ isProd }) => gulp
+module.exports = ({ isProd }) => gulp
   .src(join(PATH.SRC, 'styles', 'main.scss'))
   .pipe(
     sass({

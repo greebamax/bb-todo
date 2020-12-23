@@ -1,6 +1,6 @@
-import livereload from 'livereload';
+const livereload = require('livereload');
 
-export default ({ target, delay }) => {
+module.exports = ({ target, delay }) => {
   const liveReloadServer = livereload.createServer({
     delay,
   });

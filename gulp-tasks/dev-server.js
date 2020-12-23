@@ -1,8 +1,8 @@
-import jsonServer from 'json-server';
-import { isAbsolute, join, resolve } from 'path';
-import delayMiddleware from './delay.js';
-import { PATH } from './helpers.js';
-import defaultRoutes from './routes.js';
+const jsonServer = require('json-server');
+const { isAbsolute, join, resolve } = require('path');
+const delayMiddleware = require('./delay.js');
+const { PATH } = require('./helpers.js');
+const defaultRoutes = require('./routes.js');
 
 /**
  * Normalize path to file passed via params or used by default.
@@ -17,7 +17,7 @@ const defaults = {
   staticFolder: PATH.DEST,
 };
 
-export default options => {
+module.exports = options => {
   const {
     dbFile,
     hostName,

@@ -1,9 +1,9 @@
-import fs from 'fs';
-import gulp from 'gulp';
-import eslint from 'gulp-eslint';
-import { EOL } from 'os';
-import { resolve } from 'path';
-import { PATH } from './helpers.js';
+const fs = require('fs');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const { EOL } = require('os');
+const { resolve } = require('path');
+const { PATH } = require('./helpers.js');
 
 const targetFiles = [`${PATH.SRC}/**/*.js`];
 const eslintrcFile = resolve(PATH.SRC, '.eslintrc');
@@ -14,7 +14,7 @@ const eslintignoreFile = fs.readFileSync(resolve(PATH.SRC, '.eslintignore'), 'ut
 // convert .eslintignore into gulp.src negotiation rule
 const filesToIgnore = eslintignoreFile.trim().split(EOL).map(path => `!${path}`);
 
-export default ({ isProd }) => {
+module.exports = ({ isProd }) => {
   return gulp.src(targetFiles.concat(filesToIgnore))
     .pipe(eslint({ quiet: isProd, ...eslintRules }))
     .pipe(eslint.format())

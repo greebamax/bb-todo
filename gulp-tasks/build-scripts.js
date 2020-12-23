@@ -1,15 +1,15 @@
-import { join } from 'path';
-import { rollup } from 'rollup';
-import alias from '@rollup/plugin-alias';
-import { babel } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import inject from '@rollup/plugin-inject';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
-import { ENV, PATH } from './helpers.js';
+const { join } = require('path');
+const { rollup } = require('rollup');
+const alias = require('@rollup/plugin-alias');
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const inject = require('@rollup/plugin-inject');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
+const { terser } = require('rollup-plugin-terser');
+const { ENV, PATH } = require('./helpers.js');
 
-export default async ({ isProd }) => {
+module.exports = async ({ isProd }) => {
   const bundle = await rollup({
     input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
