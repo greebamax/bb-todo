@@ -1,0 +1,9 @@
+{
+  "package": "./package.json",
+  "spec": "tests/**/*.test.js",
+  "reporter": "min",
+  "require": [
+    "@babel/core",
+    "@babel/register"
+  ]
+}
