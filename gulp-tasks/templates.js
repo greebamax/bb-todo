@@ -10,13 +10,13 @@ const { PATH } = require('./helpers.js');
 const partials = `${PATH.SRC}/scripts/common/partials/**/*.hbs`;
 const templates = `${PATH.SRC}/scripts/**/*.hbs`;
 
-//#region templates:compile-common-partials
+//#region templates:compile-partials
 /**
  * Compile and register common partials.
  * All partials files are expected to be placed in src/scripts/common/partials
  * and its name begins with an underscore.
  */
-const compileCommonPartials = () => gulp
+const compilePartials = () => gulp
   .src(partials)
   .pipe(
     gulpHandlebars({
@@ -29,7 +29,7 @@ const compileCommonPartials = () => gulp
       {},
       {
         imports: {
-          // _templateName.js => templateName
+          // Get partial name from filename: _templateName.js => templateName
           processPartialName: fileName => JSON.stringify(fileName.match(/[^_].*[^.js$]/g)[0]),
         },
       },
@@ -42,8 +42,7 @@ const compileCommonPartials = () => gulp
     }),
   )
   .pipe(gulp.dest(`${PATH.SRC}/scripts/common/partials`));
-compileCommonPartials.displayName = 'templates:compile-common-partials';
-exports.compileCommonPartials = compileCommonPartials;
+exports.compileCommonPartials = compilePartials;
 //#endregion
 
 //#region templates:compile
@@ -57,6 +56,5 @@ const compileTemplates = () => gulp
   .pipe(define('es6'))
   .pipe(rename({ extname: '.tmpl' }))
   .pipe(gulp.dest(`${PATH.SRC}/scripts`));
-compileTemplates.displayName = 'templates:compile';
 exports.compileTemplates = compileTemplates;
 //#endregion

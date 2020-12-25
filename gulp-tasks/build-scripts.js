@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 const { join } = require('path');
-const { rollup } = require('rollup');
+const { rollup, watch } = require('rollup');
 const alias = require('@rollup/plugin-alias');
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
@@ -9,8 +10,10 @@ const replace = require('@rollup/plugin-replace');
 const { terser } = require('rollup-plugin-terser');
 const { ENV, PATH } = require('./helpers.js');
 
-module.exports = async ({ isProd }) => {
-  const bundle = await rollup({
+const formatDuration = ms => Math.round((ms / 1000 + Number.EPSILON) * 100) / 100;
+
+const getInputOptions = ({ isProd }) => {
+  return {
     input: join(PATH.SRC, 'scripts', 'main.js'),
     plugins: [
       alias({
@@ -22,7 +25,7 @@ module.exports = async ({ isProd }) => {
             'node_modules',
             'handlebars',
             'dist',
-            'handlebars.min.js',
+            'handlebars.min.js'
           ),
           helpers: join(PATH.SRC, 'scripts', 'helpers'),
           underscore: join(PATH.ROOT, 'node_modules', 'lodash', 'index.js'),
@@ -51,11 +54,51 @@ module.exports = async ({ isProd }) => {
       isProd && terser(),
     ],
     treeshake: !isProd,
+  };
+};
+
+const getOutputOptions = ({ isProd }) => ({
+  format: 'iife',
+  sourcemap: !isProd,
+  file: join(PATH.DEST, 'js', 'bundle.js'),
+});
+
+async function buildScripts({ isProd }) {
+  const bundle = await rollup(getInputOptions({ isProd }));
+
+  return bundle.write(getOutputOptions({ isProd }));
+}
+exports.buildScripts = buildScripts;
+
+function watchScripts() {
+  const watcher = watch({
+    ...getInputOptions({ isProd: false }),
+    output: getOutputOptions({ isProd: false }),
   });
 
-  return bundle.write({
-    format: 'iife',
-    sourcemap: !isProd,
-    file: join(PATH.DEST, 'js', 'bundle.js'),
+  return new Promise((_, reject) => {
+    watcher.on('event', event => {
+      switch (event.code) { // eslint-disable-line default-case
+        case 'START':
+          console.log(`Rollup ${event.code}...`);
+          break;
+
+        case 'BUNDLE_END':
+          console.log(`Bundled after ${formatDuration(event.duration)} s`);
+          event.result.close(); // make sure that bundles are properly closed after each run
+          break;
+
+        case 'END':
+          console.log(`Rollup ${event.code}`);
+          break;
+
+        case 'ERROR':
+          console.error(`Rollup ${event.code}:`);
+
+          reject(event.result);
+          break;
+      }
+    });
   });
-};
+}
+exports.watchScripts = watchScripts;
