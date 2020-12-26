@@ -1,0 +1,10 @@
+# artifacts
+.nyc_output/
+build/
+coverage/
+
+# project settings
+.vscode/
+
+# handlebars files
+src/**/*.hbs

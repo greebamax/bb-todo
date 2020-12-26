@@ -78,7 +78,8 @@ function watchScripts() {
 
   return new Promise((_, reject) => {
     watcher.on('event', event => {
-      switch (event.code) { // eslint-disable-line default-case
+      // eslint-disable-next-line default-case
+      switch (event.code) {
         case 'START':
           console.log(`Rollup ${event.code}...`);
           break;

@@ -6,10 +6,10 @@ const { resolve } = require('path');
 const { PATH } = require('./helpers.js');
 
 const targetFiles = [`${PATH.SRC}/**/*.js`];
-const eslintrcFile = resolve(PATH.SRC, '.eslintrc');
+const eslintrcFile = resolve(PATH.ROOT, '.eslintrc');
 
 const eslintRules = JSON.parse(fs.readFileSync(eslintrcFile, 'utf8'));
-const eslintignoreFile = fs.readFileSync(resolve(PATH.SRC, '.eslintignore'), 'utf8');
+const eslintignoreFile = fs.readFileSync(resolve(PATH.ROOT, '.eslintignore'), 'utf8');
 
 // convert .eslintignore into gulp.src negotiation rule
 const filesToIgnore = eslintignoreFile.trim().split(EOL).map(path => `!${path}`);

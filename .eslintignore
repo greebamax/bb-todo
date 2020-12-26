@@ -1,1 +1,3 @@
+# build artifacts
 build/
+src/scripts/common/partials/index.js

@@ -1,13 +1,7 @@
 {
-  "extends": "airbnb-base",
+  "extends": "../.eslintrc",
   "rules": {
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
     "no-unused-expressions": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
     "prefer-destructuring": "off"
   },
   "globals": {

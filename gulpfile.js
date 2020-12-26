@@ -40,9 +40,7 @@ exports.htmlWatch = htmlWatch;
 //#endregion
 
 //#region styles:build
-const stylesBuild = () => {
-  return buildStylesTask({ isProd });
-};
+const stylesBuild = () => buildStylesTask({ isProd });
 exports.stylesBuild = stylesBuild;
 //#endregion
 

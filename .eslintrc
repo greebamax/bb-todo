@@ -1,9 +1,21 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "prettier"],
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
-    "arrow-body-style": "off",
-    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "off",
+    "import/no-unresolved": [
+      "error",
+      { "ignore": ["base", "common", "helpers", ".tmpl$"] }
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
     "spaced-comment": [
       "error",
       "always",
@@ -14,8 +26,12 @@
         }
       }
     ],
-    "import/prefer-default-export": "off",
-    "import/extensions": ["error", "always", { "ignorePackages": true }]
+    "quote-props": ["error", "consistent"],
+    "quotes": ["error", "double", { "avoidEscape": true }]
   },
-  "plugins": ["import"]
+  "plugins": ["import"],
+  "env": {
+    "browser": true,
+    "es6": true
+  }
 }
