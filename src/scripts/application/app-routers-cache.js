@@ -1,7 +1,10 @@
 import BaseRouter from 'base/router';
 
 const routers = Symbol('routers');
-const isExtendsBaseRouter = router => Object.prototype.isPrototypeOf.call(Object.getPrototypeOf(BaseRouter), router);
+const isExtendsBaseRouter = router => Object.prototype.isPrototypeOf.call(
+  Object.getPrototypeOf(BaseRouter),
+  router,
+);
 
 /**
  * @class AppRoutersCache

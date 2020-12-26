@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import logger from 'helpers/logger';
 
 export default Backbone.Model.extend({
   defaults: {
@@ -15,9 +16,8 @@ export default Backbone.Model.extend({
   },
 
   initialize() {
-    console.log('This model has been initialized.');
     this.on('invalid', (model, error) => {
-      console.log(error);
+      logger.error(error);
     });
   },
 
