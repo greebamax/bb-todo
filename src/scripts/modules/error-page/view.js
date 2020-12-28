@@ -1,5 +1,5 @@
-import BaseView from 'base/view';
-import ErrorPageViewTemplate from './template.tmpl';
+import BaseView from "base/view";
+import ErrorPageViewTemplate from "./template.tmpl";
 
 /**
  * @class ErrorPageView

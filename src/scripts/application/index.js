@@ -1,8 +1,8 @@
-import Backbone from 'backbone';
-import { assign, forEach } from 'lodash';
-import BaseApplication from 'base/application';
-import MainLayout from './layout';
-import MainRouter from './router';
+import Backbone from "backbone";
+import { assign, forEach } from "lodash";
+import BaseApplication from "base/application";
+import MainLayout from "./layout";
+import MainRouter from "./router";
 
 /**
  * @class Application
@@ -10,20 +10,25 @@ import MainRouter from './router';
  */
 export default class Application extends BaseApplication {
   constructor(options) {
-    super(assign({
-      region: '#root',
-      channelName: 'app',
-      radioRequests: {
-        'show:content': 'showContent',
-      },
-    }, options));
+    super(
+      assign(
+        {
+          region: "#root",
+          channelName: "app",
+          radioRequests: {
+            "show:content": "showContent",
+          },
+        },
+        options
+      )
+    );
     this.mainRouter = new MainRouter();
   }
 
   onBeforeStart() {
-    const modules = this.getOption('modules');
+    const modules = this.getOption("modules");
 
-    forEach(modules, module => {
+    forEach(modules, (module) => {
       this.mainRouter.registerSubRouter(module);
     });
   }
@@ -34,7 +39,7 @@ export default class Application extends BaseApplication {
   }
 
   onBeforeDestroy() {
-    this.mainRouter.routers.forEach(router => router.destroy());
+    this.mainRouter.routers.forEach((router) => router.destroy());
   }
 
   showContent(view) {

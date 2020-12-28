@@ -1,5 +1,5 @@
-import { defaults } from 'lodash';
-import { CHANGE_SELECTED_EVENT_NAME } from './selectable-item';
+import { defaults } from "lodash";
+import { CHANGE_SELECTED_EVENT_NAME } from "./selectable-item";
 
 export default {
   defaults: {
@@ -8,7 +8,11 @@ export default {
 
   init() {
     defaults(this, this.defaults);
-    this.listenTo(this, CHANGE_SELECTED_EVENT_NAME, this.onModelSelectedStateChange);
+    this.listenTo(
+      this,
+      CHANGE_SELECTED_EVENT_NAME,
+      this.onModelSelectedStateChange
+    );
   },
 
   /**
@@ -18,7 +22,7 @@ export default {
    */
   onModelSelectedStateChange(model) {
     if (!this.isMultiSelect && model.isSelected()) {
-      this.without(model).forEach(item => {
+      this.without(model).forEach((item) => {
         item.deselect({ silent: this.isMultiSelect });
       });
     }

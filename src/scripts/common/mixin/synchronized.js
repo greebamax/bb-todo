@@ -1,23 +1,23 @@
-import BaseModel from 'base/model';
-import BaseCollection from 'base/collection';
+import BaseModel from "base/model";
+import BaseCollection from "base/collection";
 
-const fetching = Symbol('fetching');
-const synched = Symbol('synched');
+const fetching = Symbol("fetching");
+const synched = Symbol("synched");
 
-export const EVENT_START = 'sync:start';
-export const EVENT_STOP = 'sync:stop';
+export const EVENT_START = "sync:start";
+export const EVENT_STOP = "sync:stop";
 
 export default {
   init() {
     if (Object.prototype.isPrototypeOf.call(BaseCollection.prototype, this)) {
-      this.listenTo(this, 'request', this._onStartRequest);
-      this.listenTo(this, 'sync', this._onStopRequest);
-      this.listenTo(this, 'update', this._onStopRequest);
+      this.listenTo(this, "request", this._onStartRequest);
+      this.listenTo(this, "sync", this._onStopRequest);
+      this.listenTo(this, "update", this._onStopRequest);
     }
 
     if (Object.prototype.isPrototypeOf.call(BaseModel.prototype, this)) {
-      this.listenTo(this, 'request', this._onStartRequest);
-      this.listenTo(this, 'sync', this._onStopRequest);
+      this.listenTo(this, "request", this._onStartRequest);
+      this.listenTo(this, "sync", this._onStopRequest);
     }
   },
 

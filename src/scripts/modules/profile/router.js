@@ -1,5 +1,5 @@
-import BaseRouter from 'base/router';
-import ProfileCtrl from './controller';
+import BaseRouter from "base/router";
+import ProfileCtrl from "./controller";
 
 /**
  * @class ProfileRouter

@@ -1,7 +1,7 @@
-import BaseCollection from 'base/collection';
-import SelectableCollection from 'common/mixin/selectable-collection';
-import Synchronized from 'common/mixin/synchronized';
-import ListModel from './model';
+import BaseCollection from "base/collection";
+import SelectableCollection from "common/mixin/selectable-collection";
+import Synchronized from "common/mixin/synchronized";
+import ListModel from "./model";
 
 /**
  * @class TaskListsCollection
@@ -13,7 +13,7 @@ export default class TaskListsCollection extends BaseCollection {
   }
 
   get url() {
-    return 'api/lists';
+    return "api/lists";
   }
 
   get model() {
@@ -21,7 +21,7 @@ export default class TaskListsCollection extends BaseCollection {
   }
 
   initialize(models, { selectedListId } = {}) {
-    this.listenToOnce(this, 'sync', () => {
+    this.listenToOnce(this, "sync", () => {
       const selectedModel = this.findWhere({ id: selectedListId });
       if (selectedModel && selectedModel.select) {
         selectedModel.select();

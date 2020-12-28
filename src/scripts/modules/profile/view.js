@@ -1,5 +1,5 @@
-import BaseView from 'base/view';
-import ProfileViewTemplate from './template.tmpl';
+import BaseView from "base/view";
+import ProfileViewTemplate from "./template.tmpl";
 
 /**
  * @class ProfileView

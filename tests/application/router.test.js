@@ -1,22 +1,21 @@
-const sinon = require('sinon');
-const expect = require('chai').expect;
-const Backbone = require('backbone');
-const ApplicationRouter = require('application/router').default;
-const BaseRouter = require('base/router').default;
-
+const sinon = require("sinon");
+const expect = require("chai").expect;
+const Backbone = require("backbone");
+const ApplicationRouter = require("application/router").default;
+const BaseRouter = require("base/router").default;
 
 let applicationRouter;
 const testModule = {
-  name: 'TestModule',
+  name: "TestModule",
   router: BaseRouter,
   appRoutes: {
-    route: 'method',
-    anotherRoute: 'anotherMethod',
+    route: "method",
+    anotherRoute: "anotherMethod",
   },
 };
 const redirectionMethodName = `redirectTo${testModule.name}`;
 
-describe('Main application router', () => {
+describe("Main application router", () => {
   beforeEach(() => {
     applicationRouter = new ApplicationRouter();
   });
@@ -25,22 +24,26 @@ describe('Main application router', () => {
     applicationRouter = undefined;
   });
 
-  describe('#registerSubRouter(module)', () => {
-    it('should register sub-router of module and create redirecrtion callback to it', () => {
+  describe("#registerSubRouter(module)", () => {
+    it("should register sub-router of module and create redirecrtion callback to it", () => {
       applicationRouter.registerSubRouter(testModule);
 
-      expect(applicationRouter.controller).to.have.property(redirectionMethodName);
-      expect(applicationRouter.controller[redirectionMethodName]).to.be.an.instanceof(Function);
+      expect(applicationRouter.controller).to.have.property(
+        redirectionMethodName
+      );
+      expect(
+        applicationRouter.controller[redirectionMethodName]
+      ).to.be.an.instanceof(Function);
     });
 
-    it('should attempt to register all routes from module router within main app router', () => {
-      const spyFn = sinon.spy(applicationRouter, 'processAppRoutes');
+    it("should attempt to register all routes from module router within main app router", () => {
+      const spyFn = sinon.spy(applicationRouter, "processAppRoutes");
 
       applicationRouter.registerSubRouter(testModule);
 
       const passedArgs = spyFn.args[0];
       const handlers = {};
-      Object.keys(testModule.appRoutes).forEach(route => {
+      Object.keys(testModule.appRoutes).forEach((route) => {
         handlers[route] = redirectionMethodName;
       });
 
@@ -49,13 +52,13 @@ describe('Main application router', () => {
     });
   });
 
-  describe('Registered redirection method', () => {
+  describe("Registered redirection method", () => {
     let matchRootStub;
     let loadUrlSpy;
 
     beforeEach(() => {
-      matchRootStub = sinon.stub(Backbone.history, 'matchRoot');
-      loadUrlSpy = sinon.spy(Backbone.history, 'loadUrl');
+      matchRootStub = sinon.stub(Backbone.history, "matchRoot");
+      loadUrlSpy = sinon.spy(Backbone.history, "loadUrl");
       applicationRouter = new ApplicationRouter();
     });
 
@@ -65,8 +68,8 @@ describe('Main application router', () => {
       applicationRouter = undefined;
     });
 
-    it('should check if module is loaded', () => {
-      const spyIsLoaded = sinon.spy(applicationRouter.routers, 'isLoaded');
+    it("should check if module is loaded", () => {
+      const spyIsLoaded = sinon.spy(applicationRouter.routers, "isLoaded");
 
       applicationRouter.registerSubRouter(testModule);
       applicationRouter.controller[redirectionMethodName]();
@@ -74,11 +77,14 @@ describe('Main application router', () => {
       expect(spyIsLoaded).to.have.been.calledWithExactly(testModule);
     });
 
-    it('should do nothing if module is already loaded', () => {
+    it("should do nothing if module is already loaded", () => {
       applicationRouter.routers.isLoaded = sinon.stub().returns(true);
 
       applicationRouter.registerSubRouter(testModule);
-      const spy = sinon.spy(applicationRouter.controller, redirectionMethodName);
+      const spy = sinon.spy(
+        applicationRouter.controller,
+        redirectionMethodName
+      );
       applicationRouter.controller[redirectionMethodName]();
       expect(spy.returnValue).to.be.undefined;
       expect(loadUrlSpy).to.not.have.been.called;
@@ -88,7 +94,10 @@ describe('Main application router', () => {
       applicationRouter.routers.isLoaded = sinon.stub().returns(false);
 
       applicationRouter.registerSubRouter(testModule);
-      const spy = sinon.spy(applicationRouter.controller, redirectionMethodName);
+      const spy = sinon.spy(
+        applicationRouter.controller,
+        redirectionMethodName
+      );
       applicationRouter.controller[redirectionMethodName]();
       expect(spy.returnValue).to.be.undefined;
       expect(loadUrlSpy).to.have.been.called;

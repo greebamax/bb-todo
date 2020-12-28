@@ -1,5 +1,5 @@
-import { isString, isFunction, bindAll } from 'lodash';
-import BaseBehavior from 'base/behavior';
+import { isString, isFunction, bindAll } from "lodash";
+import BaseBehavior from "base/behavior";
 
 /**
  * @class ClickOutsideBehavior
@@ -15,20 +15,20 @@ export default class ClickOutsideBehavior extends BaseBehavior {
   }
 
   initialize() {
-    bindAll(this, ['handleClickOnDocument']);
+    bindAll(this, ["handleClickOnDocument"]);
 
     if (this.options.startListeningEvent) {
       this.listenTo(
         this.view,
         this.options.startListeningEvent,
-        this.attachHandler,
+        this.attachHandler
       );
     }
     if (this.options.stopListeningEvent) {
       this.listenTo(
         this.view,
         this.options.stopListeningEvent,
-        this.removeHandler,
+        this.removeHandler
       );
     }
   }
@@ -44,11 +44,11 @@ export default class ClickOutsideBehavior extends BaseBehavior {
   }
 
   attachHandler() {
-    document.addEventListener('click', this.handleClickOnDocument);
+    document.addEventListener("click", this.handleClickOnDocument);
   }
 
   removeHandler() {
-    document.removeEventListener('click', this.handleClickOnDocument);
+    document.removeEventListener("click", this.handleClickOnDocument);
   }
 
   /**
@@ -64,7 +64,10 @@ export default class ClickOutsideBehavior extends BaseBehavior {
       return this.options.handler;
     }
 
-    throw new Error(`Unsupported handler type: typeof ${this.options.handler} is ${typeof this.options.handler}`);
+    throw new Error(
+      `Unsupported handler type: typeof ${this.options.handler} is ${typeof this
+        .options.handler}`
+    );
   }
 
   /**

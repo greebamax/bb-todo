@@ -1,5 +1,5 @@
-import Backbone from 'backbone';
-import { extend, isFunction } from 'lodash';
+import Backbone from "backbone";
+import { extend, isFunction } from "lodash";
 
 /**
  * @class BaseModel
@@ -10,7 +10,7 @@ export default class BaseModel extends Backbone.Model {
     super(...args);
 
     if (this.mixins && this.mixins.length) {
-      this.mixins.forEach(mixin => {
+      this.mixins.forEach((mixin) => {
         extend(this, mixin);
 
         if (mixin.init && isFunction(mixin.init)) {

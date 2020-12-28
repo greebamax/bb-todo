@@ -1,4 +1,4 @@
-import BaseController from 'base/controller';
+import BaseController from "base/controller";
 
 /**
  * @class ApplicationController
@@ -7,13 +7,13 @@ import BaseController from 'base/controller';
 export default class ApplicationController extends BaseController {
   static get appRoutes() {
     return {
-      '': 'home',
-      '*otherwise': 'otherwise',
+      "": "home",
+      "*otherwise": "otherwise",
     };
   }
 
   home() {
-    this.router.redirectTo('lists');
+    this.router.redirectTo("lists");
   }
 
   otherwise() {

@@ -1,4 +1,4 @@
-const livereload = require('livereload');
+const livereload = require("livereload");
 
 module.exports = ({ target, delay }) => {
   const liveReloadServer = livereload.createServer({

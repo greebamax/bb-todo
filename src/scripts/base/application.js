@@ -1,4 +1,4 @@
-import Mn from 'backbone.marionette';
+import Mn from "backbone.marionette";
 
 /**
  * @class BaseApplication

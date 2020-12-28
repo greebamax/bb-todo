@@ -1,7 +1,7 @@
-import { get } from 'lodash';
+import { get } from "lodash";
 
-export const FIELD_NAME = Symbol('selected');
-export const CHANGE_SELECTED_EVENT_NAME = 'change:selected';
+export const FIELD_NAME = Symbol("selected");
+export const CHANGE_SELECTED_EVENT_NAME = "change:selected";
 
 export default {
   init() {
@@ -29,7 +29,7 @@ export default {
   },
 
   notify(options) {
-    if (!get(options, 'silent')) {
+    if (!get(options, "silent")) {
       this.trigger(CHANGE_SELECTED_EVENT_NAME, this);
     }
   },

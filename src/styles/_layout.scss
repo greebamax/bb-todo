@@ -11,8 +11,8 @@ body,
   grid-template-rows: $header-height 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    'app-header-region'
-    'app-content';
+    "app-header-region"
+    "app-content";
 }
 
 .app-header-region {

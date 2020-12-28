@@ -1,6 +1,6 @@
-import { clone } from 'lodash';
+import { clone } from "lodash";
 
-const INIT_ATTRS = Symbol('init-attrs');
+const INIT_ATTRS = Symbol("init-attrs");
 
 export default {
   init() {

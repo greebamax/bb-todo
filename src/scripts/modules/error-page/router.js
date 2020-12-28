@@ -1,5 +1,5 @@
-import BaseRouter from 'base/router';
-import ErrorModuleCtrl from './controller';
+import BaseRouter from "base/router";
+import ErrorModuleCtrl from "./controller";
 
 /**
  * @class ErrorModuleRouter

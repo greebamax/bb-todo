@@ -1,9 +1,9 @@
-import BaseCollection from 'base/collection';
-import TodoModel from './model';
+import BaseCollection from "base/collection";
+import TodoModel from "./model";
 
 export default class TasksCollection extends BaseCollection {
   get url() {
-    return 'api/task-lists';
+    return "api/task-lists";
   }
 
   get model() {
@@ -11,10 +11,10 @@ export default class TasksCollection extends BaseCollection {
   }
 
   get completed() {
-    return this.filter('completed');
+    return this.filter("completed");
   }
 
   get remaining() {
-    return this.without(...this.filter('completed'));
+    return this.without(...this.filter("completed"));
   }
 }

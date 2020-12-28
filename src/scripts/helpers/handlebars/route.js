@@ -1,6 +1,6 @@
-import { isString } from 'lodash';
+import { isString } from "lodash";
 
-const SKIPPED_PARAMS = ['to', 'icon'];
+const SKIPPED_PARAMS = ["to", "icon"];
 
 /**
  *  Creates transpiled route.
@@ -21,7 +21,7 @@ const SKIPPED_PARAMS = ['to', 'icon'];
  *
  * @returns {String}
  */
-export default Handlebars => options => {
+export default (Handlebars) => (options) => {
   let to;
   let passedArgs;
 
@@ -35,7 +35,8 @@ export default Handlebars => options => {
 
   if (passedArgs && passedArgs.length) {
     url = passedArgs.reduce((str, key) => {
-      if (SKIPPED_PARAMS.includes(key)) { // not expect to be used such params in URL string
+      if (SKIPPED_PARAMS.includes(key)) {
+        // not expect to be used such params in URL string
         return str;
       }
       // replace all passed args by its name

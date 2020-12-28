@@ -1,12 +1,12 @@
-import { isString } from 'lodash';
-import BaseModel from 'base/model';
-import SelectableItem from 'common/mixin/selectable-item';
-import Synchronized from 'common/mixin/synchronized';
-import Reversible from 'common/mixin/reversible';
+import { isString } from "lodash";
+import BaseModel from "base/model";
+import SelectableItem from "common/mixin/selectable-item";
+import Synchronized from "common/mixin/synchronized";
+import Reversible from "common/mixin/reversible";
 
-const IS_EDITING = Symbol('is-editing');
+const IS_EDITING = Symbol("is-editing");
 
-export const CHANGE_EDITING_EVENT_NAME = 'change:editing';
+export const CHANGE_EDITING_EVENT_NAME = "change:editing";
 
 /**
  * @class TaskList
@@ -18,12 +18,12 @@ export default class TaskList extends BaseModel {
   }
 
   get urlRoot() {
-    return 'api/lists';
+    return "api/lists";
   }
 
   defaults() {
     return {
-      title: 'Untitled',
+      title: "Untitled",
       tasks: [],
     };
   }
@@ -48,11 +48,11 @@ export default class TaskList extends BaseModel {
 
   validate(attrs) {
     if (!isString(attrs.title)) {
-      return 'Title should be a string';
+      return "Title should be a string";
     }
 
     if (!/^[A-Za-z\s\d]+$/.test(attrs.title)) {
-      return 'Title should be valid';
+      return "Title should be valid";
     }
 
     return undefined;

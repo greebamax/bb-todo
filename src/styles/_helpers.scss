@@ -6,11 +6,11 @@
 
   /* Small screen, retina, to override above media query */
   @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $bp-mobile),
-         only screen and (min--moz-device-pixel-ratio: 2)    and (max-width: $bp-mobile),
-         only screen and (-o-min-device-pixel-ratio: 2/1)    and (max-width: $bp-mobile),
-         only screen and (min-device-pixel-ratio: 2)         and (max-width: $bp-mobile),
-         only screen and (min-resolution: 192dpi)            and (max-width: $bp-mobile),
-         only screen and (min-resolution: 2dppx)             and (max-width: $bp-mobile) {
+    only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $bp-mobile),
+    only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $bp-mobile),
+    only screen and (min-device-pixel-ratio: 2) and (max-width: $bp-mobile),
+    only screen and (min-resolution: 192dpi) and (max-width: $bp-mobile),
+    only screen and (min-resolution: 2dppx) and (max-width: $bp-mobile) {
     @content;
   }
 }
@@ -23,11 +23,11 @@
 
   /* Normal screen, retina, to override above media query */
   @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
-         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-tablet-landscape),
-         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-tablet-landscape),
-         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-tablet-landscape),
-         only screen and (min-resolution: 192dpi)            and (min-width: $bp-tablet-landscape),
-         only screen and (min-resolution: 2dppx)             and (min-width: $bp-tablet-landscape) {
+    only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+    only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: $bp-tablet-landscape),
+    only screen and (min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+    only screen and (min-resolution: 192dpi) and (min-width: $bp-tablet-landscape),
+    only screen and (min-resolution: 2dppx) and (min-width: $bp-tablet-landscape) {
     @content;
   }
 }
@@ -40,11 +40,11 @@
 
   /* Medium screen, retina, to override above media query */
   @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
-         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-tablet-landscape),
-         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-tablet-landscape),
-         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-tablet-landscape),
-         only screen and (min-resolution: 192dpi)            and (min-width: $bp-tablet-landscape),
-         only screen and (min-resolution: 2dppx)             and (min-width: $bp-tablet-landscape) {
+    only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+    only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: $bp-tablet-landscape),
+    only screen and (min-device-pixel-ratio: 2) and (min-width: $bp-tablet-landscape),
+    only screen and (min-resolution: 192dpi) and (min-width: $bp-tablet-landscape),
+    only screen and (min-resolution: 2dppx) and (min-width: $bp-tablet-landscape) {
     @content;
   }
 }
@@ -57,11 +57,11 @@
 
   /* Large screen, retina, to override above media query */
   @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-desktop),
-         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-desktop),
-         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-desktop),
-         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-desktop),
-         only screen and (min-resolution: 192dpi)            and (min-width: $bp-desktop),
-         only screen and (min-resolution: 2dppx)             and (min-width: $bp-desktop) {
+    only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $bp-desktop),
+    only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: $bp-desktop),
+    only screen and (min-device-pixel-ratio: 2) and (min-width: $bp-desktop),
+    only screen and (min-resolution: 192dpi) and (min-width: $bp-desktop),
+    only screen and (min-resolution: 2dppx) and (min-width: $bp-desktop) {
     @content;
   }
 }
@@ -74,11 +74,11 @@
 
   /* Huge screen, retina, to override above media query */
   @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-desktop-large),
-         only screen and (min--moz-device-pixel-ratio: 2)    and (min-width: $bp-desktop-large),
-         only screen and (-o-min-device-pixel-ratio: 2/1)    and (min-width: $bp-desktop-large),
-         only screen and (min-device-pixel-ratio: 2)         and (min-width: $bp-desktop-large),
-         only screen and (min-resolution: 192dpi)            and (min-width: $bp-desktop-large),
-         only screen and (min-resolution: 2dppx)             and (min-width: $bp-desktop-large) {
+    only screen and (min--moz-device-pixel-ratio: 2) and (min-width: $bp-desktop-large),
+    only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: $bp-desktop-large),
+    only screen and (min-device-pixel-ratio: 2) and (min-width: $bp-desktop-large),
+    only screen and (min-resolution: 192dpi) and (min-width: $bp-desktop-large),
+    only screen and (min-resolution: 2dppx) and (min-width: $bp-desktop-large) {
     @content;
   }
 }

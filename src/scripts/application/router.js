@@ -1,8 +1,8 @@
-import { extend, each } from 'lodash';
-import Backbone from 'backbone';
-import BaseRouter from 'base/router';
-import AppRoutersCache from './app-routers-cache';
-import AppController from './controller';
+import { extend, each } from "lodash";
+import Backbone from "backbone";
+import BaseRouter from "base/router";
+import AppRoutersCache from "./app-routers-cache";
+import AppController from "./controller";
 
 export default class AppRouter extends BaseRouter {
   constructor() {

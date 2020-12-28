@@ -1,13 +1,12 @@
-import {
-  invert, get, isFunction, isNull,
-} from 'lodash';
-import Mn from 'backbone.marionette';
-import Radio from 'backbone.radio';
-import BaseModel from './model';
+import { invert, get, isFunction, isNull } from "lodash";
+import Mn from "backbone.marionette";
+import Radio from "backbone.radio";
+import BaseModel from "./model";
 
-const getRoute = (target, routes) => get(routes, isFunction(target) ? target.name : target, null);
-const requests = Symbol('layout');
-const state = Symbol('state');
+const getRoute = (target, routes) =>
+  get(routes, isFunction(target) ? target.name : target, null);
+const requests = Symbol("layout");
+const state = Symbol("state");
 
 /**
  * @class BaseController
@@ -43,7 +42,7 @@ export default class BaseController extends Mn.Object {
   }
 
   show(view) {
-    Radio.channel('app').request('show:content', view);
+    Radio.channel("app").request("show:content", view);
   }
 
   registerRequest(request) {
@@ -54,7 +53,11 @@ export default class BaseController extends Mn.Object {
     for (let i = 0; i < this[requests].length; i++) {
       const request = this[requests][i];
 
-      if (request !== undefined && request.readyState > 0 && request.readyState < 4) {
+      if (
+        request !== undefined &&
+        request.readyState > 0 &&
+        request.readyState < 4
+      ) {
         request.abort();
       } else if (request.readyState === 4) {
         this[requests].splice(i, 1);

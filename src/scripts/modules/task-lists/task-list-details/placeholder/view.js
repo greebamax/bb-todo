@@ -1,6 +1,6 @@
-import { extend } from 'lodash';
-import BaseView from 'base/view';
-import Template from './template.tmpl';
+import { extend } from "lodash";
+import BaseView from "base/view";
+import Template from "./template.tmpl";
 
 /**
  * @class ListPlaceholderView
@@ -8,8 +8,13 @@ import Template from './template.tmpl';
  */
 export default class ListPlaceholderView extends BaseView {
   constructor(options) {
-    super(extend({
-      template: Template,
-    }, options));
+    super(
+      extend(
+        {
+          template: Template,
+        },
+        options
+      )
+    );
   }
 }

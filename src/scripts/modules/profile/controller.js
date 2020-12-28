@@ -1,5 +1,5 @@
-import BaseController from 'base/controller';
-import ProfileView from './view';
+import BaseController from "base/controller";
+import ProfileView from "./view";
 
 /**
  * @class ProfileController
@@ -8,16 +8,20 @@ import ProfileView from './view';
 export default class ProfileController extends BaseController {
   static get appRoutes() {
     return {
-      'profile': 'home',
-      'profile/*other': 'otherwise',
+      "profile": "home",
+      "profile/*other": "otherwise",
     };
   }
 
   getView() {
     const view = new ProfileView();
-    this.listenTo(view, {
-      show: this.onShow,
-    }, this);
+    this.listenTo(
+      view,
+      {
+        show: this.onShow,
+      },
+      this
+    );
     return view;
   }
 

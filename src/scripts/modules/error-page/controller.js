@@ -1,5 +1,5 @@
-import BaseController from 'base/controller';
-import ErrorPageView from './view';
+import BaseController from "base/controller";
+import ErrorPageView from "./view";
 
 /**
  * @class ErrorModuleCtrl
@@ -8,16 +8,20 @@ import ErrorPageView from './view';
 export default class ErrorModuleCtrl extends BaseController {
   static get appRoutes() {
     return {
-      'error': 'homeRoute',
-      'error/*other': 'otherwiseRoute',
+      "error": "homeRoute",
+      "error/*other": "otherwiseRoute",
     };
   }
 
   getView() {
     const view = new ErrorPageView();
-    this.listenTo(view, {
-      show: this.onShow,
-    }, this);
+    this.listenTo(
+      view,
+      {
+        show: this.onShow,
+      },
+      this
+    );
     return view;
   }
 

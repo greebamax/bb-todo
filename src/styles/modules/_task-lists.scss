@@ -61,7 +61,7 @@
     background-color: $task-list-bg-color;
     display: flex;
     justify-content: flex-end;
-    padding: .3rem 1rem;
+    padding: 0.3rem 1rem;
     align-items: center;
 
     @include for-tablet-landscape {
@@ -98,7 +98,7 @@
       }
 
       & + button {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
       }
     }
 

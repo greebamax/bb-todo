@@ -1,15 +1,15 @@
-import { extend, toString } from 'lodash';
-import BaseView from 'base/view';
-import ClickOutsideBehavior from 'common/behaviors/click-outside';
-import { KEY_ENTER, KEY_ESC } from 'common/constants';
-import { CHANGE_SELECTED_EVENT_NAME } from 'common/mixin/selectable-item';
-import { CHANGE_EDITING_EVENT_NAME } from './model';
-import Template from './list-item.tmpl';
+import { extend, toString } from "lodash";
+import BaseView from "base/view";
+import ClickOutsideBehavior from "common/behaviors/click-outside";
+import { KEY_ENTER, KEY_ESC } from "common/constants";
+import { CHANGE_SELECTED_EVENT_NAME } from "common/mixin/selectable-item";
+import { CHANGE_EDITING_EVENT_NAME } from "./model";
+import Template from "./list-item.tmpl";
 
-const SELECTED_CLASS_NAME = '--selected';
+const SELECTED_CLASS_NAME = "--selected";
 const EVENTS = {
-  LIST_EDIT_START: 'list-item-edit:start',
-  LIST_EDIT_STOP: 'list-item-edit:stop',
+  LIST_EDIT_START: "list-item-edit:start",
+  LIST_EDIT_STOP: "list-item-edit:stop",
 };
 
 /**
@@ -18,31 +18,38 @@ const EVENTS = {
  */
 export default class TaskListView extends BaseView {
   constructor(options) {
-    super(extend({
-      ui: {
-        listTitleInput: 'input[name="list-title"]',
-        deleteBtn: '[data-action="delete"]',
-        renameBtn: '[data-action="rename"]',
-      },
-      events: {
-        'click': 'onShowListDetailsClick',
-        'click @ui.deleteBtn': 'onDeleteClick',
-        'click @ui.renameBtn': 'onRenameClick',
-        'keyup @ui.listTitleInput': 'onTitleInputKeyPress',
-        'click @ui.listTitleInput': 'onTitleInputClick',
-        'focus @ui.listTitleInput': 'onTitleInputFocus',
-        'blur @ui.listTitleInput': 'handleOutsideClick',
-      },
-      modelEvents: {
-        [CHANGE_EDITING_EVENT_NAME]: 'render',
-        [CHANGE_SELECTED_EVENT_NAME]: 'onSelectedStateChange',
-      },
-      template: Template,
-    }, options));
+    super(
+      extend(
+        {
+          ui: {
+            listTitleInput: 'input[name="list-title"]',
+            deleteBtn: '[data-action="delete"]',
+            renameBtn: '[data-action="rename"]',
+          },
+          events: {
+            "click": "onShowListDetailsClick",
+            "click @ui.deleteBtn": "onDeleteClick",
+            "click @ui.renameBtn": "onRenameClick",
+            "keyup @ui.listTitleInput": "onTitleInputKeyPress",
+            "click @ui.listTitleInput": "onTitleInputClick",
+            "focus @ui.listTitleInput": "onTitleInputFocus",
+            "blur @ui.listTitleInput": "handleOutsideClick",
+          },
+          modelEvents: {
+            [CHANGE_EDITING_EVENT_NAME]: "render",
+            [CHANGE_SELECTED_EVENT_NAME]: "onSelectedStateChange",
+          },
+          template: Template,
+        },
+        options
+      )
+    );
   }
 
   className() {
-    return `task-list ${this.model.isSelected() ? SELECTED_CLASS_NAME : ''}`.toString();
+    return `task-list ${
+      this.model.isSelected() ? SELECTED_CLASS_NAME : ""
+    }`.toString();
   }
 
   behaviors() {
@@ -57,14 +64,19 @@ export default class TaskListView extends BaseView {
   }
 
   serializeData() {
-    return extend({
-      isEditing: this.model.isEditing(),
-      isNew: this.model.isNew(),
-    }, this.model.toJSON());
+    return extend(
+      {
+        isEditing: this.model.isEditing(),
+        isNew: this.model.isNew(),
+      },
+      this.model.toJSON()
+    );
   }
 
   onBeforeRender() {
-    this.trigger(this.model.isEditing() ? EVENTS.LIST_EDIT_START : EVENTS.LIST_EDIT_STOP);
+    this.trigger(
+      this.model.isEditing() ? EVENTS.LIST_EDIT_START : EVENTS.LIST_EDIT_STOP
+    );
   }
 
   onRender() {
@@ -110,12 +122,14 @@ export default class TaskListView extends BaseView {
   onTitleInputKeyPress($e) {
     switch ($e.key) {
       case KEY_ESC:
-        this.model.revert('title');
+        this.model.revert("title");
         this.model.stopEdit();
         return false;
 
       case KEY_ENTER:
-        this.model.set('title', toString($e.currentTarget.value), { silent: true });
+        this.model.set("title", toString($e.currentTarget.value), {
+          silent: true,
+        });
 
         if (this.model.isValid()) {
           this.model.stopEdit();

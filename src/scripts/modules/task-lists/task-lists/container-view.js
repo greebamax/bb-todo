@@ -1,9 +1,9 @@
-import { extend, get } from 'lodash';
-import BaseView from 'base/view';
-import { EVENT_START, EVENT_STOP } from 'common/mixin/synchronized';
-import TaskListsCollectionView from './collection-view';
-import TaskListModel from './model';
-import Template from './container.tmpl';
+import { extend, get } from "lodash";
+import BaseView from "base/view";
+import { EVENT_START, EVENT_STOP } from "common/mixin/synchronized";
+import TaskListsCollectionView from "./collection-view";
+import TaskListModel from "./model";
+import Template from "./container.tmpl";
 
 /**
  * @class TasksListContainerView
@@ -11,35 +11,43 @@ import Template from './container.tmpl';
  */
 export default class TasksListContainerView extends BaseView {
   constructor(options) {
-    super(extend({
-      className: 'tasks-list-container',
-      template: Template,
-      regions: {
-        list: {
-          el: '[data-region="list"]',
-          replaceElement: true,
+    super(
+      extend(
+        {
+          className: "tasks-list-container",
+          template: Template,
+          regions: {
+            list: {
+              el: '[data-region="list"]',
+              replaceElement: true,
+            },
+          },
+          ui: {
+            add: '[data-action="add"]',
+          },
+          events: {
+            "click @ui.add": "onAddListClick",
+          },
         },
-      },
-      ui: {
-        add: '[data-action="add"]',
-      },
-      events: {
-        'click @ui.add': 'onAddListClick',
-      },
-    }, options));
+        options
+      )
+    );
   }
 
   initialize(options) {
-    this.collection = get(options, 'collection', []);
+    this.collection = get(options, "collection", []);
     this.listenTo(this.collection, EVENT_START, () => this.ui.add.hide());
     this.listenTo(this.collection, EVENT_STOP, () => this.ui.add.show());
   }
 
   onRender() {
     this.ui.add.hide();
-    this.showChildView('list', new TaskListsCollectionView({
-      collection: this.collection,
-    }));
+    this.showChildView(
+      "list",
+      new TaskListsCollectionView({
+        collection: this.collection,
+      })
+    );
   }
 
   onAddListClick() {

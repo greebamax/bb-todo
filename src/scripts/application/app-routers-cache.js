@@ -1,10 +1,11 @@
-import BaseRouter from 'base/router';
+import BaseRouter from "base/router";
 
-const routers = Symbol('routers');
-const isExtendsBaseRouter = router => Object.prototype.isPrototypeOf.call(
-  Object.getPrototypeOf(BaseRouter),
-  router,
-);
+const routers = Symbol("routers");
+const isExtendsBaseRouter = (router) =>
+  Object.prototype.isPrototypeOf.call(
+    Object.getPrototypeOf(BaseRouter),
+    router
+  );
 
 /**
  * @class AppRoutersCache
@@ -22,7 +23,7 @@ export default class AppRoutersCache {
    */
   registerRouter(RouterClass) {
     if (!isExtendsBaseRouter(RouterClass)) {
-      throw new Error('Attempt to register a malformed RouterClass');
+      throw new Error("Attempt to register a malformed RouterClass");
     }
 
     let targetRouter;
@@ -45,7 +46,7 @@ export default class AppRoutersCache {
    */
   unregisterRouter(RouterClass) {
     if (!isExtendsBaseRouter(RouterClass)) {
-      throw new Error('Attempt to unregister a malformed RouterClass');
+      throw new Error("Attempt to unregister a malformed RouterClass");
     }
 
     return this[routers].delete(RouterClass.name);

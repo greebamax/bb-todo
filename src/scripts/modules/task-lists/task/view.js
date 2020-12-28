@@ -1,7 +1,7 @@
-import Backbone from 'backbone';
-import { extend } from 'lodash';
-import TodoModel from './model';
-import Template from './template.tmpl';
+import Backbone from "backbone";
+import { extend } from "lodash";
+import TodoModel from "./model";
+import Template from "./template.tmpl";
 
 export default Backbone.View.extend({
   template: Template,
@@ -9,10 +9,16 @@ export default Backbone.View.extend({
   model: TodoModel,
 
   render() {
-    this.$el.html(this.template(extend({
-      cid: this.model.cid,
-    }, this.model.toJSON())));
+    this.$el.html(
+      this.template(
+        extend(
+          {
+            cid: this.model.cid,
+          },
+          this.model.toJSON()
+        )
+      )
+    );
     return this;
   },
-
 });

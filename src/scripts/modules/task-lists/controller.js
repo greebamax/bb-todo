@@ -1,15 +1,15 @@
-import BaseController from 'base/controller';
-import { error } from 'helpers/logger';
-import TaskListsLayout from './layout';
-import SideBarView from './sidebar';
-import TaskListModel from './task-lists/model';
-import TaskListCollection from './task-lists/collection';
-import TasksListsCollectionView from './task-lists/container-view';
-import TaskListDetailsPlaceholder from './task-list-details/placeholder';
-import TaskListDetails from './task-list-details';
+import BaseController from "base/controller";
+import { error } from "helpers/logger";
+import TaskListsLayout from "./layout";
+import SideBarView from "./sidebar";
+import TaskListModel from "./task-lists/model";
+import TaskListCollection from "./task-lists/collection";
+import TasksListsCollectionView from "./task-lists/container-view";
+import TaskListDetailsPlaceholder from "./task-list-details/placeholder";
+import TaskListDetails from "./task-list-details";
 
-const layout = Symbol('layout');
-const sidebar = Symbol('sidebar');
+const layout = Symbol("layout");
+const sidebar = Symbol("sidebar");
 
 /**
  * @class TaskListsController
@@ -18,10 +18,10 @@ const sidebar = Symbol('sidebar');
 export default class TaskListsController extends BaseController {
   static get appRoutes() {
     return {
-      'lists': 'homeRoute',
-      'lists/:id': 'redirectToDetailsRoute',
-      'lists/:id/tasks': 'listDetailsRoute',
-      'lists/*other': 'otherwise',
+      "lists": "homeRoute",
+      "lists/:id": "redirectToDetailsRoute",
+      "lists/:id/tasks": "listDetailsRoute",
+      "lists/*other": "otherwise",
     };
   }
 
@@ -35,7 +35,7 @@ export default class TaskListsController extends BaseController {
   }
 
   redirectToErrorPage() {
-    this.router.redirectTo('error');
+    this.router.redirectTo("error");
   }
 
   listDetailsRoute(id) {
@@ -47,7 +47,7 @@ export default class TaskListsController extends BaseController {
   }
 
   otherwise() {
-    this.router.navigateTo('lists');
+    this.router.navigateTo("lists");
   }
 
   /**
@@ -56,7 +56,7 @@ export default class TaskListsController extends BaseController {
   getLayout() {
     const taskListsLayout = new TaskListsLayout();
 
-    this.listenTo(taskListsLayout, 'render', this.onShowLayout);
+    this.listenTo(taskListsLayout, "render", this.onShowLayout);
 
     this[layout] = taskListsLayout;
     return taskListsLayout;
@@ -66,25 +66,31 @@ export default class TaskListsController extends BaseController {
    * @param {Marionette.View} taskListsLayout
    */
   onShowLayout(taskListsLayout) {
-    taskListsLayout.getRegion(TaskListsLayout.sidebarRegion).show(this.getSidebarView());
-    taskListsLayout.getRegion(TaskListsLayout.contentRegion).show(new TaskListDetailsPlaceholder());
+    taskListsLayout
+      .getRegion(TaskListsLayout.sidebarRegion)
+      .show(this.getSidebarView());
+    taskListsLayout
+      .getRegion(TaskListsLayout.contentRegion)
+      .show(new TaskListDetailsPlaceholder());
   }
 
   /**
    * @param {Marionette.View} sidebarView
    */
   onShowSidebar(sidebarView) {
-    const selectedListId = this.getFromState('selectedListId');
+    const selectedListId = this.getFromState("selectedListId");
     const taskLists = new TaskListCollection(null, { selectedListId });
     taskLists.fetch();
 
-    sidebarView.getRegion(SideBarView.listsRegion).show(this.getTaskListsView(taskLists));
+    sidebarView
+      .getRegion(SideBarView.listsRegion)
+      .show(this.getTaskListsView(taskLists));
   }
 
   getSidebarView() {
     const sidebarView = new SideBarView();
 
-    this.listenTo(sidebarView, 'render', this.onShowSidebar);
+    this.listenTo(sidebarView, "render", this.onShowSidebar);
     this[sidebar] = sidebarView;
     return sidebarView;
   }
@@ -97,7 +103,7 @@ export default class TaskListsController extends BaseController {
     const taskListsCollectionView = new TasksListsCollectionView({
       collection: taskListCollection,
     });
-    this.listenTo(taskListCollection, 'change:selected', model => {
+    this.listenTo(taskListCollection, "change:selected", (model) => {
       if (model.isSelected()) {
         this[sidebar].toggleSidebar(false);
         this.router.navigateTo(`lists/${model.id}/tasks`);
@@ -112,20 +118,20 @@ export default class TaskListsController extends BaseController {
   showListDetails() {
     this.abortRequests();
 
-    const listId = this.getFromState('selectedListId');
+    const listId = this.getFromState("selectedListId");
     const tasksListsModel = new TaskListModel({ id: listId });
     const fetching = tasksListsModel.fetch();
 
-    fetching
-      .catch(resp => {
-        if (resp.status) { // check if not aborted by controller
-          error(resp.status, resp.statusText);
-          this.redirectToErrorPage({
-            statusCode: resp.status,
-            statusText: resp.statusText,
-          });
-        }
-      });
+    fetching.catch((resp) => {
+      if (resp.status) {
+        // check if not aborted by controller
+        error(resp.status, resp.statusText);
+        this.redirectToErrorPage({
+          statusCode: resp.status,
+          statusText: resp.statusText,
+        });
+      }
+    });
 
     this.registerRequest(fetching);
 

@@ -1,27 +1,29 @@
-import Radio from 'backbone.radio';
-import BaseView from 'base/view';
-import ClickOutsideBehavior from 'common/behaviors/click-outside';
-import SideBarTemplate from './template.tmpl';
+import Radio from "backbone.radio";
+import BaseView from "base/view";
+import ClickOutsideBehavior from "common/behaviors/click-outside";
+import SideBarTemplate from "./template.tmpl";
 
-const LISTS_REGION = 'lists-region';
-const SIDEBAR_OPENED_CLASSNAME = '--opened';
+const LISTS_REGION = "lists-region";
+const SIDEBAR_OPENED_CLASSNAME = "--opened";
 const EVENTS = {
-  OPENED: 'sidebar:opened',
-  CLOSED: 'sidebar:closed',
+  OPENED: "sidebar:opened",
+  CLOSED: "sidebar:closed",
 };
-const globalEvents = Radio.channel('app');
+const globalEvents = Radio.channel("app");
 
 /**
  * @class SideBarLayout
  * @extends {Marionette.View}
  */
 export default class SideBarLayout extends BaseView {
-  static get listsRegion() { return LISTS_REGION; }
+  static get listsRegion() {
+    return LISTS_REGION;
+  }
 
   constructor() {
     super({
       template: SideBarTemplate,
-      className: 'sidebar',
+      className: "sidebar",
       regions: {
         [LISTS_REGION]: {
           el: `[data-region="${LISTS_REGION}"]`,
@@ -33,7 +35,7 @@ export default class SideBarLayout extends BaseView {
 
   initialize() {
     this.isSidebarRegionOpened = false;
-    this.listenTo(globalEvents, 'sidebar:toggle', this.toggleSidebar);
+    this.listenTo(globalEvents, "sidebar:toggle", this.toggleSidebar);
   }
 
   behaviors() {

@@ -1,5 +1,5 @@
-import BaseRouter from 'base/router';
-import TaskListsController from './controller';
+import BaseRouter from "base/router";
+import TaskListsController from "./controller";
 
 /**
  * @class TaskListsRouter
