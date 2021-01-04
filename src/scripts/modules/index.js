@@ -1,9 +1,9 @@
 import ErrorPageModule from "./error-page";
-import TaskListsModule from "./task-lists";
+import TodosModule from "./todos";
 import ProfileModule from "./profile";
 
 export default {
   ErrorPageModule,
-  TaskListsModule,
+  TodosModule,
   ProfileModule,
 };
