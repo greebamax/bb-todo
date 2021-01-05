@@ -1,5 +1,6 @@
 import Backbone from "backbone";
-import { assign, forEach } from "lodash";
+import assign from "lodash/assign";
+import forEach from "lodash/forEach";
 import BaseApplication from "base/application";
 import MainLayout from "./layout";
 import MainRouter from "./router";

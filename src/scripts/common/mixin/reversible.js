@@ -1,4 +1,4 @@
-import { clone } from "lodash";
+import clone from "lodash/clone";
 
 const INIT_ATTRS = Symbol("init-attrs");
 

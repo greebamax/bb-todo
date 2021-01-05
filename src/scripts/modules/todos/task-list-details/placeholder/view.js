@@ -1,4 +1,4 @@
-import { extend } from "lodash";
+import extend from "lodash/extend";
 import BaseView from "base/view";
 import Template from "./template.tmpl";
 

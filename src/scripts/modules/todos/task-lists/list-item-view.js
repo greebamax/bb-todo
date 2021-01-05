@@ -1,4 +1,5 @@
-import { extend, toString } from "lodash";
+import extend from "lodash/extend";
+import toString from "lodash/toString";
 import BaseView from "base/view";
 import ClickOutsideBehavior from "common/behaviors/click-outside";
 import { KEY_ENTER, KEY_ESC } from "common/constants";

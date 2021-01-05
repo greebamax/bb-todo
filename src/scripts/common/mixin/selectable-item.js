@@ -1,4 +1,4 @@
-import { get } from "lodash";
+import get from "lodash/get";
 
 export const FIELD_NAME = Symbol("selected");
 export const CHANGE_SELECTED_EVENT_NAME = "change:selected";

@@ -1,4 +1,4 @@
-import { isString } from "lodash";
+import isString from "lodash/isString";
 import BaseModel from "base/model";
 import SelectableItem from "common/mixin/selectable-item";
 import Synchronized from "common/mixin/synchronized";

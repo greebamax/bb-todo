@@ -1,5 +1,6 @@
 import Backbone from "backbone";
-import { extend, isFunction } from "lodash";
+import extend from "lodash/extend";
+import isFunction from "lodash/isFunction";
 
 /**
  * @class BaseModel

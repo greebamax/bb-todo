@@ -1,4 +1,4 @@
-import { isString } from "lodash";
+import isString from "lodash/isString";
 
 const SKIPPED_PARAMS = ["to", "icon"];
 

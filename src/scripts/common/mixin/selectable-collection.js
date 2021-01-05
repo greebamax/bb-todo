@@ -1,4 +1,4 @@
-import { defaults } from "lodash";
+import defaults from "lodash/defaults";
 import { CHANGE_SELECTED_EVENT_NAME } from "./selectable-item";
 
 export default {

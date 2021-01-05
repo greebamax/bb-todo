@@ -1,5 +1,5 @@
 import Backbone from "backbone";
-import { extend } from "lodash";
+import extend from "lodash/extend";
 import TodoModel from "./model";
 import Template from "./template.tmpl";
 

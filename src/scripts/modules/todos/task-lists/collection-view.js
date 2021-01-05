@@ -1,4 +1,4 @@
-import { extend } from "lodash";
+import extend from "lodash/extend";
 import BaseCollectionView from "base/collection-view";
 import LoadingBehavior from "common/behaviors/loading-behavior";
 import TaskListView from "./list-item-view";

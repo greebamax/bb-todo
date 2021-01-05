@@ -1,4 +1,6 @@
-import { isString, isFunction, bindAll } from "lodash";
+import bindAll from "lodash/bindAll";
+import isFunction from "lodash/isFunction";
+import isString from "lodash/isString";
 import BaseBehavior from "base/behavior";
 
 /**

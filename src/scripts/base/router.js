@@ -1,5 +1,7 @@
 import Mn from "backbone.marionette";
-import { get, isString, assign } from "lodash";
+import assign from "lodash/assign";
+import get from "lodash/get";
+import isString from "lodash/isString";
 
 const DEFAULT_PREFIX = "#/";
 

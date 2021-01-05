@@ -1,6 +1,9 @@
-import { invert, get, isFunction, isNull } from "lodash";
 import Mn from "backbone.marionette";
 import Radio from "backbone.radio";
+import get from "lodash/get";
+import invert from "lodash/invert";
+import isFunction from "lodash/isFunction";
+import isNull from "lodash/isNull";
 import BaseModel from "./model";
 
 const getRoute = (target, routes) =>
