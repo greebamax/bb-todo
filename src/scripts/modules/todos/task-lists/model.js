@@ -1,8 +1,10 @@
 import isString from "lodash/isString";
+import has from "lodash/has";
 import BaseModel from "base/model";
 import SelectableItem from "common/mixin/selectable-item";
 import Synchronized from "common/mixin/synchronized";
 import Reversible from "common/mixin/reversible";
+import TodosCollection from "../task-list-details/todo/todos-collection";
 
 const IS_EDITING = Symbol("is-editing");
 
@@ -23,13 +25,14 @@ export default class TaskList extends BaseModel {
 
   defaults() {
     return {
-      title: "Untitled",
-      tasks: [],
+      title: "Untitled"
     };
   }
 
   initialize() {
     this[IS_EDITING] = false;
+
+    this.tasks = new TodosCollection();
   }
 
   isEditing() {
@@ -56,5 +59,18 @@ export default class TaskList extends BaseModel {
     }
 
     return undefined;
+  }
+
+  parse(response) {
+    if (has(response, "tasks")) {
+      if (has(this, "tasks")) {
+        this.tasks.reset(response.tasks);
+      } else {
+        this.tasks = new TodosCollection(response.tasks);
+      }
+      delete response.tasks;
+    }
+
+    return response;
   }
 }

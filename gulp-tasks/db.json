@@ -6,17 +6,17 @@
       "tasks": [
         {
           "id": "1",
-          "title": "task 1",
+          "content": "task 1",
           "completed": true
         },
         {
           "id": "2",
-          "title": "task 2",
+          "content": "task 2",
           "completed": false
         },
         {
           "id": "3",
-          "title": "task 3",
+          "content": "task 3",
           "completed": false
         }
       ]
@@ -27,17 +27,17 @@
       "tasks": [
         {
           "id": "1",
-          "title": "task 1",
+          "content": "task 1",
           "completed": false
         },
         {
           "id": "2",
-          "title": "task 2",
+          "content": "task 2",
           "completed": false
         },
         {
           "id": "3",
-          "title": "task 3",
+          "content": "task 3",
           "completed": false
         }
       ]
@@ -48,17 +48,17 @@
       "tasks": [
         {
           "id": "1",
-          "title": "task 1",
+          "content": "task 1",
           "completed": false
         },
         {
           "id": "2",
-          "title": "task 2",
+          "content": "task 2",
           "completed": false
         },
         {
           "id": "3",
-          "title": "task 3",
+          "content": "task 3",
           "completed": false
         }
       ]
