@@ -1,7 +1,8 @@
 {
   "cSpell.words": [
     "iife",
-    "tmpl"
+    "tmpl",
+    "todos"
   ],
   "files.exclude": {
     ".nyc_output": true,

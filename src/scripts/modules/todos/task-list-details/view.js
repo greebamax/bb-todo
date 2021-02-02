@@ -2,6 +2,7 @@ import extend from "lodash/extend";
 import BaseView from "base/view";
 import LoadingBehavior from "common/behaviors/loading-behavior";
 import Template from "./template.tmpl";
+import TodoCollectionView from "./todo/collection-view";
 
 /**
  * @class TaskListLayout
@@ -17,6 +18,12 @@ export default class TaskListLayout extends BaseView {
           modelEvents: {
             sync: "render",
           },
+          regions: {
+            tasks: {
+              el: '[data-region="tasks"]',
+              replaceElement: true,
+            },
+          },
         },
         options
       )
@@ -30,5 +37,14 @@ export default class TaskListLayout extends BaseView {
       },
       this.model.toJSON()
     );
+  }
+
+  onRender() {
+    if (!this.model.isFetching() && this.model.tasks) {
+      this.showChildView(
+        "tasks",
+        new TodoCollectionView({ collection: this.model.tasks })
+      );
+    }
   }
 }
