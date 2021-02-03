@@ -1,19 +1,19 @@
 import extend from "lodash/extend";
 import BaseCollectionView from "base/collection-view";
-import TodoView from "./view";
+import TaskView from "./view";
 
 /**
- * @class TodoCollectionView
+ * @class TasksCollectionView
  * @extends {Marionette.CollectionView}
  */
-export default class TodoCollectionView extends BaseCollectionView {
+export default class TasksCollectionView extends BaseCollectionView {
   constructor(options) {
     super(
       extend(
         {
           tagName: "ol",
-          className: "todos",
-          childView: TodoView,
+          className: "tasks-list",
+          childView: TaskView,
         },
         options
       )

@@ -4,7 +4,7 @@ import BaseModel from "base/model";
 import SelectableItem from "common/mixin/selectable-item";
 import Synchronized from "common/mixin/synchronized";
 import Reversible from "common/mixin/reversible";
-import TodosCollection from "../task-list-details/todo/todos-collection";
+import TasksCollection from "../task-list-details/task/collection";
 
 const IS_EDITING = Symbol("is-editing");
 
@@ -32,7 +32,7 @@ export default class TaskList extends BaseModel {
   initialize() {
     this[IS_EDITING] = false;
 
-    this.tasks = new TodosCollection();
+    this.tasks = new TasksCollection();
   }
 
   isEditing() {
@@ -66,7 +66,7 @@ export default class TaskList extends BaseModel {
       if (has(this, "tasks")) {
         this.tasks.reset(response.tasks);
       } else {
-        this.tasks = new TodosCollection(response.tasks);
+        this.tasks = new TasksCollection(response.tasks);
       }
       delete response.tasks;
     }

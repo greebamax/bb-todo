@@ -1,19 +1,19 @@
 import extend from "lodash/extend";
 import BaseView from "base/view";
-import TodoTemplate from "./todo-template.tmpl";
+import TaskTemplate from "./template.tmpl";
 
 /**
- * @class TodoView
+ * @class TaskView
  * @extends {Marionette.View}
  */
-export default class TodoView extends BaseView {
+export default class TaskView extends BaseView {
   constructor(options) {
     super(
       extend(
         {
           tagName: "li",
-          className: "todo",
-          template: TodoTemplate,
+          className: "task",
+          template: TaskTemplate,
         },
         options
       )

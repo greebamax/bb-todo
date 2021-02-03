@@ -2,7 +2,7 @@ import extend from "lodash/extend";
 import BaseView from "base/view";
 import LoadingBehavior from "common/behaviors/loading-behavior";
 import Template from "./template.tmpl";
-import TodoCollectionView from "./todo/collection-view";
+import TasksCollectionView from "./task/collection-view";
 
 /**
  * @class TaskListLayout
@@ -43,7 +43,7 @@ export default class TaskListLayout extends BaseView {
     if (!this.model.isFetching() && this.model.tasks) {
       this.showChildView(
         "tasks",
-        new TodoCollectionView({ collection: this.model.tasks })
+        new TasksCollectionView({ collection: this.model.tasks })
       );
     }
   }
