@@ -5,10 +5,10 @@ const SIDEBAR_REGION = "sidebar";
 const CONTENT_REGION = "task-list";
 
 /**
- * @class TaskListsLayout
+ * @class TodosModuleLayout
  * @extends {Marionette.View}
  */
-export default class TaskListsLayout extends BaseView {
+export default class TodosModuleLayout extends BaseView {
   static get sidebarRegion() {
     return SIDEBAR_REGION;
   }
@@ -19,7 +19,7 @@ export default class TaskListsLayout extends BaseView {
 
   constructor() {
     super({
-      className: "task-lists-module",
+      className: "todos-module",
       template: TaskListsLayoutTemplate,
       regions: {
         [SIDEBAR_REGION]: {
