@@ -78,8 +78,11 @@ export default class TaskList extends BaseModel {
   toJSON() {
     const json = BaseModel.prototype.toJSON.apply(this);
 
-    return extend({
-      tasks: this.tasks.toJSON()
-    }, json)
+    return extend(
+      {
+        tasks: this.tasks.toJSON(),
+      },
+      json
+    );
   }
 }

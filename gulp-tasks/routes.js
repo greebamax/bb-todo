@@ -1,3 +1,3 @@
 module.exports = {
-  "/api/*": "/$1"
+  "/api/*": "/$1",
 };

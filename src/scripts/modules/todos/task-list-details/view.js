@@ -31,7 +31,7 @@ export default class TaskListLayout extends BaseView {
           },
           events: {
             "keypress @ui.newTaskField": "handleKeypress",
-          }
+          },
         },
         options
       )
@@ -77,7 +77,8 @@ export default class TaskListLayout extends BaseView {
         this.ui.newTaskField.val(null);
         break;
 
-      default: break;
+      default:
+        break;
     }
   }
 

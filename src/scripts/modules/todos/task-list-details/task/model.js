@@ -7,7 +7,7 @@ export default class Task extends BaseModel {
       extend(
         {
           defaults: {
-            checked: false,
+            done: false,
             content: null,
           },
         },

@@ -19,7 +19,7 @@ export default class TaskView extends BaseView {
           },
           events: {
             "click @ui.removeBtn": "remove",
-          }
+          },
         },
         options
       )
