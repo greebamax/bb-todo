@@ -5,6 +5,12 @@ import { EVENT_START, EVENT_STOP } from "common/mixin/synchronized";
 const LOADING_CLASS_NAME = "--loading";
 
 export default class LoadingBehavior extends BaseBehavior {
+  defaults() {
+    return {
+      listenToOnce: false,
+    };
+  }
+
   get modelEvents() {
     return {
       [EVENT_START]: "onStartRequest",
@@ -20,7 +26,9 @@ export default class LoadingBehavior extends BaseBehavior {
   }
 
   onStartRequest() {
-    this.view.$el.addClass(LOADING_CLASS_NAME);
+    if (!this.options.listenToOnce) {
+      this.view.$el.addClass(LOADING_CLASS_NAME);
+    }
   }
 
   onStopRequest() {

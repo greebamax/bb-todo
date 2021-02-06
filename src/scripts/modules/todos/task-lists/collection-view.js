@@ -14,7 +14,10 @@ export default class TasksListContainerView extends BaseCollectionView {
         {
           className: "task-lists",
           childView: TaskListView,
-          behaviors: [LoadingBehavior],
+          behaviors: [{
+            behaviorClass: LoadingBehavior,
+            listenToOnce: true,
+          }],
         },
         options
       )
