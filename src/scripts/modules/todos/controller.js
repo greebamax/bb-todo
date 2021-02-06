@@ -1,8 +1,7 @@
 import BaseController from "base/controller";
 import { error } from "helpers/logger";
-import TaskListsLayout from "./layout";
+import TodosModuleLayout from "./layout";
 import SideBarView from "./sidebar";
-import TaskListModel from "./task-lists/model";
 import TaskListCollection from "./task-lists/collection";
 import TasksListsCollectionView from "./task-lists/container-view";
 import TaskListDetailsPlaceholder from "./task-list-details/placeholder";
@@ -25,8 +24,13 @@ export default class TaskListsController extends BaseController {
     };
   }
 
+  initialize() {
+    this.selectedListId = null;
+    this.taskLists = new TaskListCollection();
+    this.taskLists.fetch();
+  }
+
   homeRoute() {
-    this.setToState({ selectedListId: null });
     this.show(this.getLayout());
   }
 
@@ -39,11 +43,25 @@ export default class TaskListsController extends BaseController {
   }
 
   listDetailsRoute(id) {
-    this.setToState({ selectedListId: id });
+    this.selectedListId = id;
+
     if (!this[layout]) {
       this.show(this.getLayout());
     }
-    this.showListDetails();
+
+    if (this.taskLists) {
+      if (!this.taskLists.isSynchronized()) {
+        this.listenToOnce(this.taskLists, "sync", () => {
+          this.showListDetails(this.taskLists.get(id));
+          const selectedModel = this.taskLists.findWhere({ id });
+          if (selectedModel && selectedModel.select) {
+            selectedModel.select();
+          }
+        });
+      } else {
+        this.showListDetails(this.taskLists.get(id));
+      }
+    }
   }
 
   otherwise() {
@@ -54,23 +72,23 @@ export default class TaskListsController extends BaseController {
    * @returns {Marionette.View}
    */
   getLayout() {
-    const taskListsLayout = new TaskListsLayout();
+    const moduleLayout = new TodosModuleLayout();
 
-    this.listenTo(taskListsLayout, "render", this.onShowLayout);
+    this.listenTo(moduleLayout, "render", this.onShowLayout);
 
-    this[layout] = taskListsLayout;
-    return taskListsLayout;
+    this[layout] = moduleLayout;
+    return moduleLayout;
   }
 
   /**
-   * @param {Marionette.View} taskListsLayout
+   * @param {Marionette.View} todosModuleLayout
    */
-  onShowLayout(taskListsLayout) {
-    taskListsLayout
-      .getRegion(TaskListsLayout.sidebarRegion)
+  onShowLayout(todosModuleLayout) {
+    todosModuleLayout
+      .getRegion(TodosModuleLayout.sidebarRegion)
       .show(this.getSidebarView());
-    taskListsLayout
-      .getRegion(TaskListsLayout.contentRegion)
+    todosModuleLayout
+      .getRegion(TodosModuleLayout.contentRegion)
       .show(new TaskListDetailsPlaceholder());
   }
 
@@ -78,13 +96,9 @@ export default class TaskListsController extends BaseController {
    * @param {Marionette.View} sidebarView
    */
   onShowSidebar(sidebarView) {
-    const selectedListId = this.getFromState("selectedListId");
-    const taskLists = new TaskListCollection(null, { selectedListId });
-    taskLists.fetch();
-
     sidebarView
       .getRegion(SideBarView.listsRegion)
-      .show(this.getTaskListsView(taskLists));
+      .show(this.getTaskListsView(this.taskLists));
   }
 
   getSidebarView() {
@@ -96,14 +110,14 @@ export default class TaskListsController extends BaseController {
   }
 
   /**
-   * @param {Backbone.Collection} taskListCollection
+   * @param {Backbone.Collection} taskLists
    * @returns {Marionette.CollectionView}
    */
-  getTaskListsView(taskListCollection) {
+  getTaskListsView(taskLists) {
     const taskListsCollectionView = new TasksListsCollectionView({
-      collection: taskListCollection,
+      collection: taskLists,
     });
-    this.listenTo(taskListCollection, "change:selected", (model) => {
+    this.listenTo(taskLists, "change:selected", (model) => {
       if (model.isSelected()) {
         this[sidebar].toggleSidebar(false);
         this.router.navigateTo(`lists/${model.id}/tasks`);
@@ -113,32 +127,31 @@ export default class TaskListsController extends BaseController {
   }
 
   /**
-   * @param {Backbone.Model} params
+   * @param {Backbone.Model} list
    */
-  showListDetails() {
+  showListDetails(list) {
     this.abortRequests();
 
-    const listId = this.getFromState("selectedListId");
-    const tasksListsModel = new TaskListModel({ id: listId });
-    const fetching = tasksListsModel.fetch();
+    if (list) {
+      const fetching = list.fetch();
 
-    fetching.catch((resp) => {
-      if (resp.status) {
-        // check if not aborted by controller
-        error(resp.status, resp.statusText);
-        this.redirectToErrorPage({
-          statusCode: resp.status,
-          statusText: resp.statusText,
-        });
+      fetching.catch((resp) => {
+        if (resp.status) {
+          // check if not aborted by controller
+          error(resp.status, resp.statusText);
+          this.redirectToErrorPage({
+            statusCode: resp.status,
+            statusText: resp.statusText,
+          });
+        }
+      });
+      this.registerRequest(fetching);
+
+      if (this[layout] && this[layout].isRendered()) {
+        this[layout]
+          .getRegion(TodosModuleLayout.contentRegion)
+          .show(new TaskListDetails({ model: list }));
       }
-    });
-
-    this.registerRequest(fetching);
-
-    if (this[layout] && this[layout].isRendered()) {
-      this[layout]
-        .getRegion(TaskListsLayout.contentRegion)
-        .show(new TaskListDetails({ model: tasksListsModel }));
     }
   }
 }
