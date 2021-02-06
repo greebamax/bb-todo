@@ -9,6 +9,7 @@ export default class Task extends BaseModel {
           defaults: {
             done: false,
             content: null,
+            dateAdded: null,
           },
         },
         options

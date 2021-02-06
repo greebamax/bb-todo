@@ -84,7 +84,7 @@ export default class TaskListLayout extends BaseView {
 
   addTask(content) {
     if (this.model.tasks && this.model.tasks instanceof BaseCollection) {
-      this.model.tasks.add({ content });
+      this.model.tasks.add({ content, dateAdded: Date.now() });
     }
   }
 }

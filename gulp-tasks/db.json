@@ -1,67 +1,46 @@
 {
   "lists": [
     {
-      "id": "1",
+      "tasks": [
+        {
+          "content": "task 1",
+          "dateAdded": 1612612899321
+        },
+        {
+          "content": "task 2",
+          "dateAdded": 1612612901736
+        }
+      ],
       "title": "lists 1",
-      "tasks": [
-        {
-          "id": "1",
-          "content": "task 1",
-          "done": true
-        },
-        {
-          "id": "2",
-          "content": "task 2",
-          "done": false
-        },
-        {
-          "id": "3",
-          "content": "task 3",
-          "done": false
-        }
-      ]
+      "id": "1"
     },
     {
-      "id": "2",
+      "tasks": [
+        {
+          "content": "task 1",
+          "dateAdded": 1612612913625
+        },
+        {
+          "content": "task 2",
+          "dateAdded": 1612612914962
+        },
+        {
+          "content": "task 3",
+          "dateAdded": 1612612916138
+        }
+      ],
       "title": "lists 2",
-      "tasks": [
-        {
-          "id": "1",
-          "content": "task 1",
-          "done": false
-        },
-        {
-          "id": "2",
-          "content": "task 2",
-          "done": false
-        },
-        {
-          "id": "3",
-          "content": "task 3",
-          "done": false
-        }
-      ]
+      "id": "2"
     },
     {
-      "id": "3",
-      "title": "lists 3",
       "tasks": [
         {
-          "id": "1",
           "content": "task 1",
-          "done": false
-        },
-        {
-          "id": "2",
-          "content": "task 2",
-          "done": false
-        },
-        {
-          "id": "3",
-          "content": "task 3",
-          "done": false
+          "dateAdded": 1612612925499
         }
-      ]
+      ],
+      "title": "lists 3",
+      "id": "3"
     }
   ]
 }
