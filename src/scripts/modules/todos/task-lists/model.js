@@ -1,5 +1,6 @@
 import isString from "lodash/isString";
 import has from "lodash/has";
+import extend from "lodash/extend";
 import BaseModel from "base/model";
 import SelectableItem from "common/mixin/selectable-item";
 import Synchronized from "common/mixin/synchronized";
@@ -72,5 +73,13 @@ export default class TaskList extends BaseModel {
     }
 
     return response;
+  }
+
+  toJSON() {
+    const json = BaseModel.prototype.toJSON.apply(this);
+
+    return extend({
+      tasks: this.tasks.toJSON()
+    }, json)
   }
 }
