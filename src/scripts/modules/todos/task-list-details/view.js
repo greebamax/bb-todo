@@ -39,8 +39,9 @@ export default class TaskListLayout extends BaseView {
   }
 
   initialize() {
-    this.listenTo(this.model.tasks, "add", this.showTasksList);
-    this.listenTo(this.model.tasks, "remove", this.showTasksList);
+    this.listenTo(this.model.tasks, "add", this.syncTaskList);
+    this.listenTo(this.model.tasks, "remove", this.syncTaskList);
+    this.listenTo(this.model.tasks, "change:done", this.syncTaskList);
   }
 
   serializeData() {
@@ -56,6 +57,7 @@ export default class TaskListLayout extends BaseView {
     if (!this.model.isFetching()) {
       this.showTasksList();
     }
+    this.ui.newTaskField.focus();
   }
 
   showTasksList() {
@@ -86,5 +88,9 @@ export default class TaskListLayout extends BaseView {
     if (this.model.tasks && this.model.tasks instanceof BaseCollection) {
       this.model.tasks.add({ content, dateAdded: Date.now() });
     }
+  }
+
+  syncTaskList() {
+    this.model.save();
   }
 }

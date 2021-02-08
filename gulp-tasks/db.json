@@ -4,11 +4,13 @@
       "tasks": [
         {
           "content": "task 1",
-          "dateAdded": 1612612899321
+          "dateAdded": 1612612899321,
+          "done": true
         },
         {
           "content": "task 2",
-          "dateAdded": 1612612901736
+          "dateAdded": 1612612901736,
+          "done": false
         }
       ],
       "title": "lists 1",
@@ -18,15 +20,17 @@
       "tasks": [
         {
           "content": "task 1",
-          "dateAdded": 1612612913625
+          "dateAdded": 1612612913625,
+          "done": true
         },
         {
           "content": "task 2",
-          "dateAdded": 1612612914962
+          "dateAdded": 1612612914962,
+          "done": true
         },
         {
           "content": "task 3",
-          "dateAdded": 1612612916138
+          "dateAdded": 1612770507674
         }
       ],
       "title": "lists 2",
@@ -36,7 +40,30 @@
       "tasks": [
         {
           "content": "task 1",
-          "dateAdded": 1612612925499
+          "dateAdded": 1612612925499,
+          "done": true
+        },
+        {
+          "content": "task 2",
+          "dateAdded": 1612770515924
+        },
+        {
+          "content": "task 3",
+          "dateAdded": 1612770520198
+        },
+        {
+          "content": "task 4",
+          "dateAdded": 1612770559199,
+          "done": true
+        },
+        {
+          "content": "task 5",
+          "dateAdded": 1612770560909,
+          "done": true
+        },
+        {
+          "content": "task 6",
+          "dateAdded": 1612770564029
         }
       ],
       "title": "lists 3",

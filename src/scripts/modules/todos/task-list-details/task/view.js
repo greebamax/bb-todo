@@ -16,9 +16,11 @@ export default class TaskView extends BaseView {
           template: TaskTemplate,
           ui: {
             removeBtn: '[data-action="remove"]',
+            checkbox: '[data-action="check"]',
           },
           events: {
             "click @ui.removeBtn": "remove",
+            "change @ui.checkbox": "checked",
           },
         },
         options
@@ -28,5 +30,12 @@ export default class TaskView extends BaseView {
 
   remove() {
     this.model.collection.remove(this.model);
+  }
+
+  /**
+   * @param {JQuery.Event} $event
+   */
+  checked($event) {
+    this.model.set("done", $event.currentTarget.checked);
   }
 }

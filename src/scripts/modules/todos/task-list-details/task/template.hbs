@@ -3,7 +3,8 @@
     type="checkbox"
     name="completed"
     id="{{dateAdded}}"
+    data-action="check"
     {{#if done}}checked{{/if}} />
   {{content}}
 </label>
-<span data-action="remove">X</span>
+<span data-action="remove">{{> icon name="x"}}</span>
