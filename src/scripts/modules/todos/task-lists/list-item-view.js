@@ -3,7 +3,7 @@ import toString from "lodash/toString";
 import BaseView from "base/view";
 import ClickOutsideBehavior from "common/behaviors/click-outside";
 import { KEY_ENTER, KEY_ESC } from "common/constants";
-import { CHANGE_SELECTED_EVENT_NAME } from "common/mixin/selectable-item";
+import { CHANGE_SELECTED_EVENT_NAME } from "common/mixins/selectable-item";
 import { CHANGE_EDITING_EVENT_NAME } from "./model";
 import Template from "./list-item.tmpl";
 

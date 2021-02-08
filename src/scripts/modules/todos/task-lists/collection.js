@@ -1,6 +1,6 @@
 import BaseCollection from "base/collection";
-import SelectableCollection from "common/mixin/selectable-collection";
-import Synchronized from "common/mixin/synchronized";
+import SelectableCollection from "common/mixins/selectable-collection";
+import Synchronized from "common/mixins/synchronized";
 import ListModel from "./model";
 
 /**

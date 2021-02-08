@@ -2,9 +2,9 @@ import isString from "lodash/isString";
 import has from "lodash/has";
 import extend from "lodash/extend";
 import BaseModel from "base/model";
-import SelectableItem from "common/mixin/selectable-item";
-import Synchronized from "common/mixin/synchronized";
-import Reversible from "common/mixin/reversible";
+import SelectableItem from "common/mixins/selectable-item";
+import Synchronized from "common/mixins/synchronized";
+import Reversible from "common/mixins/reversible";
 import TasksCollection from "../task-list-details/task/collection";
 
 const IS_EDITING = Symbol("is-editing");

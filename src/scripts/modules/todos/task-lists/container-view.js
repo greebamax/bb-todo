@@ -1,7 +1,7 @@
 import extend from "lodash/extend";
 import get from "lodash/get";
 import BaseView from "base/view";
-import { EVENT_START, EVENT_STOP } from "common/mixin/synchronized";
+import { EVENT_START, EVENT_STOP } from "common/mixins/synchronized";
 import TaskListsCollectionView from "./collection-view";
 import TaskListModel from "./model";
 import Template from "./container.tmpl";
