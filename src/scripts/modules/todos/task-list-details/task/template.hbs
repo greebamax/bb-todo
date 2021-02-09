@@ -1,10 +1,22 @@
 <label for="{{dateAdded}}">
-  <input
-    type="checkbox"
-    name="completed"
-    id="{{dateAdded}}"
-    data-action="check"
-    {{#if done}}checked{{/if}} />
-  {{content}}
+  {{#unless isEditing}}
+    <input
+      type="checkbox"
+      name="completed"
+      id="{{dateAdded}}"
+      data-action="check"
+      {{#if done}}checked{{/if}} />
+    {{content}}
+  {{/unless}}
+
+  {{#if isEditing}}
+    <input type="text" value="{{content}}" data-field="content" />
+  {{/if}}
 </label>
-<span data-action="remove">{{> icon name="x"}}</span>
+
+{{#if isEditing}}
+  <span data-action="done">{{> icon name="done"}}</span>
+{{else}}
+  <span data-action="edit">{{> icon name="edit-3"}}</span>
+  <span data-action="remove">{{> icon name="x"}}</span>
+{{/if}}

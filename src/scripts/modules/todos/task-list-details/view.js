@@ -42,6 +42,7 @@ export default class TaskListLayout extends BaseView {
     this.listenTo(this.model.tasks, "add", this.syncTaskList);
     this.listenTo(this.model.tasks, "remove", this.syncTaskList);
     this.listenTo(this.model.tasks, "change:done", this.syncTaskList);
+    this.listenTo(this.model.tasks, "change:content", this.syncTaskList);
   }
 
   serializeData() {
