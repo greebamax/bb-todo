@@ -1,14 +1,6 @@
 import BaseView from "base/view";
+import { template } from "common/decorators";
 import ProfileViewTemplate from "./template.tmpl";
 
-/**
- * @class ProfileView
- * @extends {Marionette.View}
- */
-export default class ProfileView extends BaseView {
-  constructor() {
-    super({
-      template: ProfileViewTemplate,
-    });
-  }
-}
+@template(ProfileViewTemplate)
+export default class ProfileView extends BaseView {}

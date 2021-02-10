@@ -3,39 +3,20 @@ import BaseView from "base/view";
 import ClickOutsideBehavior from "common/behaviors/click-outside";
 import { EVENTS } from "common/mixins/editable-item";
 import { KEY_ENTER, KEY_ESC } from "common/constants";
+import { tagName, template, ui } from "common/decorators";
 import TaskTemplate from "./template.tmpl";
 
-/**
- * @class TaskView
- * @extends {Marionette.View}
- */
+@tagName("li")
+@template(TaskTemplate)
+@ui({
+  removeBtn: '[data-action="remove"]',
+  checkbox: '[data-action="check"]',
+  editBtn: '[data-action="edit"]',
+  contentField: '[data-field="content"]',
+})
 export default class TaskView extends BaseView {
-  constructor(options) {
-    super(
-      extend(
-        {
-          ui: {
-            removeBtn: '[data-action="remove"]',
-            checkbox: '[data-action="check"]',
-            editBtn: '[data-action="edit"]',
-            contentField: '[data-field="content"]',
-          },
-        },
-        options
-      )
-    );
-  }
-
-  get tagName() {
-    return "li";
-  }
-
   get className() {
     return `task ${this.model.get("done") ? "--completed" : ""}`;
-  }
-
-  get template() {
-    return TaskTemplate;
   }
 
   events() {

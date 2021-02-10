@@ -3,39 +3,32 @@ import BaseView from "base/view";
 import BaseCollection from "base/collection";
 import { KEY_ENTER } from "common/constants";
 import LoadingBehavior from "common/behaviors/loading-behavior";
-import Template from "./template.tmpl";
+import { regions, template, ui, behaviors } from "common/decorators";
+import TaskListTemplate from "./template.tmpl";
 import TasksCollectionView from "./task/collection-view";
 
-/**
- * @class TaskListLayout
- * @extends {Marionette.View}
- */
+@template(TaskListTemplate)
+@regions({
+  tasks: {
+    el: '[data-region="tasks"]',
+    replaceElement: true,
+  },
+})
+@ui({
+  newTaskField: "#new-task",
+})
+@behaviors([LoadingBehavior])
 export default class TaskListLayout extends BaseView {
-  constructor(options) {
-    super(
-      extend(
-        {
-          template: Template,
-          behaviors: [LoadingBehavior],
-          modelEvents: {
-            sync: "render",
-          },
-          regions: {
-            tasks: {
-              el: '[data-region="tasks"]',
-              replaceElement: true,
-            },
-          },
-          ui: {
-            newTaskField: "#new-task",
-          },
-          events: {
-            "keypress @ui.newTaskField": "handleKeypress",
-          },
-        },
-        options
-      )
-    );
+  events() {
+    return {
+      "keypress @ui.newTaskField": this.handleKeypress,
+    };
+  }
+
+  modelEvents() {
+    return {
+      sync: this.render,
+    };
   }
 
   initialize() {

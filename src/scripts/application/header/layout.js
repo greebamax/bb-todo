@@ -1,20 +1,15 @@
 import Radio from "backbone.radio";
 import BaseView from "base/view";
+import { className, template } from "common/decorators";
 import HeaderTemplate from "./template.tmpl";
 
-/**
- * @class HeaderLayout
- * @extends {Marionette.View}
- */
+@className("app-header")
+@template(HeaderTemplate)
 export default class HeaderLayout extends BaseView {
-  constructor() {
-    super({
-      className: "app-header",
-      template: HeaderTemplate,
-      events: {
-        'click [id="sidebar-btn"]': "onSidebarBtnClick",
-      },
-    });
+  events() {
+    return {
+      'click [id="sidebar-btn"]': this.onSidebarBtnClick,
+    };
   }
 
   onSidebarBtnClick($e) {

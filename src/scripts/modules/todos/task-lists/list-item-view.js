@@ -4,6 +4,7 @@ import BaseView from "base/view";
 import ClickOutsideBehavior from "common/behaviors/click-outside";
 import { KEY_ENTER, KEY_ESC } from "common/constants";
 import { CHANGE_SELECTED_EVENT_NAME } from "common/mixins/selectable-item";
+import { template, ui } from "common/decorators";
 import { CHANGE_EDITING_EVENT_NAME } from "./model";
 import Template from "./list-item.tmpl";
 
@@ -13,38 +14,30 @@ const EVENTS = {
   LIST_EDIT_STOP: "list-item-edit:stop",
 };
 
-/**
- * @class TaskListView
- * @extends {Marionette.View}
- */
+@template(Template)
+@ui({
+  listTitleInput: 'input[name="list-title"]',
+  deleteBtn: '[data-action="delete"]',
+  renameBtn: '[data-action="rename"]',
+})
 export default class TaskListView extends BaseView {
-  constructor(options) {
-    super(
-      extend(
-        {
-          ui: {
-            listTitleInput: 'input[name="list-title"]',
-            deleteBtn: '[data-action="delete"]',
-            renameBtn: '[data-action="rename"]',
-          },
-          events: {
-            "click": "onShowListDetailsClick",
-            "click @ui.deleteBtn": "onDeleteClick",
-            "click @ui.renameBtn": "onRenameClick",
-            "keyup @ui.listTitleInput": "onTitleInputKeyPress",
-            "click @ui.listTitleInput": "onTitleInputClick",
-            "focus @ui.listTitleInput": "onTitleInputFocus",
-            "blur @ui.listTitleInput": "handleOutsideClick",
-          },
-          modelEvents: {
-            [CHANGE_EDITING_EVENT_NAME]: "render",
-            [CHANGE_SELECTED_EVENT_NAME]: "onSelectedStateChange",
-          },
-          template: Template,
-        },
-        options
-      )
-    );
+  events() {
+    return {
+      "click": this.onShowListDetailsClick,
+      "click @ui.deleteBtn": this.onDeleteClick,
+      "click @ui.renameBtn": this.onRenameClick,
+      "keyup @ui.listTitleInput": this.onTitleInputKeyPress,
+      "click @ui.listTitleInput": this.onTitleInputClick,
+      "focus @ui.listTitleInput": this.onTitleInputFocus,
+      "blur @ui.listTitleInput": this.handleOutsideClick,
+    };
+  }
+
+  modelEvents() {
+    return {
+      [CHANGE_EDITING_EVENT_NAME]: this.render,
+      [CHANGE_SELECTED_EVENT_NAME]: this.onSelectedStateChange,
+    };
   }
 
   className() {

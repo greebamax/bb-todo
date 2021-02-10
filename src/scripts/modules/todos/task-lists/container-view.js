@@ -1,38 +1,27 @@
-import extend from "lodash/extend";
 import get from "lodash/get";
 import BaseView from "base/view";
 import { EVENT_START, EVENT_STOP } from "common/mixins/synchronized";
+import { className, regions, template, ui } from "common/decorators";
 import TaskListsCollectionView from "./collection-view";
 import TaskListModel from "./model";
 import Template from "./container.tmpl";
 
-/**
- * @class TasksListContainerView
- * @extends {Marionette.CollectionView}
- */
+@className("tasks-list-container")
+@template(Template)
+@regions({
+  list: {
+    el: '[data-region="list"]',
+    replaceElement: true,
+  },
+})
+@ui({
+  add: '[data-action="add"]',
+})
 export default class TasksListContainerView extends BaseView {
-  constructor(options) {
-    super(
-      extend(
-        {
-          className: "tasks-list-container",
-          template: Template,
-          regions: {
-            list: {
-              el: '[data-region="list"]',
-              replaceElement: true,
-            },
-          },
-          ui: {
-            add: '[data-action="add"]',
-          },
-          events: {
-            "click @ui.add": "onAddListClick",
-          },
-        },
-        options
-      )
-    );
+  events() {
+    return {
+      "click @ui.add": this.onAddListClick,
+    };
   }
 
   initialize(options) {

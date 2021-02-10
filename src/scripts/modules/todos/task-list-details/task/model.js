@@ -9,7 +9,7 @@ export default class Task extends BaseModel {
 
   get defaults() {
     return {
-      done: true,
+      done: false,
       content: null,
       dateAdded: null,
     };

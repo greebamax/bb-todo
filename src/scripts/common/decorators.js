@@ -92,3 +92,13 @@ export const childView = decoratorsFactory({
   kind: "field",
   name: "childView",
 });
+
+export const regions = decoratorsFactory({
+  kind: "field",
+  name: "regions",
+});
+
+export const behaviors = decoratorsFactory({
+  kind: "field",
+  name: "behaviors",
+});
