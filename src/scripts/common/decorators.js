@@ -32,3 +32,10 @@ export const template = decoratorsFactory({
   name: "template",
   placement: "prototype",
 });
+
+export const ui = decoratorsFactory({
+  kind: "method",
+  name: "ui",
+  placement: "prototype",
+  descriptorOptions: { configurable: true, enumerable: true, writable: true },
+});
