@@ -153,7 +153,16 @@ exports.devServer = devServer;
 //#endregion
 
 //#region dev
-const dev = gulp.series(build, reload, devServer, watchAll);
+const dev = gulp.series(
+  clean,
+  htmlBuild,
+  iconsBuild,
+  stylesBuild,
+  templatesBuild,
+  reload,
+  devServer,
+  watchAll
+);
 exports.dev = dev;
 //#endregion
 
