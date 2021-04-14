@@ -1,5 +1,6 @@
 import BaseBehavior from "base/behavior";
 import get from "lodash/get";
+import isFunction from "lodash/isFunction";
 import { EVENT_START, EVENT_STOP } from "common/mixins/synchronized";
 
 const LOADING_CLASS_NAME = "--loading";
@@ -29,10 +30,18 @@ export default class LoadingBehavior extends BaseBehavior {
     if (!this.options.listenToOnce) {
       this.view.$el.addClass(LOADING_CLASS_NAME);
     }
+
+    if (isFunction(this.options.onSyncStart)) {
+      this.options.onSyncStart.call(this.view, this.view);
+    }
   }
 
   onStopRequest() {
     this.view.$el.removeClass(LOADING_CLASS_NAME);
+
+    if (isFunction(this.options.onSyncStop)) {
+      this.options.onSyncStop.call(this.view, this.view);
+    }
   }
 
   onBeforeRender() {
