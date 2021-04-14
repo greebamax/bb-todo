@@ -1,10 +1,15 @@
-{{#unless isFetching}}
-  <div>task list layout</div>
-  <pre>
-    title: {{title}}
-    listId: {{id}}
-    cid: {{cid}}
-  </pre>
-  <div data-region="tasks"></div>
-  <input type="text" name="new-task" autocomplete="off" id="new-task">
-{{/unless}}
+<div>task list layout</div>
+<pre>
+  title: {{title}}
+  listId: {{id}}
+  cid: {{cid}}
+  isFetching: {{isFetching}}
+</pre>
+<div data-region="tasks"></div>
+<input
+  type="text"
+  name="new-task"
+  autocomplete="off"
+  id="new-task"
+  {{#if isFetching}}disabled{{/if}}
+>

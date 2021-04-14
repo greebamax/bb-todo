@@ -6,7 +6,7 @@ import TaskListsCollectionView from "./collection-view";
 import TaskListModel from "./model";
 import Template from "./container.tmpl";
 
-@className("tasks-list-container")
+@className("task-lists-container")
 @template(Template)
 @regions({
   list: {

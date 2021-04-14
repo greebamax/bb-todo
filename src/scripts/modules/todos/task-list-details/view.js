@@ -3,11 +3,12 @@ import BaseView from "base/view";
 import BaseCollection from "base/collection";
 import { KEY_ENTER } from "common/constants";
 import LoadingBehavior from "common/behaviors/loading-behavior";
-import { regions, template, ui, behaviors } from "common/decorators";
+import { regions, template, ui, className } from "common/decorators";
 import TaskListTemplate from "./template.tmpl";
 import TasksCollectionView from "./task/collection-view";
 
 @template(TaskListTemplate)
+@className("task-list-details")
 @regions({
   tasks: {
     el: '[data-region="tasks"]',
@@ -17,7 +18,6 @@ import TasksCollectionView from "./task/collection-view";
 @ui({
   newTaskField: "#new-task",
 })
-@behaviors([LoadingBehavior])
 export default class TaskListLayout extends BaseView {
   events() {
     return {
@@ -29,6 +29,16 @@ export default class TaskListLayout extends BaseView {
     return {
       sync: this.render,
     };
+  }
+
+  behaviors() {
+    return [
+      {
+        behaviorClass: LoadingBehavior,
+        onSyncStart: this.onModelSyncStart,
+        onSyncStop: this.onModelSyncStop,
+      },
+    ];
   }
 
   initialize() {
@@ -86,5 +96,13 @@ export default class TaskListLayout extends BaseView {
 
   syncTaskList() {
     this.model.save();
+  }
+
+  onModelSyncStart() {
+    this.ui.newTaskField.prop('disabled', true);
+  }
+
+  onModelSyncStop() {
+    this.ui.newTaskField.prop('disabled', false);
   }
 }
