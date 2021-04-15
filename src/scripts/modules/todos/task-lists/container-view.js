@@ -1,7 +1,7 @@
 import get from "lodash/get";
 import BaseView from "base/view";
-import { EVENT_START, EVENT_STOP } from "common/mixins/synchronized";
 import { className, regions, template, ui } from "common/decorators";
+import { KEY_ENTER } from "common/constants";
 import TaskListsCollectionView from "./collection-view";
 import TaskListModel from "./model";
 import Template from "./container.tmpl";
@@ -15,23 +15,21 @@ import Template from "./container.tmpl";
   },
 })
 @ui({
-  add: '[data-action="add"]',
+  newListSection: ".new-list",
+  newListField: "#new-list-name",
 })
 export default class TasksListContainerView extends BaseView {
   events() {
     return {
-      "click @ui.add": this.onAddListClick,
+      "keypress @ui.newListField": this.onAddList,
     };
   }
 
   initialize(options) {
     this.collection = get(options, "collection", []);
-    this.listenTo(this.collection, EVENT_START, () => this.ui.add.hide());
-    this.listenTo(this.collection, EVENT_STOP, () => this.ui.add.show());
   }
 
   onRender() {
-    this.ui.add.hide();
     this.showChildView(
       "list",
       new TaskListsCollectionView({
@@ -40,7 +38,17 @@ export default class TasksListContainerView extends BaseView {
     );
   }
 
-  onAddListClick() {
-    this.collection.add(new TaskListModel());
+  onAddList($event) {
+    switch ($event.key) {
+      case KEY_ENTER:
+        this.collection.create(
+          new TaskListModel({ title: $event.currentTarget.value })
+        );
+        this.ui.newListField.val(null);
+        break;
+
+      default:
+        break;
+    }
   }
 }

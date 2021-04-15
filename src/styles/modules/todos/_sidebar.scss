@@ -92,8 +92,8 @@
     }
   }
 
-  .add-new-list {
-    padding: 0 1rem;
+  .new-list {
+    padding: 0 0.5rem;
     margin-top: 1rem;
     width: 100%;
     text-transform: uppercase;
@@ -103,7 +103,18 @@
     cursor: pointer;
 
     > .icon {
-      margin-right: 1rem;
+      margin-right: 0.5rem;
+      color: $gray-darker;
+    }
+
+    > input {
+      background: none;
+      border: none;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
     }
   }
 }

@@ -8,14 +8,19 @@
           "dateAdded": 1612612899321
         },
         {
-          "done": true,
+          "done": false,
           "content": "task 2",
           "dateAdded": 1612612901736
         },
         {
-          "done": true,
-          "content": "test 3",
+          "done": false,
+          "content": "test 5",
           "dateAdded": 1618438887813
+        },
+        {
+          "done": false,
+          "content": "test 4",
+          "dateAdded": 1618440269475
         }
       ],
       "title": "lists 1",
@@ -44,75 +49,18 @@
           "dateAdded": 1615843660168
         }
       ],
-      "title": "lists 2",
+      "title": "test list 2",
       "id": "2"
     },
     {
-      "tasks": [
-        {
-          "done": true,
-          "content": "task 1",
-          "dateAdded": 1612612925499
-        },
-        {
-          "done": true,
-          "content": "task 2",
-          "dateAdded": 1612770515924
-        },
-        {
-          "done": true,
-          "content": "task 3",
-          "dateAdded": 1612770520198
-        },
-        {
-          "done": true,
-          "content": "task 4",
-          "dateAdded": 1612770559199
-        },
-        {
-          "done": true,
-          "content": "task 5",
-          "dateAdded": 1612770560909
-        },
-        {
-          "done": false,
-          "content": "task 6",
-          "dateAdded": 1612770564029
-        }
-      ],
-      "title": "lists 3",
-      "id": "3"
+      "tasks": [],
+      "title": "test 4",
+      "id": "WhR8N_z"
     },
     {
-      "tasks": [
-        {
-          "done": false,
-          "content": "test 1",
-          "dateAdded": 1615843694520
-        },
-        {
-          "done": false,
-          "content": "test 2",
-          "dateAdded": 1615843696689
-        },
-        {
-          "done": false,
-          "content": "test 3",
-          "dateAdded": 1615843699330
-        },
-        {
-          "done": false,
-          "content": "test 4",
-          "dateAdded": 1615843927238
-        },
-        {
-          "done": false,
-          "content": "test 5",
-          "dateAdded": 1615843930953
-        }
-      ],
-      "title": "test",
-      "id": "V2WAGmg"
+      "tasks": [],
+      "title": "test 5",
+      "id": "OodSByz"
     }
   ]
 }

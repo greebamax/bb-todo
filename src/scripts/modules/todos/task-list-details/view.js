@@ -99,10 +99,10 @@ export default class TaskListLayout extends BaseView {
   }
 
   onModelSyncStart() {
-    this.ui.newTaskField.prop('disabled', true);
+    this.ui.newTaskField.prop("disabled", true);
   }
 
   onModelSyncStop() {
-    this.ui.newTaskField.prop('disabled', false);
+    this.ui.newTaskField.prop("disabled", false);
   }
 }
