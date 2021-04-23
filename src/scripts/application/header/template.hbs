@@ -1,11 +1,22 @@
-{{#> link-to
-    to=(route 'lists')
-    className="header_btn"
-    isLarge=true
-    id="sidebar-btn"}}
-  {{> icon name="menu"}}
-{{/link-to}}
+<div class="app-header__mobile">
+  {{#> link-to
+      to=(route 'lists')
+      className="header_btn"
+      isLarge=true
+      id="sidebar-btn"}}
+    {{> icon name="menu"}}
+  {{/link-to}}
 
-{{#> link-to to=(route 'profile') className="header_btn --alight-right" isLarge=true}}
-  {{> icon name="user"}}
-{{/link-to}}
+  {{#> link-to to=(route 'profile') className="header_btn --alight-right" isLarge=true}}
+    {{> icon name="user"}}
+  {{/link-to}}
+</div>
+
+<div class="app-header__desktop">
+  {{#> link-to to=(route 'lists') className="header_btn"}}
+    Lists
+  {{/link-to}}
+  {{#> link-to to=(route 'profile') className="header_btn"}}
+    Profile
+  {{/link-to}}
+</div>
