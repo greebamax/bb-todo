@@ -1,4 +1,4 @@
-import Mn from "backbone.marionette";
+import Marionette from "backbone.marionette";
 import assign from "lodash/assign";
 import get from "lodash/get";
 import isString from "lodash/isString";
@@ -9,7 +9,7 @@ const DEFAULT_PREFIX = "#/";
  * @class BaseRouter
  * @extends {Marionette.AppRouter}
  */
-export default class BaseRouter extends Mn.AppRouter {
+export default class BaseRouter extends Marionette.AppRouter {
   /**
    * @returns {String}
    */

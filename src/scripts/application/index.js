@@ -40,7 +40,7 @@ export default class Application extends BaseApplication {
   }
 
   onBeforeDestroy() {
-    this.mainRouter.routers.forEach((router) => router.destroy());
+    this.mainRouter.routersCache.forEach((router) => router.destroy());
   }
 
   showContent(view) {

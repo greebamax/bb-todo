@@ -1,6 +1,9 @@
+import { Events } from "backbone";
 import BaseRouter from "base/router";
 
 const routers = Symbol("routers");
+const activeRouter = Symbol("active-route");
+
 const isExtendsBaseRouter = (router) =>
   Object.prototype.isPrototypeOf.call(
     Object.getPrototypeOf(BaseRouter),
@@ -14,6 +17,7 @@ const isExtendsBaseRouter = (router) =>
 export default class AppRoutersCache {
   constructor() {
     this[routers] = new Map();
+    this[activeRouter] = null;
   }
 
   /**
@@ -33,6 +37,7 @@ export default class AppRoutersCache {
     } else {
       // If it not exists, initiate it
       targetRouter = new RouterClass();
+      Events.listenTo(targetRouter, "route", this.handleRouteChange.bind(this, RouterClass.name));
       this[routers].set(RouterClass.name, targetRouter);
     }
 
@@ -69,5 +74,19 @@ export default class AppRoutersCache {
 
   isLoaded(module) {
     return this[routers].has(module.name);
+  }
+
+  handleRouteChange(router) {
+    this[activeRouter] = router;
+  }
+
+  /**
+   * Get current active router name
+   *
+   * @returns {Marionette.AppRouter|undefined}
+   * @memberof AppRoutersCache
+   */
+  getActive() {
+    return this[activeRouter];
   }
 }

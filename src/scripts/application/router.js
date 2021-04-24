@@ -9,7 +9,7 @@ export default class AppRouter extends BaseRouter {
   constructor() {
     super();
     this.controller = new AppController({ router: this });
-    this.routers = new AppRoutersCache();
+    this.routersCache = new AppRoutersCache();
     this.processAppRoutes(this.controller, AppController.appRoutes);
   }
 
@@ -19,9 +19,9 @@ export default class AppRouter extends BaseRouter {
 
     extend(this.controller, {
       [redirectionMethodName]: () => {
-        if (this.routers.isLoaded(module)) return;
+        if (this.routersCache.isLoaded(module)) return;
 
-        this.routers.registerRouter(module.router);
+        this.routersCache.registerRouter(module.router);
 
         Backbone.history.loadUrl();
       },
