@@ -4,63 +4,48 @@
       "tasks": [
         {
           "done": false,
-          "content": "task 1",
-          "dateAdded": 1612612899321
+          "content": "call to car service",
+          "dateAdded": 1619308843266
         },
         {
           "done": false,
-          "content": "task 2",
-          "dateAdded": 1612612901736
-        },
-        {
-          "done": false,
-          "content": "test 5",
-          "dateAdded": 1618438887813
-        },
-        {
-          "done": false,
-          "content": "test 4",
-          "dateAdded": 1618440269475
+          "content": "go shopping",
+          "dateAdded": 1619308851401
         }
       ],
-      "title": "lists 1",
-      "id": "1"
+      "title": "Today",
+      "id": "WhR8N_z"
     },
     {
       "tasks": [
         {
-          "done": true,
-          "content": "task 1",
-          "dateAdded": 1612612913625
+          "done": false,
+          "content": "milk",
+          "dateAdded": 1619308670641
+        },
+        {
+          "done": false,
+          "content": "water",
+          "dateAdded": 1619308673022
+        },
+        {
+          "done": false,
+          "content": "meat",
+          "dateAdded": 1619308675514
         },
         {
           "done": true,
-          "content": "task 2",
-          "dateAdded": 1612612914962
+          "content": "bread",
+          "dateAdded": 1619308677593
         },
         {
           "done": true,
-          "content": "task 3",
-          "dateAdded": 1612770507674
-        },
-        {
-          "done": true,
-          "content": "task 4",
-          "dateAdded": 1615843660168
+          "content": "eggs",
+          "dateAdded": 1619308688983
         }
       ],
-      "title": "test list 2",
-      "id": "2"
-    },
-    {
-      "tasks": [],
-      "title": "test 4",
-      "id": "WhR8N_z"
-    },
-    {
-      "tasks": [],
-      "title": "test 5",
-      "id": "OodSByz"
+      "title": "Shopping list",
+      "id": "Ajxz6J1"
     }
   ]
 }
