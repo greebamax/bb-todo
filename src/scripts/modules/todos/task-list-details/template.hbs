@@ -1,15 +1,16 @@
-<div>task list layout</div>
-<pre>
-  title: {{title}}
-  listId: {{id}}
-  cid: {{cid}}
-  isFetching: {{isFetching}}
-</pre>
+<div>{{title}}</div>
 <div data-region="tasks"></div>
-<input
-  type="text"
-  name="new-task"
-  autocomplete="off"
-  id="new-task"
-  {{#if isFetching}}disabled{{/if}}
->
+
+{{#unless isFetching}}
+  <div class="new-task-input">
+    {{> icon name="plus"}}
+    <input
+      type="text"
+      name="new-task"
+      autocomplete="off"
+      id="new-task"
+      placeholder="Add new task"
+      {{#if isFetching}}disabled{{/if}}
+    >
+  </div>
+{{/unless}}
