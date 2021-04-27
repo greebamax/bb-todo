@@ -6,7 +6,7 @@
 * [Setup](#setup)
 
 ## General info
-This project is a simple todo app initially created as a PoC during my work on refactoring huge Backbone+Marionette application and migrating it from backbone@0.9.1 and backbone.marionette@2.4.1 to the latest versions. In addition was used rollup as build tool to have treeshaking applied. handlebars has been chosen as template engine instead of lodash templates.
+This project is a simple todo app initially created as a PoC to introduce new architecture of SPA applicaiton which was implemented during my work on migration Backbone+Marionette application from backbone@0.9.1 and backbone.marionette@2.4.1 to the latest versions. In addition rollup has been used as build tool to have treeshaking applied and handlebars has been chosen as template engine instead of lodash templates.
 
 ## Technologies
 Project is created with:
